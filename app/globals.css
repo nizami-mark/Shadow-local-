@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  
+  --color-brand-accent: #f4703a;
+  --color-brand-glow: rgba(244, 112, 58, 0.2);
+  --color-bg-primary: #3a3d44;
+  --color-bg-secondary: #32353b;
+  --color-text-primary: #f0ece4;
+}
+
+@layer base {
+  body {
+    @apply bg-bg-primary text-text-primary font-sans;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+}
+
+.glass-panel {
+  @apply bg-[#32353b]/50 border border-white/10 backdrop-blur-sm;
+}
+
+.neon-glow {
+  box-shadow: 0 0 20px var(--color-brand-glow);
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#f0ece4] via-[#f0ece4]/80 to-[#f0ece4]/50;
+}

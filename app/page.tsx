@@ -150,22 +150,9 @@ const Hero = () => {
             <Button onClick={scrollToBooking} className="w-full sm:w-auto text-lg py-5 px-10">
               Partner With Us <ArrowRight className="w-5 h-5" />
             </Button>
-            <div className="flex items-center gap-4 text-text-primary/50 text-sm">
-              <div className="flex -space-x-2">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="w-8 h-8 rounded-full border-2 border-bg-primary bg-bg-secondary overflow-hidden relative">
-                    <Image 
-                      src={`https://picsum.photos/seed/user${i}/100/100`} 
-                      alt="Client" 
-                      fill 
-                      className="object-cover" 
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                ))}
-              </div>
-              <span>Joined by 40+ Scaling Brands</span>
-            </div>
+            <Button onClick={() => document.getElementById('lead-magnet')?.scrollIntoView({ behavior: 'smooth' })} variant="outline" className="w-full sm:w-auto text-lg py-5 px-10">
+              Free ROI Audit <BarChart3 className="w-5 h-5" />
+            </Button>
           </div>
         </motion.div>
       </div>
@@ -730,6 +717,7 @@ const LeadMagnet = () => {
 
   return (
     <motion.section 
+      id="lead-magnet"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -961,7 +949,10 @@ const Footer = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:row justify-between items-center gap-8">
           <div className="flex items-center gap-2">
-            <div className="relative w-40 h-10">
+            <div 
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
+              className="relative w-40 h-10 cursor-pointer"
+            >
               <Image 
                 src="https://drive.google.com/uc?export=download&id=11q0Tq7UxhHXsvFFBUo3KeEpFZJumQ1LM" 
                 alt="Shadow Studio Logo" 
@@ -971,10 +962,11 @@ const Footer = () => {
               />
             </div>
           </div>
-          <div className="flex gap-8 text-text-primary/40 text-sm">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors">Contact</a>
+          <div className="flex flex-wrap justify-center gap-8 text-text-primary/40 text-sm">
+            <a href="#case-studies" onClick={(e) => { e.preventDefault(); document.getElementById('case-studies')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-white transition-colors">Case Studies</a>
+            <a href="#lead-magnet" onClick={(e) => { e.preventDefault(); document.getElementById('lead-magnet')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-white transition-colors">Free Audit</a>
+            <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="/terms" className="hover:text-white transition-colors">Terms of Service</a>
           </div>
           <div className="text-text-primary/20 text-xs font-mono">
             © 2026 SHADOW STUDIO // ALL RIGHTS RESERVED
@@ -996,7 +988,7 @@ export default function FunnelPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollTo = (id: string) => (e?: React.MouseEvent) => {
+  const scrollTo = (id: string) => (e: any) => {
     e?.preventDefault();
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -1008,7 +1000,10 @@ export default function FunnelPage() {
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-bg-primary/80 backdrop-blur-md border-b border-white/10 py-4' : 'bg-transparent py-6'}`}>
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <div className="relative w-40 h-10">
+            <div 
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
+              className="relative w-40 h-10 cursor-pointer"
+            >
               <Image 
                 src="https://drive.google.com/uc?export=download&id=11q0Tq7UxhHXsvFFBUo3KeEpFZJumQ1LM" 
                 alt="Shadow Studio Logo" 
@@ -1021,6 +1016,7 @@ export default function FunnelPage() {
           <div className="hidden md:flex items-center gap-8">
             <a href="#system" onClick={scrollTo('system')} className="text-text-primary/60 hover:text-white text-sm font-medium transition-colors">Services</a>
             <a href="#case-studies" onClick={scrollTo('case-studies')} className="text-text-primary/60 hover:text-white text-sm font-medium transition-colors">Case Studies</a>
+            <a href="#lead-magnet" onClick={scrollTo('lead-magnet')} className="text-text-primary/60 hover:text-white text-sm font-medium transition-colors">Free Audit</a>
             <a href="#process" onClick={scrollTo('process')} className="text-text-primary/60 hover:text-white text-sm font-medium transition-colors">Process</a>
             <Button onClick={scrollTo('booking')} variant="outline" className="px-6 py-2 text-sm">
               Book Call

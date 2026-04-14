@@ -171,7 +171,7 @@ const VSL = () => {
       <div className="container mx-auto px-6">
         <SectionHeading 
           title="How We Scale Brands Without The Agency Fluff"
-          subtitle="Watch this 6-minute breakdown of the Shadow System. If you don&apos;t like what you see, we aren&apos;t for you."
+          subtitle="Watch this 5-minute breakdown of the Shadow System. If you don&apos;t like what you see, we aren&apos;t for you."
         />
         
         <div className="max-w-4xl mx-auto">
@@ -197,7 +197,7 @@ const VSL = () => {
               </motion.div>
             </div>
             <div className="absolute bottom-6 left-6 right-6 flex justify-between items-center text-xs text-text-primary/40 font-mono">
-              <span>00:00 / 06:42</span>
+              <span>00:00 / 05:00</span>
               <span className="px-2 py-1 bg-red-500/20 text-red-400 rounded">LIVE_DEMO</span>
             </div>
           </motion.div>
@@ -209,7 +209,9 @@ const VSL = () => {
               "Unit Economics Optimization"
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3 text-text-primary/70">
-                <CheckCircle2 className="w-5 h-5 text-brand-accent flex-shrink-0" />
+                <div className="w-6 h-6 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent flex-shrink-0">
+                  <CheckCircle2 className="w-4 h-4" />
+                </div>
                 <span className="text-sm font-medium">{item}</span>
               </div>
             ))}
@@ -656,7 +658,7 @@ const OfferStack = () => {
               { title: "Scaling Framework", desc: "The exact math to hit 7M+" },
             ].map((item, i) => (
               <div key={i} className="flex gap-4">
-                <div className="w-6 h-6 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent flex-shrink-0">
+                <div className="w-6 h-6 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent flex-shrink-0 mt-1">
                   <CheckCircle2 className="w-4 h-4" />
                 </div>
                 <div>
@@ -746,7 +748,7 @@ const LeadMagnet = () => {
                   A Complete Ecommerce <span className="text-brand-accent">ROI Audit Framework</span>, worth $399 for free
                 </h2>
                 <p className="text-text-primary/60 text-lg mb-8 leading-relaxed">
-                  This is our secret sauce for auditing a brand&apos;s last 90 days of ROI—so we can make clear, data-backed decisions on what to scale next.
+                  This is our secret sauce for auditing a brand&apos;s last 90 days of ROI—so you can make clear, data-backed decisions on what to scale next.
                 </p>
                 
                 <ul className="space-y-4 mb-8">
@@ -756,9 +758,11 @@ const LeadMagnet = () => {
                     "Know exactly when and how to scale safely",
                     "Spot the bottlenecks holding back your revenue"
                   ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-text-primary/80">
-                      <CheckCircle2 className="w-5 h-5 text-brand-accent" />
-                      <span>{item}</span>
+                    <li key={i} className="flex items-start gap-4 text-text-primary/80">
+                      <div className="w-6 h-6 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent flex-shrink-0 mt-0.5">
+                        <CheckCircle2 className="w-4 h-4" />
+                      </div>
+                      <span className="leading-relaxed">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -911,8 +915,10 @@ const Booking = () => {
                       "7M+ Revenue Roadmap",
                       "Direct Access to Founders"
                     ].map((item, i) => (
-                      <div key={i} className="flex items-center justify-center gap-2 text-sm text-text-primary/40">
-                        <CheckCircle2 className="w-4 h-4 text-brand-accent" />
+                      <div key={i} className="flex items-center justify-center gap-3 text-sm text-text-primary/40">
+                        <div className="w-5 h-5 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent flex-shrink-0">
+                          <CheckCircle2 className="w-3 h-3" />
+                        </div>
                         <span>{item}</span>
                       </div>
                     ))}

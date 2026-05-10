@@ -14,7 +14,7 @@ const unbounded = Unbounded({
 
 export const metadata: Metadata = {
   title: 'Shadow Studio | Marketing Agency for eCommerce',
-  description: 'Scale your ecommerce brand from 3M to 7M+ in 90 days.',
+  description: 'Scale your ecommerce brand from 2M to 7M+ in 90 days.',
   icons: {
     icon: 'https://drive.google.com/uc?export=download&id=11PftqrVrqzER602AoZWUbAu12fzD95mc',
   },

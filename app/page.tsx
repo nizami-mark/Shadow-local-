@@ -133,11 +133,11 @@ const Hero = () => {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-bg-secondary/80 border border-white/10 text-text-primary/60 text-sm mb-8">
             <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
-            Exclusive for Brands doing PKR 3M+ Monthly
+            Exclusive for Brands doing PKR 2M+ Monthly
           </div>
           
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[1.1] tracking-tight">
-            Scale from <span className="text-brand-accent">3M</span> to <span className="text-white">7M+</span> <br className="hidden md:block" />
+            Scale from <span className="text-brand-accent">2M</span> to <span className="text-white">7M+</span> <br className="hidden md:block" />
             In Exactly <span className="underline decoration-brand-accent/50 underline-offset-8">90 Days</span>.
           </h1>
           
@@ -161,6 +161,7 @@ const Hero = () => {
 };
 
 const VSL = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
   const scrollToBooking = () => {
     const element = document.getElementById('booking');
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -179,125 +180,45 @@ const VSL = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="aspect-video relative rounded-3xl overflow-hidden border border-white/10 bg-bg-primary group cursor-pointer"
+            className="aspect-video relative rounded-3xl overflow-hidden border border-white/10 bg-bg-primary group"
           >
-            <Image 
-              src="https://picsum.photos/seed/vsl/1280/720?blur=10" 
-              alt="VSL Thumbnail" 
-              fill
-              className="object-cover opacity-40 group-hover:scale-105 transition-transform duration-700"
-              referrerPolicy="no-referrer"
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div 
-                whileHover={{ scale: 1.1 }}
-                className="w-20 h-20 bg-brand-accent rounded-full flex items-center justify-center text-white shadow-2xl shadow-brand-accent/20"
-              >
-                <Play className="w-8 h-8 fill-current ml-1" />
-              </motion.div>
-            </div>
-            <div className="absolute bottom-6 left-6 right-6 flex justify-between items-center text-xs text-text-primary/40 font-mono">
-              <span>00:00 / 05:00</span>
-              <span className="px-2 py-1 bg-red-500/20 text-red-400 rounded">LIVE_DEMO</span>
-            </div>
+            {isPlaying ? (
+              <iframe
+                className="w-full h-full border-0"
+                src="https://www.youtube.com/embed/sq8PtWsY1gw?autoplay=1"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            ) : (
+              <div className="w-full h-full cursor-pointer" onClick={() => setIsPlaying(true)}>
+                <Image 
+                  src="https://i.ytimg.com/vi/sq8PtWsY1gw/maxresdefault.jpg" 
+                  alt="VSL Thumbnail" 
+                  fill
+                  className="object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <motion.div 
+                    whileHover={{ scale: 1.1 }}
+                    className="w-20 h-20 bg-brand-accent rounded-full flex items-center justify-center text-white shadow-2xl shadow-brand-accent/20"
+                  >
+                    <Play className="w-8 h-8 fill-current ml-1" />
+                  </motion.div>
+                </div>
+                <div className="absolute bottom-6 left-6 right-6 flex justify-between items-center text-xs text-text-primary/40 font-mono">
+                  <span>00:00 / 05:00</span>
+                  <span className="px-2 py-1 bg-red-500/20 text-red-400 rounded">LIVE_DEMO</span>
+                </div>
+              </div>
+            )}
           </motion.div>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              "The 'Content Engine' Framework",
-              "Omnichannel Ad Dominance",
-              "Unit Economics Optimization"
-            ].map((item, i) => (
-              <div key={i} className="flex items-center gap-3 text-text-primary/70">
-                <div className="w-6 h-6 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent flex-shrink-0">
-                  <CheckCircle2 className="w-4 h-4" />
-                </div>
-                <span className="text-sm font-medium">{item}</span>
-              </div>
-            ))}
-          </div>
 
           <div className="mt-12 text-center">
             <Button onClick={scrollToBooking} className="mx-auto">
               Book a Call
             </Button>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const Problem = () => {
-  const pains = [
-    { title: "Plateaued Revenue", desc: "Stuck at 3M for months? Your current 'tactics' have hit a ceiling." },
-    { title: "Rising Ad Costs", desc: "CPMs are up. If your creative isn't converting, you're just burning cash." },
-    { title: "Inconsistent ROAS", desc: "One good day, three bad ones. You can't scale on a roller coaster." },
-    { title: "Broken Creatives", desc: "Using the same static images from 2022? The market has moved on." },
-  ];
-
-  return (
-    <section className="py-24 border-y border-white/5">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <SectionHeading 
-              centered={false}
-              title="Scaling is hard because your agency is lazy."
-              subtitle="Most agencies focus on &apos;management fees&apos; and &apos;vanity metrics&apos;. They don&apos;t understand unit economics or the psychology of a high-ticket buyer."
-            />
-            <div className="space-y-6">
-              {pains.map((pain, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="flex gap-4 p-4 rounded-xl hover:bg-bg-secondary/50 transition-colors group"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-500 flex-shrink-0 group-hover:scale-110 transition-transform">
-                    <XCircle className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-white mb-1">{pain.title}</h4>
-                    <p className="text-text-primary/50 text-sm">{pain.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-          <div className="relative">
-            <div className="absolute -inset-4 bg-brand-accent/5 blur-3xl rounded-full" />
-            <Card className="relative border-red-500/20">
-              <div className="text-red-500 font-mono text-xs mb-4 uppercase tracking-widest">Warning: Inefficiency Detected</div>
-              <h3 className="text-2xl font-bold mb-6">The &quot;Agency Trap&quot;</h3>
-              <div className="space-y-4">
-                {[
-                  { label: "Ad Spend Waste", val: "42%", color: "bg-red-500" },
-                  { label: "Creative Fatigue", val: "88%", color: "bg-orange-500" },
-                  { label: "Manual Labor", val: "75%", color: "bg-yellow-500" },
-                ].map((item, i) => (
-                  <div key={i}>
-                    <div className="flex justify-between text-xs text-text-primary/40 mb-2">
-                      <span>{item.label}</span>
-                      <span>{item.val}</span>
-                    </div>
-                    <div className="h-2 w-full bg-bg-primary rounded-full overflow-hidden">
-                      <motion.div 
-                        initial={{ width: 0 }}
-                        whileInView={{ width: item.val }}
-                        viewport={{ once: true }}
-                        className={`h-full ${item.color}`}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-8 pt-8 border-t border-white/10 text-center">
-                <p className="text-text-primary/60 text-sm italic">&quot;If you keep doing what you&apos;ve always done, you&apos;ll keep getting what you&apos;ve always got.&quot;</p>
-              </div>
-            </Card>
           </div>
         </div>
       </div>
@@ -370,7 +291,7 @@ const CaseStudies = () => {
       <div className="container mx-auto px-6">
         <SectionHeading 
           title="Real Brands. Real Revenue."
-          subtitle="We don't hide behind percentages. We show the actual numbers."
+          subtitle="What we achieve for eCommerce founders"
         />
         
         <motion.div 
@@ -378,12 +299,15 @@ const CaseStudies = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="glass-panel rounded-[40px] overflow-hidden p-8 md:p-12 lg:p-16"
+          className="glass-panel rounded-[40px] overflow-hidden p-6 md:p-10 lg:p-12"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Content */}
-            <div className="lg:col-span-6 space-y-8">
-              <h3 className="text-4xl md:text-5xl font-display font-bold leading-tight">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            {/* Left Content: The Story */}
+            <div className="lg:col-span-5 space-y-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
+                Case Study: Footwear Brand
+              </div>
+              <h3 className="text-4xl md:text-5xl font-display font-bold leading-tight tracking-tighter">
                 Scaled Men Footwear brand from <span className="text-brand-accent">43.3 M to 75.3M</span> in 12 months
               </h3>
               
@@ -405,57 +329,144 @@ const CaseStudies = () => {
               </div>
             </div>
 
-            {/* Right Content: Video & Stats */}
-            <div className="lg:col-span-6 space-y-8">
-              {/* Video Player Placeholder */}
-              <div className="relative aspect-video rounded-3xl overflow-hidden border border-white/10 bg-bg-secondary group cursor-pointer">
+            {/* Right Content: Stats Screenshot & Details */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="group relative rounded-3xl overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-2xl transition-all duration-500 hover:border-brand-accent/30">
+                <div className="absolute inset-0 bg-gradient-to-tr from-brand-accent/5 to-transparent pointer-events-none" />
                 <Image 
-                  src="https://picsum.photos/seed/footwear-case/1200/800" 
-                  alt="Case Study Video" 
-                  fill 
-                  className="object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
+                  src="https://drive.google.com/uc?export=download&id=1AgFj2PYNcWrpf7wxgBbhV3w7Tr-QqWFC" 
+                  alt="Annual Revenue Growth Dashboard" 
+                  width={1400}
+                  height={800}
+                  className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-[1.02]"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-20 h-20 rounded-full bg-brand-accent flex items-center justify-center text-white shadow-2xl shadow-brand-accent/40 group-hover:scale-110 transition-transform">
-                    <Play className="w-8 h-8 fill-current ml-1" />
-                  </div>
-                </div>
-                
-                {/* Badges like in the image */}
-                <div className="absolute top-4 left-4 flex gap-2">
-                  <div className="bg-red-600 text-white text-[10px] font-black px-3 py-1 rounded uppercase tracking-tighter">Before</div>
-                </div>
-                <div className="absolute top-4 right-4 flex gap-2">
-                  <div className="bg-green-600 text-white text-[10px] font-black px-3 py-1 rounded uppercase tracking-tighter">After</div>
-                </div>
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
-                  <div className="text-white font-display font-black text-4xl md:text-5xl tracking-tighter drop-shadow-2xl">12 MONTHS</div>
-                </div>
               </div>
-
-              {/* Stats Grid */}
-              <div className="grid grid-cols-2 gap-8 pt-4">
-                <div>
-                  <div className="text-text-primary/40 text-xs uppercase tracking-widest mb-2">Revenue Growth</div>
-                  <div className="text-4xl font-display font-bold text-white tracking-tighter">+74%</div>
+              
+              <div className="pt-4 border-t border-white/5">
+                <div className="mb-6 flex justify-between items-center px-2">
+                  <div className="text-brand-accent/60 font-mono text-[9px] uppercase tracking-[0.4em] whitespace-nowrap">
+                    Verified Dashboard Data
+                  </div>
+                  <div className="h-px flex-grow bg-white/5 ml-4" />
                 </div>
-                <div>
-                  <div className="text-text-primary/40 text-xs uppercase tracking-widest mb-2">Net Sales Up</div>
-                  <div className="text-4xl font-display font-bold text-white tracking-tighter">+60%</div>
-                </div>
-                <div>
-                  <div className="text-text-primary/40 text-xs uppercase tracking-widest mb-2">More Orders</div>
-                  <div className="text-4xl font-display font-bold text-white tracking-tighter">+30%</div>
-                </div>
-                <div>
-                  <div className="text-text-primary/40 text-xs uppercase tracking-widest mb-2">Repeat Customers</div>
-                  <div className="text-4xl font-display font-bold text-white tracking-tighter">+6%</div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 px-2">
+                  <div>
+                    <div className="text-text-primary/40 text-[10px] uppercase tracking-widest mb-1">Revenue Growth</div>
+                    <div className="text-2xl font-display font-bold text-white tracking-tighter">+74%</div>
+                  </div>
+                  <div>
+                    <div className="text-text-primary/40 text-[10px] uppercase tracking-widest mb-1">Net Sales</div>
+                    <div className="text-2xl font-display font-bold text-white tracking-tighter">+60%</div>
+                  </div>
+                  <div>
+                    <div className="text-text-primary/40 text-[10px] uppercase tracking-widest mb-1">More Orders</div>
+                    <div className="text-2xl font-display font-bold text-white tracking-tighter">+30%</div>
+                  </div>
+                  <div>
+                    <div className="text-text-primary/40 text-[10px] uppercase tracking-widest mb-1">Repeat Rate</div>
+                    <div className="text-2xl font-display font-bold text-white tracking-tighter">+6%</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const MonthlyPerformance = () => {
+  const screenshots = [
+    { 
+      label: "Profitability Powerhouse", 
+      title: "PKR 4.7M+ Net Sales", 
+      mer: "21% MER",
+      desc: "Exceptional efficiency achieved through tactical creative testing and audience refinement. This represents a period of hyper-optimized lead acquisition and conversion.",
+      imgId: "1L_LvdtlhSqMnb5LZLR3MjzxR68TpM0Ru"
+    },
+    { 
+      label: "Scale Dominance", 
+      title: "PKR 14.8M+ Net Sales", 
+      mer: "14.8% MER",
+      desc: "Aggressive spend deployment while maintaining a solid profitability threshold. We scaled the advertising budget by 3x while keeping efficiency well above industry standards.",
+      imgId: "1HffYdtg1vmiZct_DCZuzE0DkaGd1nxxC"
+    },
+    { 
+      label: "Volume & Efficiency", 
+      title: "PKR 10.5M+ Net Sales", 
+      mer: "20.9% MER",
+      desc: "Merging high volume with high efficiency to maximize net profit. A balanced approach between cold acquisition and aggressive retargeting cycles.",
+      imgId: "15Zc00PZupT8dMYHK_-ss3lOJQwqdk8qD"
+    }
+  ];
+
+  return (
+    <section className="py-24 border-t border-white/5 bg-[#050505]">
+      <div className="container mx-auto px-6">
+        <div className="max-w-4xl mx-auto text-center mb-24">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
+            Proven Performance
+          </div>
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-white tracking-tighter mb-6">
+            Month-on-Month <span className="text-brand-accent">MER Dominance</span>
+          </h2>
+          <p className="text-text-primary/60 text-lg">
+            Direct dashboard snapshots showing how we scale revenue while protecting your bottom line. No fluff, just real numbers.
+          </p>
+        </div>
+
+        <div className="space-y-32">
+          {screenshots.map((ss, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className={`flex flex-col ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center`}
+            >
+              <div className="lg:w-1/3 w-full space-y-6">
+                <div>
+                  <div className="inline-block px-3 py-1 rounded-md bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-[10px] font-bold uppercase tracking-widest mb-4">
+                    {ss.label}
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-display font-bold text-white tracking-tighter mb-3">
+                    {ss.title}
+                  </h3>
+                  <div className="text-3xl font-black text-brand-accent tracking-tight">
+                    {ss.mer}
+                  </div>
+                </div>
+                <p className="text-text-primary/50 text-lg leading-relaxed max-w-md">
+                  {ss.desc}
+                </p>
+                <div className="flex items-center gap-4 pt-4">
+                  <div className="flex items-center gap-2 text-[10px] font-mono text-text-primary/30 uppercase tracking-widest">
+                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                    Verified Performance
+                  </div>
+                </div>
+              </div>
+              
+              <div className="lg:w-2/3 w-full">
+                <div className="group relative rounded-3xl overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-2xl transition-all duration-500 hover:border-brand-accent/30">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-brand-accent/5 to-transparent pointer-events-none z-10" />
+                  <div className="relative aspect-[16/10] w-full">
+                    <Image 
+                      src={`https://drive.google.com/uc?export=download&id=${ss.imgId}`} 
+                      alt={ss.title}
+                      fill
+                      className="object-contain p-4 md:p-8 transition-transform duration-700 group-hover:scale-[1.02]"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -567,7 +578,7 @@ const Qualification = () => {
             <ul className="space-y-6">
               {[
                 "Beginners looking for a 'magic bullet'",
-                "Brands with less than PKR 3M monthly revenue",
+                "Brands with less than PKR 2M monthly revenue",
                 "Businesses without a proven product-market fit",
                 "Founders unwilling to invest in high-quality creative",
                 "People looking for a 'cheap agency' price"
@@ -603,7 +614,7 @@ const Qualification = () => {
             </div>
             <ul className="space-y-6">
               {[
-                "Established brands doing PKR 3M - 10M monthly",
+                "Established brands doing PKR 2M - 10M monthly",
                 "Founders ready to scale to 8 figures and beyond",
                 "Brands with a high LTV and solid margins",
                 "Decision makers who value speed and results",
@@ -926,9 +937,9 @@ const Booking = () => {
 
                   <Button 
                     onClick={() => window.open('https://form.jotform.com/260972545860061', '_blank')}
-                    className="w-full py-6 text-xl group"
+                    className="w-full py-6 text-xl group font-black"
                   >
-                    Start Now <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                    START NOW <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                   </Button>
                   
                   <div className="mt-6 flex items-center justify-center gap-2 text-xs font-mono text-brand-accent/60">
@@ -1036,9 +1047,9 @@ export default function FunnelPage() {
 
       <Hero />
       <VSL />
-      <Problem />
       <Mechanism />
       <CaseStudies />
+      <MonthlyPerformance />
       <LeadMagnet />
       <HowItWorks />
       <Qualification />

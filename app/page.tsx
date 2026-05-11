@@ -149,10 +149,10 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Button onClick={scrollToBooking} className="w-full sm:w-auto text-lg py-5 px-10">
+            <Button onClick={scrollToBooking} className="w-full sm:w-auto text-base md:text-lg py-4 md:py-5 px-8 md:px-10">
               Partner With Us <ArrowRight className="w-5 h-5" />
             </Button>
-            <Button onClick={() => document.getElementById('lead-magnet')?.scrollIntoView({ behavior: 'smooth' })} variant="outline" className="w-full sm:w-auto text-lg py-5 px-10">
+            <Button onClick={() => document.getElementById('lead-magnet')?.scrollIntoView({ behavior: 'smooth' })} variant="outline" className="w-full sm:w-auto text-base md:text-lg py-4 md:py-5 px-8 md:px-10">
               Free ROI Audit <BarChart3 className="w-5 h-5" />
             </Button>
           </div>
@@ -696,7 +696,7 @@ const OfferStack = () => {
 
           <div className="mt-12 pt-12 border-t border-white/10 text-center">
             <div className="text-text-primary/40 text-sm mb-4">Limited to 3 New Partners per Month</div>
-            <Button onClick={scrollToBooking} className="mx-auto text-xl py-6 px-12">
+            <Button onClick={scrollToBooking} className="mx-auto text-lg md:text-xl py-4 md:py-6 px-8 md:px-12 w-full md:w-auto">
               Partner With Us
             </Button>
           </div>
@@ -818,7 +818,7 @@ const LeadMagnet = () => {
                     </div>
                     
                     <Button 
-                      className="w-full py-4" 
+                      className="w-full py-3 md:py-4 text-sm md:text-base" 
                       onClick={() => {}} // Form handles submission
                       variant={status === 'success' ? 'secondary' : 'primary'}
                     >
@@ -951,7 +951,7 @@ const Booking = () => {
 
                   <Button 
                     onClick={() => window.open('https://form.jotform.com/260972545860061', '_blank')}
-                    className="w-full py-6 text-xl group font-black"
+                    className="w-full py-4 md:py-6 text-lg md:text-xl group font-black"
                   >
                     START NOW <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                   </Button>

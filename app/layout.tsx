@@ -13,41 +13,102 @@ const unbounded = Unbounded({
   variable: '--font-display',
 });
 
+const siteConfig = {
+  name: 'Shadow Studio',
+  description: 'Scale your eCommerce brand from PKR 2M to 7M+ Monthly revenue in 90 days. Pakistan\'s leading performance marketing agency for high-growth brands.',
+  url: 'https://shadowstudio.io', // Placeholder, can be updated later
+  ogImage: 'https://drive.google.com/uc?export=download&id=1p78NgIMJDO-CY1s-ZWb-OyvdKcxdSHxM',
+  keywords: [
+    'eCommerce marketing pakistan',
+    'performance marketing agency',
+    'scale ecommerce brand',
+    'meta ads agency pakistan',
+    'google ads experts',
+    'UGC content agency',
+    'shopify scaling system'
+  ]
+};
+
 export const metadata: Metadata = {
-  title: 'Shadow Studio | Marketing Agency for eCommerce',
-  description: 'Scale your ecommerce brand from 2M to 7M+ in 90 days.',
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  authors: [
+    {
+      name: 'Shadow Studio',
+      url: siteConfig.url,
+    },
+  ],
+  creator: 'Shadow Studio',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+    creator: '@shadowstudio',
+  },
+  alternates: {
+    canonical: siteConfig.url,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
     icon: 'https://drive.google.com/uc?export=download&id=11PftqrVrqzER602AoZWUbAu12fzD95mc',
+    shortcut: 'https://drive.google.com/uc?export=download&id=11PftqrVrqzER602AoZWUbAu12fzD95mc',
+    apple: 'https://drive.google.com/uc?export=download&id=11PftqrVrqzER602AoZWUbAu12fzD95mc',
   },
+  manifest: `${siteConfig.url}/site.webmanifest`,
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={`${inter.variable} ${unbounded.variable} dark`}>
       <head>
-        <Script id="meta-pixel" strategy="afterInteractive">
+        <Script id="gtm" strategy="afterInteractive">
           {`
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '4422520057993278');
-            fbq('track', 'PageView');
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-MVB8PXS6');
           `}
         </Script>
       </head>
       <body suppressHydrationWarning className="bg-[#3a3d44] text-[#f0ece4] antialiased selection:bg-[#f4703a]/30 selection:text-[#f4703a]">
         <noscript>
-          <img 
-            height="1" 
-            width="1" 
-            style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=4422520057993278&ev=PageView&noscript=1"
-            alt=""
+          <iframe 
+            src="https://www.googletagmanager.com/ns.html?id=GTM-MVB8PXS6"
+            height="0" 
+            width="0" 
+            style={{ display: 'none', visibility: 'hidden' }}
           />
         </noscript>
         {children}

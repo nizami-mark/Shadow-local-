@@ -20,7 +20,9 @@ import {
   ExternalLink,
   Mail,
   Send,
-  Loader2
+  Loader2,
+  Instagram,
+  Linkedin
 } from 'lucide-react';
 
 // --- Components ---
@@ -435,66 +437,45 @@ const MonthlyPerformance = () => {
           </motion.p>
         </div>
 
-        <div className="space-y-40">
+        <div className="max-w-5xl mx-auto space-y-24 md:space-y-32">
           {screenshots.map((ss, i) => (
             <motion.div 
               key={i}
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className={`flex flex-col ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-16 items-center`}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+              className="group relative"
             >
-              <div className="lg:w-2/5 w-full space-y-8">
-                <div className="space-y-4">
-                  <div className="inline-block px-3 py-1 rounded-md bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-[11px] font-bold uppercase tracking-widest">
-                    {ss.label}
-                  </div>
-                  <h3 className="text-4xl md:text-5xl font-display font-bold text-white tracking-tighter leading-none">
-                    {ss.title}
-                  </h3>
-                  <div className="text-4xl font-black text-brand-accent tracking-tight flex items-center gap-3">
-                    {ss.mer}
-                    <div className="h-px w-12 bg-brand-accent/30" />
-                  </div>
-                </div>
-                <p className="text-text-primary/60 text-lg leading-relaxed">
-                  {ss.desc}
-                </p>
-                <div className="flex items-center gap-6 pt-4 border-t border-white/5">
-                  <div className="flex items-center gap-2 text-[10px] font-mono text-text-primary/40 uppercase tracking-[0.2em]">
-                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
-                    Live Dashboard Extraction
-                  </div>
-                </div>
-              </div>
-              
-              <div className="lg:w-3/5 w-full">
-                <div className="group relative rounded-[2rem] overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-2xl transition-all duration-700 hover:border-brand-accent/40 hover:shadow-brand-accent/5">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-brand-accent/10 via-transparent to-transparent pointer-events-none z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  {/* Browser Bar Decoration */}
-                  <div className="bg-white/5 border-b border-white/10 px-6 py-4 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-red-500/20" />
-                      <div className="w-3 h-3 rounded-full bg-yellow-500/20" />
-                      <div className="w-3 h-3 rounded-full bg-green-500/20" />
+              <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden border border-white/5 bg-[#0a0a0a] shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] transition-all duration-700 hover:border-brand-accent/30 hover:shadow-brand-accent/5">
+                <Image 
+                  src={`https://drive.google.com/uc?export=download&id=${ss.imgId}`} 
+                  alt={ss.title}
+                  width={1600}
+                  height={1000}
+                  className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-[1.01]"
+                  referrerPolicy="no-referrer"
+                />
+                
+                {/* Refined Overlay - Minimal (Net Sales & MER only) */}
+                <div className="absolute inset-0 bg-black/90 md:bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center p-4 md:p-12 text-center backdrop-blur-sm md:backdrop-blur-md">
+                  <motion.div 
+                    initial={{ y: 20, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.1 }}
+                    className="space-y-2 md:space-y-8"
+                  >
+                    <h3 className="text-sm md:text-5xl font-display font-bold text-white tracking-tighter leading-tight uppercase md:normal-case">
+                      {ss.title}
+                    </h3>
+                    <div className="flex items-center justify-center gap-2 md:gap-6">
+                      <div className="h-px w-4 md:w-16 bg-brand-accent/30" />
+                      <div className="text-xl md:text-8xl font-black text-brand-accent tracking-tighter">
+                        {ss.mer}
+                      </div>
+                      <div className="h-px w-4 md:w-16 bg-brand-accent/30" />
                     </div>
-                    <div className="flex-grow mx-8 h-6 bg-white/5 rounded-md flex items-center px-3">
-                      <div className="w-full h-2 bg-white/5 rounded-full" />
-                    </div>
-                  </div>
-
-                  <div className="p-4 md:p-8 bg-[#0a0a0a]">
-                    <Image 
-                      src={`https://drive.google.com/uc?export=download&id=${ss.imgId}`} 
-                      alt={ss.title}
-                      width={1200}
-                      height={800}
-                      className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-[1.02]"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
+                  </motion.div>
                 </div>
               </div>
             </motion.div>
@@ -1018,7 +999,15 @@ const Footer = () => {
             <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
             <a href="/terms" className="hover:text-white transition-colors">Terms of Service</a>
           </div>
-          <div className="text-text-primary/20 text-xs font-mono">
+          <div className="flex items-center gap-6">
+            <a href="https://www.instagram.com/shadowstudioglobal?igsh=MXRmNWxqb21zNGN5NA==" target="_blank" rel="noopener noreferrer" className="text-text-primary/40 hover:text-brand-accent transition-all duration-300 transform hover:scale-110" aria-label="Instagram">
+              <Instagram className="w-5 h-5" />
+            </a>
+            <a href="https://www.linkedin.com/company/shadowstudio-comapny/" target="_blank" rel="noopener noreferrer" className="text-text-primary/40 hover:text-brand-accent transition-all duration-300 transform hover:scale-110" aria-label="LinkedIn">
+              <Linkedin className="w-5 h-5" />
+            </a>
+          </div>
+          <div className="text-text-primary/20 text-xs font-mono text-center md:text-right">
             © 2026 SHADOW STUDIO // ALL RIGHTS RESERVED
           </div>
         </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import Image from 'next/image';
 import { 
   ArrowRight, 
@@ -136,13 +136,13 @@ const Hero = () => {
             Exclusive for Brands doing PKR 2M+ Monthly
           </div>
           
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[1.1] tracking-tight">
-            Scale from <span className="text-brand-accent">2M</span> to <span className="text-white">7M+</span> <br className="hidden md:block" />
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-[1.1] tracking-tight">
+            Scale from 2M to <span className="text-brand-accent">7M+</span> Monthly
             In Exactly <span className="underline decoration-brand-accent/50 underline-offset-8">90 Days</span>.
           </h1>
           
-          <p className="text-text-primary/70 text-xl md:text-2xl max-w-3xl mx-auto mb-12 leading-relaxed">
-            Stop hiring agencies. Start installing a <span className="text-white font-semibold">Scaling System</span>. 
+          <p className="text-text-primary/70 text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed">
+            Install a high-performance <span className="text-white font-semibold">Scaling System</span> built for exponential growth. 
             We partner with high-potential brands to dominate Meta, Google, and the Content Engine.
           </p>
 
@@ -244,7 +244,7 @@ const Mechanism = () => {
       title: "Content Engine",
       icon: Layers,
       desc: "The fuel for the machine. High-converting UGC and cinematic brand assets that scale.",
-      features: ["UC Creator Network", "Hook-Based Editing", "Viral Loop Strategy"]
+      features: ["UGC Creator Network", "Hook-Based Editing", "Viral Loop Strategy"]
     }
   ];
 
@@ -403,62 +403,95 @@ const MonthlyPerformance = () => {
   ];
 
   return (
-    <section className="py-24 border-t border-white/5 bg-[#050505]">
-      <div className="container mx-auto px-6">
+    <section className="py-24 bg-bg-secondary border-y border-white/5 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-brand-accent/5 to-transparent pointer-events-none" />
+      
+      <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center mb-24">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-[10px] font-bold uppercase tracking-[0.2em] mb-4"
+          >
             Proven Performance
-          </div>
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-white tracking-tighter mb-6">
+          </motion.div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-6xl font-display font-bold text-white tracking-tighter mb-6"
+          >
             Month-on-Month <span className="text-brand-accent">MER Dominance</span>
-          </h2>
-          <p className="text-text-primary/60 text-lg">
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-text-primary/60 text-lg md:text-xl max-w-2xl mx-auto"
+          >
             Direct dashboard snapshots showing how we scale revenue while protecting your bottom line. No fluff, just real numbers.
-          </p>
+          </motion.p>
         </div>
 
-        <div className="space-y-32">
+        <div className="space-y-40">
           {screenshots.map((ss, i) => (
             <motion.div 
               key={i}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className={`flex flex-col ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center`}
+              className={`flex flex-col ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-16 items-center`}
             >
-              <div className="lg:w-1/3 w-full space-y-6">
-                <div>
-                  <div className="inline-block px-3 py-1 rounded-md bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-[10px] font-bold uppercase tracking-widest mb-4">
+              <div className="lg:w-2/5 w-full space-y-8">
+                <div className="space-y-4">
+                  <div className="inline-block px-3 py-1 rounded-md bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-[11px] font-bold uppercase tracking-widest">
                     {ss.label}
                   </div>
-                  <h3 className="text-3xl md:text-4xl font-display font-bold text-white tracking-tighter mb-3">
+                  <h3 className="text-4xl md:text-5xl font-display font-bold text-white tracking-tighter leading-none">
                     {ss.title}
                   </h3>
-                  <div className="text-3xl font-black text-brand-accent tracking-tight">
+                  <div className="text-4xl font-black text-brand-accent tracking-tight flex items-center gap-3">
                     {ss.mer}
+                    <div className="h-px w-12 bg-brand-accent/30" />
                   </div>
                 </div>
-                <p className="text-text-primary/50 text-lg leading-relaxed max-w-md">
+                <p className="text-text-primary/60 text-lg leading-relaxed">
                   {ss.desc}
                 </p>
-                <div className="flex items-center gap-4 pt-4">
-                  <div className="flex items-center gap-2 text-[10px] font-mono text-text-primary/30 uppercase tracking-widest">
-                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                    Verified Performance
+                <div className="flex items-center gap-6 pt-4 border-t border-white/5">
+                  <div className="flex items-center gap-2 text-[10px] font-mono text-text-primary/40 uppercase tracking-[0.2em]">
+                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
+                    Live Dashboard Extraction
                   </div>
                 </div>
               </div>
               
-              <div className="lg:w-2/3 w-full">
-                <div className="group relative rounded-3xl overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-2xl transition-all duration-500 hover:border-brand-accent/30">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-brand-accent/5 to-transparent pointer-events-none z-10" />
-                  <div className="relative aspect-[16/10] w-full">
+              <div className="lg:w-3/5 w-full">
+                <div className="group relative rounded-[2rem] overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-2xl transition-all duration-700 hover:border-brand-accent/40 hover:shadow-brand-accent/5">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-brand-accent/10 via-transparent to-transparent pointer-events-none z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  {/* Browser Bar Decoration */}
+                  <div className="bg-white/5 border-b border-white/10 px-6 py-4 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500/20" />
+                      <div className="w-3 h-3 rounded-full bg-yellow-500/20" />
+                      <div className="w-3 h-3 rounded-full bg-green-500/20" />
+                    </div>
+                    <div className="flex-grow mx-8 h-6 bg-white/5 rounded-md flex items-center px-3">
+                      <div className="w-full h-2 bg-white/5 rounded-full" />
+                    </div>
+                  </div>
+
+                  <div className="p-4 md:p-8 bg-[#0a0a0a]">
                     <Image 
                       src={`https://drive.google.com/uc?export=download&id=${ss.imgId}`} 
                       alt={ss.title}
-                      fill
-                      className="object-contain p-4 md:p-8 transition-transform duration-700 group-hover:scale-[1.02]"
+                      width={1200}
+                      height={800}
+                      className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-[1.02]"
                       referrerPolicy="no-referrer"
                     />
                   </div>
@@ -971,7 +1004,7 @@ const Footer = () => {
               className="relative w-40 h-10 cursor-pointer"
             >
               <Image 
-                src="https://drive.google.com/uc?export=download&id=11q0Tq7UxhHXsvFFBUo3KeEpFZJumQ1LM" 
+                src="https://drive.google.com/uc?export=download&id=1p78NgIMJDO-CY1s-ZWb-OyvdKcxdSHxM" 
                 alt="Shadow Studio Logo" 
                 fill 
                 className="object-contain"
@@ -1011,18 +1044,25 @@ export default function FunnelPage() {
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const navLinks = [
+    { name: 'Services', id: 'system', icon: Zap },
+    { name: 'Cases', id: 'case-studies', icon: BarChart3 },
+    { name: 'Audit', id: 'lead-magnet', icon: Target },
+    { name: 'Process', id: 'process', icon: Layers },
+  ];
+
   return (
-    <main className="relative">
-      {/* Navigation */}
+    <main className="relative pb-20 md:pb-0">
+      {/* Top Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-bg-primary/80 backdrop-blur-md border-b border-white/10 py-4' : 'bg-transparent py-6'}`}>
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <div 
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
-              className="relative w-40 h-10 cursor-pointer"
+              className="relative w-32 md:w-40 h-8 md:h-10 cursor-pointer"
             >
               <Image 
-                src="https://drive.google.com/uc?export=download&id=11q0Tq7UxhHXsvFFBUo3KeEpFZJumQ1LM" 
+                src="https://drive.google.com/uc?export=download&id=1p78NgIMJDO-CY1s-ZWb-OyvdKcxdSHxM" 
                 alt="Shadow Studio Logo" 
                 fill 
                 className="object-contain object-left"
@@ -1030,20 +1070,50 @@ export default function FunnelPage() {
               />
             </div>
           </div>
+          
           <div className="hidden md:flex items-center gap-8">
-            <a href="#system" onClick={scrollTo('system')} className="text-text-primary/60 hover:text-white text-sm font-medium transition-colors">Services</a>
-            <a href="#case-studies" onClick={scrollTo('case-studies')} className="text-text-primary/60 hover:text-white text-sm font-medium transition-colors">Case Studies</a>
-            <a href="#lead-magnet" onClick={scrollTo('lead-magnet')} className="text-text-primary/60 hover:text-white text-sm font-medium transition-colors">Free Audit</a>
-            <a href="#process" onClick={scrollTo('process')} className="text-text-primary/60 hover:text-white text-sm font-medium transition-colors">Process</a>
+            {navLinks.map((link) => (
+              <a 
+                key={link.id} 
+                href={`#${link.id}`} 
+                onClick={scrollTo(link.id)} 
+                className="text-text-primary/60 hover:text-white text-sm font-medium transition-colors"
+              >
+                {link.name}
+              </a>
+            ))}
             <Button onClick={scrollTo('booking')} variant="outline" className="px-6 py-2 text-sm">
               Book Call
             </Button>
           </div>
-          <Button onClick={scrollTo('booking')} variant="outline" className="md:hidden px-4 py-2 text-xs">
-            Book Call
-          </Button>
+
+          <div className="md:hidden flex items-center">
+            <Button onClick={scrollTo('booking')} variant="primary" className="px-4 py-2 text-xs !py-2.5">
+              Book Call
+            </Button>
+          </div>
         </div>
       </nav>
+
+      {/* Bottom Mobile Menu */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-bg-primary/90 backdrop-blur-xl border-t border-white/10 px-6 py-3">
+        <div className="flex justify-between items-center max-w-md mx-auto">
+          {navLinks.map((link) => {
+            const Icon = link.icon;
+            return (
+              <a 
+                key={link.id} 
+                href={`#${link.id}`} 
+                onClick={scrollTo(link.id)}
+                className="flex flex-col items-center gap-1 text-text-primary/40 hover:text-brand-accent transition-colors py-1"
+              >
+                <Icon className="w-5 h-5" />
+                <span className="text-[10px] font-bold uppercase tracking-tighter">{link.name}</span>
+              </a>
+            );
+          })}
+        </div>
+      </div>
 
       <Hero />
       <VSL />
@@ -1056,13 +1126,6 @@ export default function FunnelPage() {
       <OfferStack />
       <Booking />
       <Footer />
-
-      {/* Floating CTA for Mobile */}
-      <div className="fixed bottom-6 left-6 right-6 z-40 md:hidden">
-        <Button onClick={scrollTo('booking')} className="w-full py-5 shadow-2xl shadow-brand-accent/20">
-          Book Strategy Call <ArrowRight className="w-4 h-4" />
-        </Button>
-      </div>
     </main>
   );
 }

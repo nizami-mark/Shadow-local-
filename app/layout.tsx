@@ -81,17 +81,29 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: 'https://drive.google.com/uc?export=download&id=11PftqrVrqzER602AoZWUbAu12fzD95mc',
+    icon: [
+      {
+        url: 'https://drive.google.com/uc?export=download&id=11PftqrVrqzER602AoZWUbAu12fzD95mc',
+        href: 'https://drive.google.com/uc?export=download&id=11PftqrVrqzER602AoZWUbAu12fzD95mc',
+      },
+    ],
     shortcut: 'https://drive.google.com/uc?export=download&id=11PftqrVrqzER602AoZWUbAu12fzD95mc',
-    apple: 'https://drive.google.com/uc?export=download&id=11PftqrVrqzER602AoZWUbAu12fzD95mc',
+    apple: [
+      {
+        url: 'https://drive.google.com/uc?export=download&id=11PftqrVrqzER602AoZWUbAu12fzD95mc',
+        sizes: '180x180',
+        type: 'image/png',
+      },
+    ],
   },
-  manifest: `${siteConfig.url}/site.webmanifest`,
+  manifest: '/site.webmanifest',
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={`${inter.variable} ${unbounded.variable} dark`}>
       <head>
+        <link rel="icon" href="https://drive.google.com/uc?export=download&id=11PftqrVrqzER602AoZWUbAu12fzD95mc" />
         <Script id="gtm" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

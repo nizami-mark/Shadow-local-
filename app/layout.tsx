@@ -30,6 +30,9 @@ const siteConfig = {
 };
 
 export const metadata: Metadata = {
+  icons: {
+  icon: "/icon.png",
+},
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,

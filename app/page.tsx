@@ -445,7 +445,8 @@ const MonthlyPerformance = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8 }}
-              className="group relative"
+              className="group relative cursor-pointer outline-none"
+              tabIndex={0}
             >
               <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden border border-white/5 bg-[#0a0a0a] shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] transition-all duration-700 hover:border-brand-accent/30 hover:shadow-brand-accent/5">
                 <Image 
@@ -458,7 +459,7 @@ const MonthlyPerformance = () => {
                 />
                 
                 {/* Refined Overlay - Minimal (Net Sales & MER only) */}
-                <div className="absolute inset-0 bg-black/90 md:bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center p-4 md:p-12 text-center backdrop-blur-sm md:backdrop-blur-md">
+                <div className="absolute inset-0 bg-black/90 md:bg-black/80 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center p-4 md:p-12 text-center backdrop-blur-sm md:backdrop-blur-md">
                   <motion.div 
                     initial={{ y: 20, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
@@ -1005,6 +1006,11 @@ const Footer = () => {
             </a>
             <a href="https://www.linkedin.com/company/shadowstudio-comapny/" target="_blank" rel="noopener noreferrer" className="text-text-primary/40 hover:text-brand-accent transition-all duration-300 transform hover:scale-110" aria-label="LinkedIn">
               <Linkedin className="w-5 h-5" />
+            </a>
+            <a href="https://www.behance.net/shadowstudioglobal" target="_blank" rel="noopener noreferrer" className="text-text-primary/40 hover:text-brand-accent transition-all duration-300 transform hover:scale-110" aria-label="Behance">
+              <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 fill-current">
+                <path d="M22 7h-7v-2h7v2zm.5 5c0 3.037-2.463 5.5-5.5 5.5s-5.5-2.463-5.5-5.5 2.463-5.5 5.5-5.5 5.5 2.463 5.5 5.5zm-5.5-3.5c-1.93 0-3.5 1.57-3.5 3.5s1.57 3.5 3.5 3.5 3.5-1.57 3.5-3.5-1.57-3.5-3.5-3.5zm-8.5 7.5h-5.5v-13h5.5c2.317 0 4.167 1.6 4.167 3.833 0 1.258-.617 2.37-1.583 3.033 1.25 0.584 2.083 1.805 2.083 3.235 0 2.233-1.85 3.899-4.167 3.899zm-3.5-5.5h2.5c0.917 0 1.667-0.75 1.667-1.667s-0.75-1.667-1.667-1.667h-2.5v3.334zm0 4h3c0.917 0 1.667-0.75 1.667-1.667s-0.75-1.667-1.667-1.667h-3v3.334z"/>
+              </svg>
             </a>
           </div>
           <div className="text-text-primary/20 text-xs font-mono text-center md:text-right">

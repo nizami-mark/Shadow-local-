@@ -122,7 +122,7 @@ const UnifiedHero = () => {
   };
 
   return (
-    <section className="relative pt-16 pb-8 md:pt-28 md:pb-12 overflow-hidden bg-bg-primary text-white">
+    <section className="relative pt-24 pb-16 md:pt-36 md:pb-12 overflow-hidden bg-bg-primary text-white">
       {/* Background Glows */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-[10%] left-1/2 -translate-x-1/2 w-full max-w-7xl aspect-square bg-brand-accent/20 blur-[160px] rounded-full opacity-50" />
@@ -135,7 +135,7 @@ const UnifiedHero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-[28px] sm:text-3xl md:text-5xl lg:text-[62px] font-bold text-center leading-[1.1] tracking-tight mb-8 md:mb-12 px-4"
+            className="text-[28px] sm:text-3xl md:text-5xl lg:text-[62px] font-bold text-center leading-[1.1] tracking-tight mb-12 md:mb-16 px-4"
           >
             Scale from 2M to <span className="text-brand-accent">7M+</span> Monthly In Exactly <span className="text-brand-accent">90 Days</span> or you don&apos;t pay.
           </motion.h1>

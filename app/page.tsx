@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import Image from 'next/image';
+import Script from 'next/script';
 import { 
   ArrowRight, 
   TrendingUp, 
@@ -16,6 +17,7 @@ import {
   Layers, 
   Calendar,
   ChevronRight,
+  ChevronDown,
   Quote,
   ExternalLink,
   Mail,
@@ -112,57 +114,7 @@ const Card = ({ children, className = "" }: { children: React.ReactNode; classNa
 
 // --- Sections ---
 
-const Hero = () => {
-  const scrollToBooking = () => {
-    const element = document.getElementById('booking');
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  return (
-    <section className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-brand-accent/10 blur-[120px] rounded-full" />
-        <div className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-blue-500/10 blur-[120px] rounded-full" />
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
-      </div>
-
-      <div className="container mx-auto px-6 relative z-10 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-bg-secondary/80 border border-white/10 text-text-primary/60 text-[10px] md:text-sm mb-6 md:mb-8">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="whitespace-nowrap">PKR 2M+ Monthly Brands Only</span>
-          </div>
-          
-          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 leading-[1.2] md:leading-[1.1] tracking-tight px-2">
-            Scale from 2M to <span className="text-brand-accent">7M+</span> Monthly
-            <span className="block md:inline"> In Exactly </span><span className="underline decoration-brand-accent/50 underline-offset-4 md:underline-offset-8">90 Days</span>.
-          </h1>
-          
-          <p className="text-text-primary/70 text-base md:text-xl max-w-3xl mx-auto mb-10 md:mb-12 leading-relaxed px-4 md:px-0">
-            Install a high-performance <span className="text-white font-semibold">Scaling System</span> built for exponential growth. 
-            We partner with high-potential brands to dominate Meta, Google, and Content.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
-            <Button onClick={() => window.open('https://form.jotform.com/260972545860061', '_blank')} className="w-full max-w-[280px] sm:w-auto text-sm md:text-lg">
-              Partner With Us <ArrowRight className="w-5 h-5" />
-            </Button>
-            <Button onClick={() => document.getElementById('lead-magnet')?.scrollIntoView({ behavior: 'smooth' })} variant="outline" className="w-full max-w-[280px] sm:w-auto text-sm md:text-lg">
-              Free ROI Audit <BarChart3 className="w-5 h-5" />
-            </Button>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-};
-
-const VSL = () => {
+const UnifiedHero = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const scrollToBooking = () => {
     const element = document.getElementById('booking');
@@ -170,19 +122,30 @@ const VSL = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-bg-secondary relative">
-      <div className="container mx-auto px-6">
-        <SectionHeading 
-          title="Spend 4.6 minutes to see how we help scale eCom founders"
-          subtitle="Watch this breakdown of the Shadow System. If you don't like what you see, we aren't for you."
-        />
-        
-        <div className="max-w-4xl mx-auto">
+    <section className="relative pt-32 pb-12 md:pt-48 md:pb-16 overflow-hidden bg-bg-primary text-white">
+      {/* Background Glows */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-[10%] left-1/2 -translate-x-1/2 w-full max-w-7xl aspect-square bg-brand-accent/20 blur-[160px] rounded-full opacity-50" />
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="max-w-6xl mx-auto flex flex-col items-center">
+          {/* Headline */}
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-[32px] sm:text-4xl md:text-6xl lg:text-[72px] font-bold text-center leading-[1.1] tracking-tight mb-16 md:mb-24 px-4"
+          >
+            Scale from 2M to <span className="text-brand-accent">7M+</span> Monthly In Exactly <span className="text-brand-accent">90 Days</span> or you don&apos;t pay.
+          </motion.h1>
+          
+          {/* VSL Video */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="aspect-video relative rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 bg-bg-primary group shadow-2xl"
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="w-full max-w-5xl aspect-video relative rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 bg-black/40 group shadow-[0_0_100px_rgba(0,0,0,0.5)] mb-12"
           >
             {isPlaying ? (
               <iframe
@@ -197,36 +160,40 @@ const VSL = () => {
                   src="https://i.ytimg.com/vi/sq8PtWsY1gw/maxresdefault.jpg" 
                   alt="VSL Thumbnail" 
                   fill
-                  className="object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover opacity-80 group-hover:scale-[1.02] transition-transform duration-700"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <motion.div 
                     whileHover={{ scale: 1.1 }}
-                    className="w-16 h-16 md:w-20 md:h-20 bg-brand-accent rounded-full flex items-center justify-center text-white shadow-2xl shadow-brand-accent/20"
+                    className="w-16 h-16 md:w-24 md:h-24 bg-brand-accent rounded-full flex items-center justify-center text-white shadow-2xl shadow-brand-accent/20"
                   >
-                    <Play className="w-6 h-6 md:w-8 md:h-8 fill-current ml-1" />
+                    <Play className="w-6 h-6 md:w-10 md:h-10 fill-current ml-1" />
                   </motion.div>
-                </div>
-                <div className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 flex justify-between items-center text-[10px] md:text-xs text-text-primary/40 font-mono">
-                  <span>00:00 / 05:00</span>
-                  <span className="px-2 py-1 bg-red-500/20 text-red-400 rounded">LIVE_DEMO</span>
                 </div>
               </div>
             )}
           </motion.div>
 
-
-          <div className="mt-8 md:mt-12 text-center">
-            <Button onClick={() => window.open('https://calendly.com/nizami-shadowstudio/30min', '_blank')} className="mx-auto w-full max-w-[240px] sm:w-auto">
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+          >
+            <Button 
+              onClick={scrollToBooking} 
+              className="bg-brand-accent text-black hover:bg-white hover:text-black px-12 py-5 md:py-6 text-xl md:text-2xl font-bold rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-300"
+            >
               Book a Call
             </Button>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
 };
+
 
 
 
@@ -237,7 +204,7 @@ const CaseStudies = () => {
   };
 
   return (
-    <section id="case-studies" className="py-16 md:py-24">
+    <section id="case-studies" className="pt-8 pb-16 md:pt-12 md:pb-24">
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeading 
           title="Real Brands. Real Revenue."
@@ -604,23 +571,100 @@ const HowItWorks = () => {
         </motion.div>
 
         {/* Flow Visualization */}
-        <div className="mt-24 flex flex-col items-center gap-6 relative">
-          <div className="absolute -top-12 left-1/2 -translate-x-1/2 h-12 w-px border-l-2 border-dashed border-brand-accent/20" />
+        <div className="mt-0 flex flex-col items-center gap-0 relative">
+          {/* Multi-line Converging SVG */}
+          <div className="w-full h-24 md:h-32 -mt-1 relative overflow-hidden pointer-events-none">
+            <svg className="w-full h-full" viewBox="0 0 1200 120" preserveAspectRatio="none">
+              {/* Outer Converging paths */}
+              <motion.path 
+                d="M 100 0 L 600 120" 
+                stroke="white" 
+                strokeOpacity="0.05" 
+                strokeWidth="1" 
+                fill="none" 
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+              />
+              <motion.path 
+                d="M 1100 0 L 600 120" 
+                stroke="white" 
+                strokeOpacity="0.05" 
+                strokeWidth="1" 
+                fill="none" 
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+              />
+              
+              {/* Inner Converging paths */}
+              <motion.path 
+                d="M 350 0 L 600 120" 
+                stroke="white" 
+                strokeOpacity="0.1" 
+                strokeWidth="1.5" 
+                fill="none" 
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.4, ease: "easeOut" }}
+              />
+              <motion.path 
+                d="M 850 0 L 600 120" 
+                stroke="white" 
+                strokeOpacity="0.1" 
+                strokeWidth="1.5" 
+                fill="none" 
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.4, ease: "easeOut" }}
+              />
+              
+              {/* Central Dash Line */}
+              <motion.path 
+                d="M 600 0 L 600 120" 
+                stroke="#FF5C35" 
+                strokeOpacity="0.6" 
+                strokeWidth="2" 
+                strokeDasharray="8 8" 
+                fill="none" 
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: "linear" }}
+              />
+              
+              {/* Convergence Point Dot */}
+              <motion.circle 
+                cx="600" cy="120" r="3.5" 
+                fill="#FF5C35" 
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 1, duration: 0.3 }}
+              />
+            </svg>
+          </div>
           
-          <div className="space-y-6 w-full max-w-md">
-             {[
-               { eyebrow: "ALL CHANNELS FIRING TOGETHER", title: "Unified demand engine" },
-               { eyebrow: "QUALIFIED BUYERS + REPEAT PURCHASERS", title: "Revenue pipeline + retention" },
-               { eyebrow: "90-DAY OUTCOME", title: "PKR 2M → 7M+ monthly", highlight: true, href: "https://form.jotform.com/260972545860061" }
-             ].map((step, sIdx) => (
-               <React.Fragment key={sIdx}>
-                 <motion.div 
-                   onClick={() => step.href && window.open(step.href, '_blank')}
-                   initial={{ opacity: 0, y: 10 }}
-                   whileInView={{ opacity: 1, y: 0 }}
-                   transition={{ delay: sIdx * 0.1 }}
-                   className={`${step.highlight ? 'bg-brand-accent cursor-pointer hover:scale-[1.02] transition-transform' : 'bg-white/5'} border border-white/10 rounded-2xl p-6 md:p-8 text-center shadow-xl backdrop-blur-sm relative group overflow-hidden`}
-                 >
+          <div className="space-y-6 w-full max-w-md pb-12 relative">
+              {[
+                { eyebrow: "ALL CHANNELS FIRING TOGETHER", title: "Unified demand engine", isDark: true },
+                { eyebrow: "QUALIFIED BUYERS + REPEAT PURCHASERS", title: "Revenue pipeline + retention" },
+                { eyebrow: "90-DAY OUTCOME", title: "PKR 2M → 7M+ monthly", highlight: true }
+              ].map((step, sIdx) => (
+                <React.Fragment key={sIdx}>
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: sIdx * 0.1 }}
+                    className={`
+                      ${step.highlight ? 'bg-brand-accent' : step.isDark ? 'bg-black/40 border-white/20' : 'bg-white/5 border-white/10'} 
+                      border rounded-2xl md:rounded-[24px] p-6 md:p-8 text-center shadow-2xl backdrop-blur-md relative group overflow-hidden transition-all duration-300
+                    `}
+                  >
                    {step.highlight && (
                      <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-50 group-hover:opacity-70 transition-opacity" />
                    )}
@@ -632,7 +676,9 @@ const HowItWorks = () => {
                    </h4>
                  </motion.div>
                  {sIdx < 2 && (
-                   <div className="h-10 md:h-12 w-0.5 bg-brand-accent/20 mx-auto" />
+                   <div className="h-10 md:h-12 w-px bg-gradient-to-b from-brand-accent/30 to-transparent mx-auto relative">
+                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-brand-accent/10 blur-md rounded-full" />
+                   </div>
                  )}
                </React.Fragment>
              ))}
@@ -896,115 +942,106 @@ const LeadMagnet = ( ) => {
   );
 };
 
-const Booking = () => {
-  return (
-    <section className="py-16 md:py-24 relative overflow-hidden" id="booking">
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
-            <div className="text-center lg:text-left">
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 md:mb-8 leading-tight px-2 md:px-0">
-                Initialize Your <span className="text-brand-accent">Scaling System</span>
-              </h2>
-              <p className="text-text-primary/70 text-base md:text-lg mb-8 px-4 md:px-0">
-                The manual agency model is dead. We install a self-optimizing engine that turns your ad spend into predictable revenue.
-              </p>
-              <div className="space-y-6 max-w-md mx-auto lg:mx-0 text-left">
-                <div className="flex items-center gap-4 px-4 md:px-0">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-bg-secondary flex items-center justify-center text-brand-accent flex-shrink-0">
-                    <Target className="w-5 h-5 md:w-6 md:h-6" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-sm md:text-base">System Compatibility Check</div>
-                    <div className="text-text-primary/40 text-xs md:text-sm">We verify if your brand is ready for 7M+ scale</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 px-4 md:px-0">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-bg-secondary flex items-center justify-center text-brand-accent flex-shrink-0">
-                    <Zap className="w-5 h-5 md:w-6 md:h-6" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-sm md:text-base">Bottleneck Identification</div>
-                    <div className="text-text-primary/40 text-xs md:text-sm">Pinpoint exactly what is stalling your growth</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 px-4 md:px-0">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-bg-secondary flex items-center justify-center text-brand-accent flex-shrink-0">
-                    <Layers className="w-5 h-5 md:w-6 md:h-6" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-sm md:text-base">Activation Roadmap</div>
-                    <div className="text-text-primary/40 text-xs md:text-sm">A clear, step-by-step plan to hit your targets</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="relative px-2 md:px-0">
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className="glass-panel rounded-3xl p-8 md:p-12 text-center relative overflow-hidden group"
-              >
-                {/* Animated Background Elements */}
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-accent to-transparent opacity-50" />
-                <div className="absolute -top-24 -right-24 w-64 h-64 bg-brand-accent/10 blur-3xl rounded-full group-hover:bg-brand-accent/20 transition-colors duration-700" />
-                
-                <div className="relative z-10">
-                  <motion.div 
-                    animate={{ 
-                      y: [0, -10, 0],
-                    }}
-                    transition={{ 
-                      duration: 4, 
-                      repeat: Infinity, 
-                      ease: "easeInOut" 
-                    }}
-                    className="w-24 h-24 bg-brand-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-8 border border-brand-accent/20"
-                  >
-                    <Zap className="w-12 h-12 text-brand-accent" />
-                  </motion.div>
-                  
-                  <h3 className="text-3xl font-bold mb-4">System Activation</h3>
-                  <p className="text-text-primary/60 mb-10 max-w-xs mx-auto">
-                    Complete the 40 second intake to see if your brand qualifies for our scaling system.
-                  </p>
-                  
-                  <div className="space-y-4 mb-10">
-                    {[
-                      "Instant Bottleneck Analysis",
-                      "7M+ Revenue Roadmap",
-                      "Direct Access to Founders"
-                    ].map((item, i) => (
-                      <div key={i} className="flex items-center justify-center gap-3 text-sm text-text-primary/40">
-                        <div className="w-5 h-5 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent flex-shrink-0">
-                          <CheckCircle2 className="w-3 h-3" />
-                        </div>
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
 
-                  <Button 
-                    onClick={() => window.open('https://form.jotform.com/260972545860061', '_blank')}
-                    className="w-full max-w-[280px] mx-auto py-3 md:py-6 text-base md:text-xl group font-black"
-                  >
-                    START NOW <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                  
-                  <div className="mt-6 flex items-center justify-center gap-2 text-xs font-mono text-brand-accent/60">
-                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                    System Access Open
+const FAQ = () => {
+  const faqs = [
+    {
+      question: "What is shadow studio pricing?",
+      answer: "We operate on a performance-driven structure. For our core performance marketing engine, our model involves an agreed-upon commission on net revenue, ensuring our incentives are strictly aligned with your scale. Other creative and strategic services like high-end content production, OOH, and social media management are handled through separate project arrangements tailored to your brand's specific roadmap."
+    },
+    {
+      question: "What exactly is the \"Shadow Scaling System\"?",
+      answer: "It's a multi-channel demand engine. Most agencies just 'run ads'. We build a full ecosystem: a high-volume content machine (20+ assets/month), a YouTube-to-Paid-Funnel, influencer seeding, and strategic OOH placements. It's a unified approach to dominate your category."
+    },
+    {
+      question: "Do you work with new eCommerce stores?",
+      answer: "No. We specifically partner with established brands already doing PKR 2M+ monthly. Our systems are designed for high-performance scaling. We don't 'test' if your product works; we fuel products that are already selling but have stalled in growth."
+    },
+    {
+      question: "Which advertising channels do you specialize in?",
+      answer: "Our 'Unified Demand Engine' focuses on YouTube + Paid Ads, Meta (Instagram/Facebook), and TikTok. We also integrate OOH billboards in major cities (DHA/Gulberg/Clifton) to build brand authority and lower your digital CAC."
+    },
+    {
+      question: "How involved do I need to be as a founder?",
+      answer: "We handle the heavy lifting—from content production to ad management. However, we need a close feedback loop during the first 30 days to align on inventory, brand voice, and offer architecture. After that, we operate as your dedicated growth arm."
+    },
+    {
+      question: "What is the typical investment required?",
+      answer: "Beyond our performance fee, you must have an ad budget ready to scale. For the 90-day roadmap to 7M+, we typically recommend starting with a minimum ad spend that allows for statistically significant creative testing."
+    }
+  ];
+
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  return (
+    <section className="py-24 bg-bg-primary relative" id="faq">
+      <div className="container mx-auto px-6">
+        <div className="max-w-3xl mx-auto">
+          <SectionHeading 
+            title="Frequently Asked Questions"
+            subtitle="Everything you need to know about scaling with Shadow Studio."
+          />
+          
+          <div className="space-y-4">
+            {faqs.map((faq, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="glass-panel rounded-2xl overflow-hidden border-white/5"
+              >
+                <button 
+                  onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                  className="w-full p-6 text-left flex justify-between items-center bg-white/[0.02] hover:bg-white/[0.04] transition-colors"
+                >
+                  <span className="font-bold text-base md:text-lg text-white/90">{faq.question}</span>
+                  <ChevronDown className={`w-5 h-5 text-brand-accent transition-transform duration-300 ${openIndex === i ? 'rotate-180' : ''}`} />
+                </button>
+                <motion.div 
+                  initial={false}
+                  animate={{ 
+                    height: openIndex === i ? 'auto' : 0,
+                    opacity: openIndex === i ? 1 : 0
+                  }}
+                  className="overflow-hidden"
+                >
+                  <div className="p-6 pt-0 text-text-primary/60 text-sm md:text-base leading-relaxed border-t border-white/5">
+                    {faq.answer}
                   </div>
-                </div>
+                </motion.div>
               </motion.div>
-              
-              {/* Decorative side elements */}
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 border-l-2 border-b-2 border-brand-accent/20 rounded-bl-3xl -z-10" />
-              <div className="absolute -top-6 -right-6 w-32 h-32 border-r-2 border-t-2 border-brand-accent/20 rounded-tr-3xl -z-10" />
-            </div>
+            ))}
           </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+
+const CalendlyEmbed = () => {
+  return (
+    <section className="py-16 md:py-24 bg-bg-secondary relative overflow-hidden" id="booking">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="max-w-5xl mx-auto text-center mb-12">
+          <SectionHeading 
+            title="Book Your Strategy Call"
+            subtitle="Select a time that works for you and let's discuss how we can scale your brand."
+          />
+        </div>
+        <div className="max-w-5xl mx-auto glass-panel rounded-3xl overflow-hidden border-brand-accent/20">
+          <div 
+            className="calendly-inline-widget" 
+            data-url="https://calendly.com/nizami-shadowstudio/30min?hide_event_type_details=1&hide_gdpr_banner=1" 
+            style={{ minWidth: '320px', height: '700px' }} 
+          />
+          <Script 
+            type="text/javascript" 
+            src="https://assets.calendly.com/assets/external/widget.js" 
+            strategy="lazyOnload"
+          />
         </div>
       </div>
     </section>
@@ -1076,10 +1113,10 @@ export default function FunnelPage() {
   };
 
   const navLinks = [
-    { name: 'Services', id: 'system', icon: Zap },
-    { name: 'Cases', id: 'case-studies', icon: BarChart3 },
-    { name: 'Audit', id: 'lead-magnet', icon: Target },
-    { name: 'Process', id: 'process', icon: Layers },
+    { name: 'Case Study', id: 'case-studies', icon: BarChart3 },
+    { name: 'Free Audit', id: 'lead-magnet', icon: Target },
+    { name: 'How We Do It', id: 'process', icon: Layers },
+    { name: 'FAQ', id: 'faq', icon: Calendar },
   ];
 
   return (
@@ -1137,13 +1174,13 @@ export default function FunnelPage() {
                 {link.name}
               </a>
             ))}
-            <Button onClick={() => window.open('https://calendly.com/nizami-shadowstudio/30min', '_blank')} variant="outline" className="px-6 py-2 text-sm">
+            <Button onClick={scrollTo('booking')} variant="outline" className="px-6 py-2 text-sm">
               Book Call
             </Button>
           </div>
 
           <div className="md:hidden flex items-center">
-            <Button onClick={() => window.open('https://calendly.com/nizami-shadowstudio/30min', '_blank')} variant="primary" className="px-4 py-2 text-[10px] uppercase tracking-wider">
+            <Button onClick={scrollTo('booking')} variant="primary" className="px-4 py-2 text-[10px] uppercase tracking-wider">
               Book Call
             </Button>
           </div>
@@ -1170,14 +1207,14 @@ export default function FunnelPage() {
         </div>
       </div>
 
-      <Hero />
-      <VSL />
-      <HowItWorks />
+      <UnifiedHero />
       <CaseStudies />
       <MonthlyPerformance />
+      <HowItWorks />
       <LeadMagnet />
       <Qualification />
-      <Booking />
+      <CalendlyEmbed />
+      <FAQ />
       <Footer />
     </main>
   );

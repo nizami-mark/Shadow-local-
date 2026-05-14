@@ -21,7 +21,7 @@ const playfair = Playfair_Display({
 const siteConfig = {
   name: 'Shadow Studio',
   description: 'Scale your eCommerce brand from PKR 2M to 7M+ Monthly revenue in 90 days. Pakistan\'s leading performance marketing agency for high-growth brands.',
-  url: 'https://shadowstudio.io', // Placeholder, can be updated later
+  url: 'https://shadowstudio.co', // Updated URL
   ogImage: 'https://drive.google.com/uc?export=download&id=1p78NgIMJDO-CY1s-ZWb-OyvdKcxdSHxM',
   keywords: [
     'eCommerce marketing pakistan',

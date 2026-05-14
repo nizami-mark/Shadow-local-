@@ -3,6 +3,7 @@
 @theme {
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-serif), ui-serif, Georgia, serif;
   
   --color-brand-accent: #f4703a;
   --color-brand-glow: rgba(244, 112, 58, 0.2);
@@ -30,5 +31,5 @@
 }
 
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#f0ece4] via-[#f0ece4]/80 to-[#f0ece4]/50;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-white/80 to-white/40;
 }

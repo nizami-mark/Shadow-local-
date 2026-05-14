@@ -1,5 +1,5 @@
 import type {Metadata} from 'next';
-import { Inter, Unbounded } from 'next/font/google';
+import { Inter, Unbounded, Playfair_Display } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 
@@ -11,6 +11,11 @@ const inter = Inter({
 const unbounded = Unbounded({
   subsets: ['latin'],
   variable: '--font-display',
+});
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-serif',
 });
 
 const siteConfig = {
@@ -106,7 +111,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="en" className={`${inter.variable} ${unbounded.variable} dark`}>
+    <html lang="en" className={`${inter.variable} ${unbounded.variable} ${playfair.variable} dark`}>
       <head>
         <Script id="gtm" strategy="afterInteractive">
           {`

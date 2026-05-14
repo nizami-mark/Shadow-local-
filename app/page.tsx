@@ -50,7 +50,7 @@ const Button = ({
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
-      className={`px-8 py-4 rounded-full font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${variants[variant]} ${className}`}
+      className={`px-5 md:px-8 py-2.5 md:py-4 rounded-full font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${variants[variant]} ${className}`}
     >
       {children}
     </motion.button>
@@ -68,13 +68,13 @@ const SectionHeading = ({
   subtitle?: string; 
   centered?: boolean 
 }) => (
-  <div className={`mb-16 ${centered ? 'text-center' : ''}`}>
+  <div className={`mb-10 md:mb-16 ${centered ? 'text-center' : ''}`}>
     {badge && (
       <motion.span 
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="inline-block px-4 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-xs font-bold uppercase tracking-widest mb-4"
+        className="inline-block px-4 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-[10px] md:text-xs font-bold uppercase tracking-widest mb-4"
       >
         {badge}
       </motion.span>
@@ -83,7 +83,7 @@ const SectionHeading = ({
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="text-4xl md:text-5xl font-bold mb-6 text-gradient"
+      className="text-3xl md:text-5xl font-bold mb-4 md:mb-6 text-gradient px-4 md:px-0"
     >
       {title}
     </motion.h2>
@@ -93,7 +93,7 @@ const SectionHeading = ({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.1 }}
-        className="text-zinc-400 text-lg max-w-2xl mx-auto"
+        className="text-zinc-400 text-sm md:text-lg max-w-2xl mx-auto px-6 md:px-0"
       >
         {subtitle}
       </motion.p>
@@ -104,7 +104,7 @@ const SectionHeading = ({
 const Card = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
   <motion.div 
     whileHover={{ y: -5 }}
-    className={`glass-panel p-8 rounded-2xl transition-all hover:border-brand-accent/30 ${className}`}
+    className={`glass-panel p-6 md:p-8 rounded-2xl transition-all hover:border-brand-accent/30 ${className}`}
   >
     {children}
   </motion.div>
@@ -119,7 +119,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+    <section className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-brand-accent/10 blur-[120px] rounded-full" />
@@ -133,26 +133,26 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-bg-secondary/80 border border-white/10 text-text-primary/60 text-sm mb-8">
-            <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
-            Exclusive for Brands doing PKR 2M+ Monthly
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-bg-secondary/80 border border-white/10 text-text-primary/60 text-[10px] md:text-sm mb-6 md:mb-8">
+            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            <span className="whitespace-nowrap">PKR 2M+ Monthly Brands Only</span>
           </div>
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-[1.1] tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 leading-[1.2] md:leading-[1.1] tracking-tight px-2">
             Scale from 2M to <span className="text-brand-accent">7M+</span> Monthly
-            In Exactly <span className="underline decoration-brand-accent/50 underline-offset-8">90 Days</span>.
+            <span className="block md:inline"> In Exactly </span><span className="underline decoration-brand-accent/50 underline-offset-4 md:underline-offset-8">90 Days</span>.
           </h1>
           
-          <p className="text-text-primary/70 text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed">
+          <p className="text-text-primary/70 text-base md:text-xl max-w-3xl mx-auto mb-10 md:mb-12 leading-relaxed px-4 md:px-0">
             Install a high-performance <span className="text-white font-semibold">Scaling System</span> built for exponential growth. 
-            We partner with high-potential brands to dominate Meta, Google, and the Content Engine.
+            We partner with high-potential brands to dominate Meta, Google, and Content.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Button onClick={scrollToBooking} className="w-full sm:w-auto text-base md:text-lg py-4 md:py-5 px-8 md:px-10">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
+            <Button onClick={() => window.open('https://form.jotform.com/260972545860061', '_blank')} className="w-full max-w-[280px] sm:w-auto text-sm md:text-lg">
               Partner With Us <ArrowRight className="w-5 h-5" />
             </Button>
-            <Button onClick={() => document.getElementById('lead-magnet')?.scrollIntoView({ behavior: 'smooth' })} variant="outline" className="w-full sm:w-auto text-base md:text-lg py-4 md:py-5 px-8 md:px-10">
+            <Button onClick={() => document.getElementById('lead-magnet')?.scrollIntoView({ behavior: 'smooth' })} variant="outline" className="w-full max-w-[280px] sm:w-auto text-sm md:text-lg">
               Free ROI Audit <BarChart3 className="w-5 h-5" />
             </Button>
           </div>
@@ -170,11 +170,11 @@ const VSL = () => {
   };
 
   return (
-    <section className="py-24 bg-bg-secondary relative">
+    <section className="py-16 md:py-24 bg-bg-secondary relative">
       <div className="container mx-auto px-6">
         <SectionHeading 
-          title="How We Scale Brands Without The Agency Fluff"
-          subtitle="Watch this 5-minute breakdown of the Shadow System. If you don&apos;t like what you see, we aren&apos;t for you."
+          title="Spend 4.6 minutes to see how we help scale eCom founders"
+          subtitle="Watch this breakdown of the Shadow System. If you don't like what you see, we aren't for you."
         />
         
         <div className="max-w-4xl mx-auto">
@@ -182,7 +182,7 @@ const VSL = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="aspect-video relative rounded-3xl overflow-hidden border border-white/10 bg-bg-primary group"
+            className="aspect-video relative rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 bg-bg-primary group shadow-2xl"
           >
             {isPlaying ? (
               <iframe
@@ -203,12 +203,12 @@ const VSL = () => {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <motion.div 
                     whileHover={{ scale: 1.1 }}
-                    className="w-20 h-20 bg-brand-accent rounded-full flex items-center justify-center text-white shadow-2xl shadow-brand-accent/20"
+                    className="w-16 h-16 md:w-20 md:h-20 bg-brand-accent rounded-full flex items-center justify-center text-white shadow-2xl shadow-brand-accent/20"
                   >
-                    <Play className="w-8 h-8 fill-current ml-1" />
+                    <Play className="w-6 h-6 md:w-8 md:h-8 fill-current ml-1" />
                   </motion.div>
                 </div>
-                <div className="absolute bottom-6 left-6 right-6 flex justify-between items-center text-xs text-text-primary/40 font-mono">
+                <div className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 flex justify-between items-center text-[10px] md:text-xs text-text-primary/40 font-mono">
                   <span>00:00 / 05:00</span>
                   <span className="px-2 py-1 bg-red-500/20 text-red-400 rounded">LIVE_DEMO</span>
                 </div>
@@ -217,8 +217,8 @@ const VSL = () => {
           </motion.div>
 
 
-          <div className="mt-12 text-center">
-            <Button onClick={scrollToBooking} className="mx-auto">
+          <div className="mt-8 md:mt-12 text-center">
+            <Button onClick={() => window.open('https://calendly.com/nizami-shadowstudio/30min', '_blank')} className="mx-auto w-full max-w-[240px] sm:w-auto">
               Book a Call
             </Button>
           </div>
@@ -228,59 +228,7 @@ const VSL = () => {
   );
 };
 
-const Mechanism = () => {
-  const pillars = [
-    {
-      title: "Meta Ads",
-      icon: Target,
-      desc: "We don't just 'run ads'. We build psychological funnels that capture attention and force conversion.",
-      features: ["Advantage+ Optimization", "Dynamic Creative Testing", "Retention Retargeting"]
-    },
-    {
-      title: "Google Ads",
-      icon: Zap,
-      desc: "Capture high-intent buyers exactly when they are looking for your product. Zero waste.",
-      features: ["Performance Max Scaling", "Keyword Dominance", "Shopping Feed Optimization"]
-    },
-    {
-      title: "Content Engine",
-      icon: Layers,
-      desc: "The fuel for the machine. High-converting UGC and cinematic brand assets that scale.",
-      features: ["UGC Creator Network", "Hook-Based Editing", "Viral Loop Strategy"]
-    }
-  ];
 
-  return (
-    <section id="system" className="py-24 bg-bg-secondary">
-      <div className="container mx-auto px-6">
-        <SectionHeading 
-          title="Our 3-Pillar Scaling Engine"
-          subtitle="We don't offer 'services'. We install a proprietary system that works in synergy to drive revenue."
-        />
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {pillars.map((pillar, i) => (
-            <Card key={i} className="flex flex-col h-full">
-              <div className="w-14 h-14 rounded-2xl bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center text-brand-accent mb-8">
-                <pillar.icon className="w-7 h-7" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">{pillar.title}</h3>
-              <p className="text-text-primary/70 mb-8 flex-grow">{pillar.desc}</p>
-              <ul className="space-y-3">
-                {pillar.features.map((f, j) => (
-                  <li key={j} className="flex items-center gap-2 text-sm text-text-primary/80">
-                    <div className="w-1.5 h-1.5 rounded-full bg-brand-accent" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
 
 const CaseStudies = () => {
   const scrollToBooking = () => {
@@ -289,8 +237,8 @@ const CaseStudies = () => {
   };
 
   return (
-    <section id="case-studies" className="py-24">
-      <div className="container mx-auto px-6">
+    <section id="case-studies" className="py-16 md:py-24">
+      <div className="container mx-auto px-4 md:px-6">
         <SectionHeading 
           title="Real Brands. Real Revenue."
           subtitle="What we achieve for eCommerce founders"
@@ -301,39 +249,39 @@ const CaseStudies = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="glass-panel rounded-[40px] overflow-hidden p-6 md:p-10 lg:p-12"
+          className="glass-panel rounded-[32px] md:rounded-[40px] overflow-hidden p-6 md:p-10 lg:p-12"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 items-start">
             {/* Left Content: The Story */}
-            <div className="lg:col-span-5 space-y-8">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
+            <div className="lg:col-span-5 space-y-6 md:space-y-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
                 Case Study: Footwear Brand
               </div>
-              <h3 className="text-4xl md:text-5xl font-display font-bold leading-tight tracking-tighter">
-                Scaled Men Footwear brand from <span className="text-brand-accent">43.3 M to 75.3M</span> in 12 months
+              <h3 className="text-3xl md:text-5xl font-display font-bold leading-tight tracking-tighter">
+                Scaled Men Footwear brand from <span className="text-brand-accent">43M to 75M</span> in 12 months
               </h3>
               
               <div className="relative">
-                <div className="absolute -left-4 top-0 text-brand-accent text-6xl opacity-20 font-serif">&quot;</div>
-                <p className="text-xl text-text-primary/70 italic leading-relaxed pl-4">
-                  Before Shadow Studio, we had no real structure, and nothing was hitting. They came in with a full plan and suddenly our revenue started hitting new heights. We passed 75M like it was nothing.
+                <div className="absolute -left-2 top-0 text-brand-accent text-5xl opacity-20 font-serif leading-none">&quot;</div>
+                <p className="text-lg md:text-xl text-text-primary/70 italic leading-relaxed pl-4">
+                  Before Shadow Studio, we had no real structure. They came in with a full plan and suddenly our revenue started hitting new heights. We passed 75M like it was nothing.
                 </p>
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
-                  <div className="w-8 h-8 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent font-bold">M</div>
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 flex items-center justify-center">
+                  <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent font-bold text-xs md:text-base">M</div>
                 </div>
                 <div>
-                  <div className="font-bold">Founder, Men&apos;s Footwear Brand</div>
-                  <div className="text-text-primary/40 text-sm">eCommerce Scale-Up</div>
+                  <div className="font-bold text-sm md:text-base">Founder, Men&apos;s Footwear Brand</div>
+                  <div className="text-text-primary/40 text-xs md:text-sm">eCommerce Scale-Up</div>
                 </div>
               </div>
             </div>
 
             {/* Right Content: Stats Screenshot & Details */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="group relative rounded-3xl overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-2xl transition-all duration-500 hover:border-brand-accent/30">
+              <div className="group relative rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 bg-[#0a0a0a] shadow-2xl transition-all duration-500 hover:border-brand-accent/30">
                 <div className="absolute inset-0 bg-gradient-to-tr from-brand-accent/5 to-transparent pointer-events-none" />
                 <Image 
                   src="https://drive.google.com/uc?export=download&id=1AgFj2PYNcWrpf7wxgBbhV3w7Tr-QqWFC" 
@@ -346,28 +294,28 @@ const CaseStudies = () => {
               </div>
               
               <div className="pt-4 border-t border-white/5">
-                <div className="mb-6 flex justify-between items-center px-2">
-                  <div className="text-brand-accent/60 font-mono text-[9px] uppercase tracking-[0.4em] whitespace-nowrap">
+                <div className="mb-4 md:mb-6 flex justify-between items-center px-1">
+                  <div className="text-brand-accent/60 font-mono text-[8px] md:text-[9px] uppercase tracking-[0.4em] whitespace-nowrap">
                     Verified Dashboard Data
                   </div>
                   <div className="h-px flex-grow bg-white/5 ml-4" />
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 px-2">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 px-1">
                   <div>
-                    <div className="text-text-primary/40 text-[10px] uppercase tracking-widest mb-1">Revenue Growth</div>
-                    <div className="text-2xl font-display font-bold text-white tracking-tighter">+74%</div>
+                    <div className="text-text-primary/40 text-[9px] md:text-[10px] uppercase tracking-widest mb-1">Revenue Growth</div>
+                    <div className="text-xl md:text-2xl font-display font-bold text-white tracking-tighter">+74%</div>
                   </div>
                   <div>
-                    <div className="text-text-primary/40 text-[10px] uppercase tracking-widest mb-1">Net Sales</div>
-                    <div className="text-2xl font-display font-bold text-white tracking-tighter">+60%</div>
+                    <div className="text-text-primary/40 text-[9px] md:text-[10px] uppercase tracking-widest mb-1">Net Sales</div>
+                    <div className="text-xl md:text-2xl font-display font-bold text-white tracking-tighter">+60%</div>
                   </div>
                   <div>
-                    <div className="text-text-primary/40 text-[10px] uppercase tracking-widest mb-1">More Orders</div>
-                    <div className="text-2xl font-display font-bold text-white tracking-tighter">+30%</div>
+                    <div className="text-text-primary/40 text-[9px] md:text-[10px] uppercase tracking-widest mb-1">More Orders</div>
+                    <div className="text-xl md:text-2xl font-display font-bold text-white tracking-tighter">+30%</div>
                   </div>
                   <div>
-                    <div className="text-text-primary/40 text-[10px] uppercase tracking-widest mb-1">Repeat Rate</div>
-                    <div className="text-2xl font-display font-bold text-white tracking-tighter">+6%</div>
+                    <div className="text-text-primary/40 text-[9px] md:text-[10px] uppercase tracking-widest mb-1">Repeat Rate</div>
+                    <div className="text-xl md:text-2xl font-display font-bold text-white tracking-tighter">+6%</div>
                   </div>
                 </div>
               </div>
@@ -405,16 +353,16 @@ const MonthlyPerformance = () => {
   ];
 
   return (
-    <section className="py-24 bg-bg-secondary border-y border-white/5 relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-bg-secondary border-y border-white/5 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-brand-accent/5 to-transparent pointer-events-none" />
       
       <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center mb-24">
+        <div className="max-w-4xl mx-auto text-center mb-16 md:mb-24">
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-[10px] font-bold uppercase tracking-[0.2em] mb-4"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] mb-4"
           >
             Proven Performance
           </motion.div>
@@ -422,7 +370,7 @@ const MonthlyPerformance = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-6xl font-display font-bold text-white tracking-tighter mb-6"
+            className="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-white tracking-tighter mb-6 leading-tight"
           >
             Month-on-Month <span className="text-brand-accent">MER Dominance</span>
           </motion.h2>
@@ -431,13 +379,13 @@ const MonthlyPerformance = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-text-primary/60 text-lg md:text-xl max-w-2xl mx-auto"
+            className="text-text-primary/60 text-base md:text-xl max-w-2xl mx-auto px-4 md:px-0"
           >
-            Direct dashboard snapshots showing how we scale revenue while protecting your bottom line. No fluff, just real numbers.
+            Direct snapshots showing how we scale revenue while protecting your profit. No fluff, just real numbers.
           </motion.p>
         </div>
 
-        <div className="max-w-5xl mx-auto space-y-24 md:space-y-32">
+        <div className="max-w-5xl mx-auto space-y-12 md:space-y-32">
           {screenshots.map((ss, i) => (
             <motion.div 
               key={i}
@@ -448,7 +396,7 @@ const MonthlyPerformance = () => {
               className="group relative cursor-pointer outline-none"
               tabIndex={0}
             >
-              <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden border border-white/5 bg-[#0a0a0a] shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] transition-all duration-700 hover:border-brand-accent/30 hover:shadow-brand-accent/5">
+              <div className="relative rounded-2xl md:rounded-[2.5rem] overflow-hidden border border-white/5 bg-[#0a0a0a] shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] transition-all duration-700 hover:border-brand-accent/30 hover:shadow-brand-accent/5">
                 <Image 
                   src={`https://drive.google.com/uc?export=download&id=${ss.imgId}`} 
                   alt={ss.title}
@@ -464,17 +412,17 @@ const MonthlyPerformance = () => {
                     initial={{ y: 20, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.1 }}
-                    className="space-y-2 md:space-y-8"
+                    className="space-y-4 md:space-y-8"
                   >
-                    <h3 className="text-sm md:text-5xl font-display font-bold text-white tracking-tighter leading-tight uppercase md:normal-case">
+                    <h3 className="text-xl md:text-3xl lg:text-5xl font-display font-bold text-white tracking-tighter leading-tight uppercase md:normal-case">
                       {ss.title}
                     </h3>
-                    <div className="flex items-center justify-center gap-2 md:gap-6">
-                      <div className="h-px w-4 md:w-16 bg-brand-accent/30" />
-                      <div className="text-xl md:text-8xl font-black text-brand-accent tracking-tighter">
+                    <div className="flex items-center justify-center gap-4 md:gap-6">
+                      <div className="h-px w-6 md:w-16 bg-brand-accent/30" />
+                      <div className="text-3xl md:text-6xl lg:text-8xl font-black text-brand-accent tracking-tighter">
                         {ss.mer}
                       </div>
-                      <div className="h-px w-4 md:w-16 bg-brand-accent/30" />
+                      <div className="h-px w-6 md:w-16 bg-brand-accent/30" />
                     </div>
                   </motion.div>
                 </div>
@@ -488,67 +436,206 @@ const MonthlyPerformance = () => {
 };
 
 const HowItWorks = () => {
-  const steps = [
-    { 
-      title: "Free Scale Session (30 min)", 
-      desc: "We audit your current ad accounts, revenue data, and content. You leave with a clear picture of exactly what's holding you back and what it would take to hit PKR 7M." 
+  const channels = [
+    {
+      title: "Paid Ads",
+      subtitle: "Meta+Google ads that print orders",
+      theme: "bg-[#7c77c9]",
+      lightTheme: "bg-[#7c77c9]/10",
+      icon: TrendingUp,
+      features: [
+        { title: "Full-funnel campaigns", desc: "TOF cold · MOF warm · BOF cart recovery" },
+        { title: "Creative testing loops", desc: "Hook variants · Offer angles · CTA splits" },
+        { title: "ROAS-first scaling", desc: "Kill losers fast · Stack on winning SKUs" }
+      ],
+      footer: "TARGET: 4x ROAS FLOOR"
     },
-    { 
-      title: "Custom Scale Roadmap", 
-      desc: "We build your 90-day growth plan — channel by channel, week by week. Meta strategy, Google architecture, content calendar, and KPIs tied to revenue milestones." 
+    {
+      title: "Video Content",
+      subtitle: "Scroll-stopping creative at volume",
+      theme: "bg-[#8c6239]",
+      lightTheme: "bg-[#8c6239]/10",
+      icon: Play,
+      features: [
+        { title: "UGC-style ad creatives", desc: "Raw · Authentic · Built to convert" },
+        { title: "Product demo reels", desc: "Feature → benefit → buy · Under 30 sec" },
+        { title: "Monthly content sprints", desc: "20+ assets/month feeding every channel" }
+      ],
+      footer: "OUTPUT: 20+ ASSETS MONTHLY"
     },
-    { 
-      title: "Full System Launch", 
-      desc: "Our team deploys. Campaigns go live. Content sprint begins. Everything is running within 14 days of signing — no 6-week onboarding." 
+    {
+      title: "Influencer",
+      subtitle: "Trust at scale through real voices",
+      theme: "bg-[#bc4169]",
+      lightTheme: "bg-[#bc4169]/10",
+      icon: Users,
+      features: [
+        { title: "Micro + macro mix", desc: "Category-fit creators · High-intent audiences" },
+        { title: "Seeding campaigns", desc: "Product gifting · Review generation · UGC rights" },
+        { title: "Affiliate structure", desc: "Performance-based · Promo codes · Tracked LTV" }
+      ],
+      footer: "GOAL: SOCIAL PROOF AT SCALE"
     },
+    {
+      title: "OOH",
+      subtitle: "Brand recall where your buyer lives",
+      theme: "bg-[#008272]",
+      lightTheme: "bg-[#008272]/10",
+      icon: Target,
+      features: [
+        { title: "Billboards + transit", desc: "DHA · Gulberg · Clifton · high-footfall zones" },
+        { title: "Geo-targeted placements", desc: "Match ICP neighbourhoods · Buying intent areas" },
+        { title: "Brand authority lift", desc: "Lower CAC on paid when brand is recognised" }
+      ],
+      footer: "GOAL: BRAND RECALL + CAC DROP"
+    }
   ];
 
   return (
-    <section id="process" className="py-24 bg-bg-secondary">
-      <div className="container mx-auto px-6">
-        <SectionHeading 
-          title="Simple 3-Step Scaling System"
-          subtitle="A streamlined, outcome-focused approach to growth. No fluff, just execution."
-        />
-        
-        <div className="relative">
-          {/* Connector Line */}
-          <motion.div 
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
+    <section id="process" className="py-24 bg-bg-primary text-white relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-brand-accent/5 to-transparent pointer-events-none" />
+      
+      <div className="container mx-auto px-6 relative z-10">
+        {/* Header */}
+        <div className="mb-20 text-center">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.5, ease: "easeInOut" }}
-            className="absolute top-1/2 left-0 w-full h-0.5 bg-brand-accent/20 hidden md:block -translate-y-1/2 origin-left" 
-          />
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
-            {steps.map((step, i) => (
-              <motion.div 
-                key={i} 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.2, duration: 0.5 }}
-                whileHover={{ y: -5 }}
-                className="text-center group"
-              >
-                <div className="relative mb-8">
-                  <motion.div 
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.2 + 0.2, type: "spring", stiffness: 200 }}
-                    className="w-16 h-16 rounded-full bg-bg-primary border-2 border-brand-accent text-brand-accent flex items-center justify-center text-2xl font-black mx-auto relative z-10 group-hover:bg-brand-accent group-hover:text-white transition-colors duration-300 shadow-xl shadow-brand-accent/10"
-                  >
-                    {i + 1}
-                  </motion.div>
-                  {/* Glow effect on hover */}
-                  <div className="absolute inset-0 bg-brand-accent/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            className="text-4xl md:text-6xl font-display font-bold text-white mb-6"
+          >
+            Shadow Scaling System Blueprint
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-white/40 text-sm md:text-lg max-w-2xl mx-auto"
+          >
+            Built for eCommerce founders ready to move volume and dominate their category.
+          </motion.p>
+        </div>
+        
+        {/* Four Channels Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+          {channels.map((channel, idx) => (
+            <motion.div 
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              className={`rounded-[32px] overflow-hidden flex flex-col ${channel.lightTheme} border border-white/5`}
+            >
+              <div className="p-8 pb-0">
+                <div className={`${channel.theme} w-12 h-12 rounded-xl flex items-center justify-center text-white mb-6 shadow-lg`}>
+                  <channel.icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl font-bold mb-4 group-hover:text-brand-accent transition-colors duration-300">{step.title}</h3>
-                <p className="text-text-primary/50 text-sm leading-relaxed">{step.desc}</p>
-              </motion.div>
-            ))}
+                <h3 className="text-2xl font-bold text-white mb-2">{channel.title}</h3>
+                <p className="text-white/60 text-sm leading-relaxed mb-8 h-10">
+                  {channel.subtitle}
+                </p>
+              </div>
+
+              <div className="flex-grow space-y-4 px-4 pb-8">
+                {channel.features.map((feature, fIdx) => (
+                  <div key={fIdx} className="bg-white/5 border border-white/5 rounded-2xl p-5 hover:border-white/10 transition-colors">
+                    <h4 className="text-sm font-bold text-white/90 mb-1">{feature.title}</h4>
+                    <p className="text-[11px] text-white/40 leading-relaxed font-medium uppercase tracking-tight">
+                      {feature.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="p-6 bg-white/5 border-t border-white/5 mt-auto">
+                <p className="text-[10px] font-black text-brand-accent uppercase tracking-widest text-center">
+                  {channel.footer}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Offer Engine Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="relative mt-4 border border-brand-accent/20 rounded-[40px] p-8 md:p-12 overflow-hidden group bg-brand-accent/[0.03]"
+        >
+          <div className="absolute top-0 right-0 w-64 h-64 bg-brand-accent/5 blur-[100px] -translate-y-1/2 translate-x-1/2" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative z-10">
+            <div className="md:col-span-1 flex justify-center">
+              <div className="w-14 h-14 rounded-2xl bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center text-brand-accent">
+                <Zap className="w-7 h-7" />
+              </div>
+            </div>
+            
+            <div className="md:col-span-11 space-y-6">
+              <div>
+                <p className="text-brand-accent font-mono text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] mb-3">Offer Engine</p>
+                <h3 className="text-2xl md:text-4xl font-display font-medium text-white mb-4">
+                  Engineered offers that move volume and protect margin
+                </h3>
+                <p className="text-white/50 text-sm md:text-base leading-relaxed max-w-4xl">
+                  Bundle builds · Flash sale architecture · Liquidation pricing · Free-gift triggers · Upsell stacks designed to lift AOV while clearing slow-moving inventory at speed.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-2 md:gap-3">
+                {[
+                  "Bundle & save", 
+                  "Flash drops", 
+                  "Inventory liquidation", 
+                  "AOV upsell", 
+                  "Free gift threshold", 
+                  "BOGO structures"
+                ].map((tag, tIdx) => (
+                  <span key={tIdx} className="bg-brand-accent/10 text-brand-accent border border-brand-accent/20 rounded-full px-4 py-2 text-[10px] md:text-xs font-bold whitespace-nowrap">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Flow Visualization */}
+        <div className="mt-24 flex flex-col items-center gap-6 relative">
+          <div className="absolute -top-12 left-1/2 -translate-x-1/2 h-12 w-px border-l-2 border-dashed border-brand-accent/20" />
+          
+          <div className="space-y-6 w-full max-w-md">
+             {[
+               { eyebrow: "ALL CHANNELS FIRING TOGETHER", title: "Unified demand engine" },
+               { eyebrow: "QUALIFIED BUYERS + REPEAT PURCHASERS", title: "Revenue pipeline + retention" },
+               { eyebrow: "90-DAY OUTCOME", title: "PKR 2M → 7M+ monthly", highlight: true, href: "https://form.jotform.com/260972545860061" }
+             ].map((step, sIdx) => (
+               <React.Fragment key={sIdx}>
+                 <motion.div 
+                   onClick={() => step.href && window.open(step.href, '_blank')}
+                   initial={{ opacity: 0, y: 10 }}
+                   whileInView={{ opacity: 1, y: 0 }}
+                   transition={{ delay: sIdx * 0.1 }}
+                   className={`${step.highlight ? 'bg-brand-accent cursor-pointer hover:scale-[1.02] transition-transform' : 'bg-white/5'} border border-white/10 rounded-2xl p-6 md:p-8 text-center shadow-xl backdrop-blur-sm relative group overflow-hidden`}
+                 >
+                   {step.highlight && (
+                     <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-50 group-hover:opacity-70 transition-opacity" />
+                   )}
+                   <p className={`${step.highlight ? 'text-white/60' : 'text-white/40'} font-mono text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] mb-3`}>
+                     {step.eyebrow}
+                   </p>
+                   <h4 className={`text-xl md:text-3xl font-bold ${step.highlight ? 'text-white' : 'text-white/90'} tracking-tight`}>
+                     {step.title}
+                   </h4>
+                 </motion.div>
+                 {sIdx < 2 && (
+                   <div className="h-10 md:h-12 w-0.5 bg-brand-accent/20 mx-auto" />
+                 )}
+               </React.Fragment>
+             ))}
           </div>
         </div>
       </div>
@@ -655,59 +742,8 @@ const Qualification = () => {
   );
 };
 
-const OfferStack = () => {
-  const scrollToBooking = () => {
-    const element = document.getElementById('booking');
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
 
-  return (
-    <section className="py-24 bg-bg-secondary">
-      <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto glass-panel p-12 rounded-3xl border-brand-accent/20 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-brand-accent/5 blur-[100px] -translate-y-1/2 translate-x-1/2" />
-          
-          <div className="text-center mb-12">
-            <SectionHeading 
-              title="The Shadow Scaling System"
-              subtitle="Everything you need to dominate your niche. No hidden costs."
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              { title: "Full Ad Management", desc: "Meta + Google + TikTok" },
-              { title: "Creative Strategy", desc: "Hooks, Scripts, and Direction" },
-              { title: "Funnel Optimization", desc: "CRO and Landing Page Design" },
-              { title: "Data Infrastructure", desc: "Advanced Tracking & Attribution" },
-              { title: "Weekly Strategy Calls", desc: "Direct access to our growth leads" },
-              { title: "Scaling Framework", desc: "The exact math to hit 7M+" },
-            ].map((item, i) => (
-              <div key={i} className="flex gap-4">
-                <div className="w-6 h-6 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent flex-shrink-0 mt-1">
-                  <CheckCircle2 className="w-4 h-4" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-white">{item.title}</h4>
-                  <p className="text-text-primary/50 text-sm">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-12 pt-12 border-t border-white/10 text-center">
-            <div className="text-text-primary/40 text-sm mb-4">Limited to 3 New Partners per Month</div>
-            <Button onClick={scrollToBooking} className="mx-auto text-lg md:text-xl py-4 md:py-6 px-8 md:px-12 w-full md:w-auto">
-              Partner With Us
-            </Button>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const LeadMagnet = () => {
+const LeadMagnet = ( ) => {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -758,22 +794,22 @@ const LeadMagnet = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-5xl mx-auto">
-          <Card className="p-8 md:p-16 border-brand-accent/20 bg-bg-secondary/50 backdrop-blur-xl">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <Card className="p-6 md:p-16 border-brand-accent/20 bg-bg-secondary/50 backdrop-blur-xl">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 items-center">
               <div>
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-xs font-bold uppercase tracking-widest mb-6"
+                  className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-[10px] md:text-xs font-bold uppercase tracking-widest mb-6"
                 >
                   <BarChart3 className="w-3 h-3" />
                   Free Resource
                 </motion.div>
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">
+                <h2 className="text-2xl md:text-5xl font-bold mb-6 text-white leading-tight">
                   A Complete Ecommerce <span className="text-brand-accent">ROI Audit Framework</span>, worth $399 for free
                 </h2>
-                <p className="text-text-primary/60 text-lg mb-8 leading-relaxed">
+                <p className="text-text-primary/60 text-sm md:text-lg mb-8 leading-relaxed">
                   This is our secret sauce for auditing a brand&apos;s last 90 days of ROI—so you can make clear, data-backed decisions on what to scale next.
                 </p>
                 
@@ -785,10 +821,10 @@ const LeadMagnet = () => {
                     "Spot the bottlenecks holding back your revenue"
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-4 text-text-primary/80">
-                      <div className="w-6 h-6 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent flex-shrink-0 mt-0.5">
-                        <CheckCircle2 className="w-4 h-4" />
+                      <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent flex-shrink-0 mt-0.5">
+                        <CheckCircle2 className="w-3 h-3 md:w-4 md:h-4" />
                       </div>
-                      <span className="leading-relaxed">{item}</span>
+                      <span className="leading-relaxed text-sm md:text-base">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -819,7 +855,7 @@ const LeadMagnet = () => {
                     </div>
                     
                     <Button 
-                      className="w-full py-3 md:py-4 text-sm md:text-base" 
+                      className="w-full max-w-[280px] mx-auto py-2.5 md:py-4 text-xs md:text-base" 
                       onClick={() => {}} // Form handles submission
                       variant={status === 'success' ? 'secondary' : 'primary'}
                     >
@@ -862,54 +898,54 @@ const LeadMagnet = () => {
 
 const Booking = () => {
   return (
-    <section className="py-24 relative overflow-hidden" id="booking">
+    <section className="py-16 md:py-24 relative overflow-hidden" id="booking">
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
+            <div className="text-center lg:text-left">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 md:mb-8 leading-tight px-2 md:px-0">
                 Initialize Your <span className="text-brand-accent">Scaling System</span>
               </h2>
-              <p className="text-text-primary/70 text-lg mb-8">
-                The manual agency model is dead. We install a self-optimizing engine that turns your ad spend into predictable revenue. Your discovery call is the final step to system activation.
+              <p className="text-text-primary/70 text-base md:text-lg mb-8 px-4 md:px-0">
+                The manual agency model is dead. We install a self-optimizing engine that turns your ad spend into predictable revenue.
               </p>
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-bg-secondary flex items-center justify-center text-brand-accent">
-                    <Target className="w-6 h-6" />
+              <div className="space-y-6 max-w-md mx-auto lg:mx-0 text-left">
+                <div className="flex items-center gap-4 px-4 md:px-0">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-bg-secondary flex items-center justify-center text-brand-accent flex-shrink-0">
+                    <Target className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <div>
-                    <div className="font-bold">System Compatibility Check</div>
-                    <div className="text-text-primary/40 text-sm">We verify if your brand is ready for 7M+ scale</div>
+                    <div className="font-bold text-sm md:text-base">System Compatibility Check</div>
+                    <div className="text-text-primary/40 text-xs md:text-sm">We verify if your brand is ready for 7M+ scale</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-bg-secondary flex items-center justify-center text-brand-accent">
-                    <Zap className="w-6 h-6" />
+                <div className="flex items-center gap-4 px-4 md:px-0">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-bg-secondary flex items-center justify-center text-brand-accent flex-shrink-0">
+                    <Zap className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <div>
-                    <div className="font-bold">Bottleneck Identification</div>
-                    <div className="text-text-primary/40 text-sm">Pinpoint exactly what is stalling your growth</div>
+                    <div className="font-bold text-sm md:text-base">Bottleneck Identification</div>
+                    <div className="text-text-primary/40 text-xs md:text-sm">Pinpoint exactly what is stalling your growth</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-bg-secondary flex items-center justify-center text-brand-accent">
-                    <Layers className="w-6 h-6" />
+                <div className="flex items-center gap-4 px-4 md:px-0">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-bg-secondary flex items-center justify-center text-brand-accent flex-shrink-0">
+                    <Layers className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <div>
-                    <div className="font-bold">Activation Roadmap</div>
-                    <div className="text-text-primary/40 text-sm">A clear, step-by-step plan to hit your targets</div>
+                    <div className="font-bold text-sm md:text-base">Activation Roadmap</div>
+                    <div className="text-text-primary/40 text-xs md:text-sm">A clear, step-by-step plan to hit your targets</div>
                   </div>
                 </div>
               </div>
             </div>
             
-            <div className="relative">
+            <div className="relative px-2 md:px-0">
               <motion.div 
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="glass-panel rounded-3xl p-12 text-center relative overflow-hidden group"
+                className="glass-panel rounded-3xl p-8 md:p-12 text-center relative overflow-hidden group"
               >
                 {/* Animated Background Elements */}
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-accent to-transparent opacity-50" />
@@ -952,7 +988,7 @@ const Booking = () => {
 
                   <Button 
                     onClick={() => window.open('https://form.jotform.com/260972545860061', '_blank')}
-                    className="w-full py-4 md:py-6 text-lg md:text-xl group font-black"
+                    className="w-full max-w-[280px] mx-auto py-3 md:py-6 text-base md:text-xl group font-black"
                   >
                     START NOW <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                   </Button>
@@ -994,11 +1030,11 @@ const Footer = () => {
               />
             </div>
           </div>
-          <div className="flex flex-wrap justify-center gap-8 text-text-primary/40 text-sm">
+          <div className="flex flex-wrap justify-center gap-6 md:gap-8 text-text-primary/40 text-xs md:text-sm text-center px-4">
             <a href="#case-studies" onClick={(e) => { e.preventDefault(); document.getElementById('case-studies')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-white transition-colors">Case Studies</a>
             <a href="#lead-magnet" onClick={(e) => { e.preventDefault(); document.getElementById('lead-magnet')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-white transition-colors">Free Audit</a>
-            <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="/terms" className="hover:text-white transition-colors">Terms of Service</a>
+            <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
+            <a href="/terms" className="hover:text-white transition-colors">Terms</a>
           </div>
           <div className="flex items-center gap-6">
             <a href="https://www.instagram.com/shadowstudioglobal?igsh=MXRmNWxqb21zNGN5NA==" target="_blank" rel="noopener noreferrer" className="text-text-primary/40 hover:text-brand-accent transition-all duration-300 transform hover:scale-110" aria-label="Instagram">
@@ -1048,6 +1084,30 @@ export default function FunnelPage() {
 
   return (
     <main className="relative pb-20 md:pb-0">
+      {/* WhatsApp Link */}
+      <motion.a
+        href="https://wa.me/923451694215"
+        target="_blank"
+        rel="noopener noreferrer"
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="fixed bottom-24 md:bottom-8 right-6 z-[60] w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(37,211,102,0.4)] cursor-pointer group"
+        aria-label="Chat on WhatsApp"
+      >
+        <div className="absolute -top-12 right-0 bg-white text-black px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-xl">
+          Quick Chat
+          <div className="absolute bottom-[-4px] right-5 w-2 h-2 bg-white rotate-45" />
+        </div>
+        <svg 
+          viewBox="0 0 24 24" 
+          className="w-8 h-8 fill-white"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+      </motion.a>
       {/* Top Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-bg-primary/80 backdrop-blur-md border-b border-white/10 py-4' : 'bg-transparent py-6'}`}>
         <div className="container mx-auto px-6 flex justify-between items-center">
@@ -1077,13 +1137,13 @@ export default function FunnelPage() {
                 {link.name}
               </a>
             ))}
-            <Button onClick={scrollTo('booking')} variant="outline" className="px-6 py-2 text-sm">
+            <Button onClick={() => window.open('https://calendly.com/nizami-shadowstudio/30min', '_blank')} variant="outline" className="px-6 py-2 text-sm">
               Book Call
             </Button>
           </div>
 
           <div className="md:hidden flex items-center">
-            <Button onClick={scrollTo('booking')} variant="primary" className="px-4 py-2 text-xs !py-2.5">
+            <Button onClick={() => window.open('https://calendly.com/nizami-shadowstudio/30min', '_blank')} variant="primary" className="px-4 py-2 text-[10px] uppercase tracking-wider">
               Book Call
             </Button>
           </div>
@@ -1112,13 +1172,11 @@ export default function FunnelPage() {
 
       <Hero />
       <VSL />
-      <Mechanism />
+      <HowItWorks />
       <CaseStudies />
       <MonthlyPerformance />
       <LeadMagnet />
-      <HowItWorks />
       <Qualification />
-      <OfferStack />
       <Booking />
       <Footer />
     </main>

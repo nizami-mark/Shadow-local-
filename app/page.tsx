@@ -122,7 +122,7 @@ const UnifiedHero = () => {
   };
 
   return (
-    <section className="relative pt-32 pb-12 md:pt-48 md:pb-16 overflow-hidden bg-bg-primary text-white">
+    <section className="relative pt-16 pb-8 md:pt-28 md:pb-12 overflow-hidden bg-bg-primary text-white">
       {/* Background Glows */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-[10%] left-1/2 -translate-x-1/2 w-full max-w-7xl aspect-square bg-brand-accent/20 blur-[160px] rounded-full opacity-50" />
@@ -135,7 +135,7 @@ const UnifiedHero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-[32px] sm:text-4xl md:text-6xl lg:text-[72px] font-bold text-center leading-[1.1] tracking-tight mb-16 md:mb-24 px-4"
+            className="text-[28px] sm:text-3xl md:text-5xl lg:text-[62px] font-bold text-center leading-[1.1] tracking-tight mb-8 md:mb-12 px-4"
           >
             Scale from 2M to <span className="text-brand-accent">7M+</span> Monthly In Exactly <span className="text-brand-accent">90 Days</span> or you don&apos;t pay.
           </motion.h1>
@@ -145,7 +145,7 @@ const UnifiedHero = () => {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="w-full max-w-5xl aspect-video relative rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 bg-black/40 group shadow-[0_0_100px_rgba(0,0,0,0.5)] mb-12"
+            className="w-full max-w-3xl aspect-video relative rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 bg-black/40 group shadow-[0_0_100px_rgba(0,0,0,0.5)] mb-6"
           >
             {isPlaying ? (
               <iframe
@@ -183,7 +183,7 @@ const UnifiedHero = () => {
           >
             <Button 
               onClick={scrollToBooking} 
-              className="bg-brand-accent text-black hover:bg-white hover:text-black px-12 py-5 md:py-6 text-xl md:text-2xl font-bold rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-300"
+              className="bg-brand-accent text-black hover:bg-white hover:text-black px-8 py-3.5 md:px-12 md:py-6 text-lg md:text-2xl font-bold rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-300"
             >
               Book a Call
             </Button>

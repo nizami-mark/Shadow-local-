@@ -1147,6 +1147,18 @@ export default function FunnelPage() {
         href="https://wa.me/923451694215"
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => {
+          const win = window as any;
+          if (typeof win.fbq === 'function') {
+            win.fbq('track', 'Contact');
+          }
+          win.dataLayer = win.dataLayer || [];
+          win.dataLayer.push({
+            'event': 'whatsapp_contact_click',
+            'conversion_type': 'contact'
+          });
+          console.log('WhatsApp Contact Tracked (Meta + GTM)');
+        }}
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         whileHover={{ scale: 1.1 }}

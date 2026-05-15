@@ -1042,6 +1042,27 @@ const CalendlyEmbed = () => {
             src="https://assets.calendly.com/assets/external/widget.js" 
             strategy="lazyOnload"
           />
+          <Script id="calendly-event-tracking" strategy="lazyOnload">
+            {`
+              window.addEventListener('message', function(e) {
+                if (e.data.event && e.data.event === 'calendly.event_scheduled') {
+                  // Direct Facebook Pixel call
+                  if (typeof fbq === 'function') {
+                    fbq('track', 'Lead');
+                  }
+                  
+                  // Google Tag Manager Data Layer push
+                  window.dataLayer = window.dataLayer || [];
+                  window.dataLayer.push({
+                    'event': 'calendly_booking_completed',
+                    'conversion_type': 'lead'
+                  });
+
+                  console.log('Calendly Event Tracked (Meta + GTM)');
+                }
+              });
+            `}
+          </Script>
         </div>
       </div>
     </section>

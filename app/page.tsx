@@ -921,7 +921,7 @@ const LeadMagnet = ( ) => {
                     <div className="relative">
                       <input
                         type="email"
-                        placeholder="write your email"
+                        placeholder="write your work email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required

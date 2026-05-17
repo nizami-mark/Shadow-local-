@@ -791,6 +791,7 @@ const Qualification = () => {
 
 const LeadMagnet = ( ) => {
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -807,7 +808,7 @@ const LeadMagnet = ( ) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, name }),
       });
 
       const data = await response.json();
@@ -815,6 +816,7 @@ const LeadMagnet = ( ) => {
       if (response.ok) {
         setStatus('success');
         setEmail('');
+        setName('');
       } else {
         setStatus('error');
         setErrorMessage(data.error || 'Something went wrong. Please try again.');
@@ -888,6 +890,18 @@ const LeadMagnet = ( ) => {
                   </div>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="relative">
+                      <input
+                        type="text"
+                        placeholder="Your Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                        disabled={status === 'loading' || status === 'success'}
+                        className="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-text-primary/20 focus:outline-none focus:border-brand-accent/50 transition-colors disabled:opacity-50"
+                      />
+                    </div>
+
                     <div className="relative">
                       <input
                         type="email"

@@ -2,11 +2,13 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   try {
-    const { email } = await req.json();
+    const { email, name } = await req.json();
 
     if (!email || !email.includes('@')) {
       return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
     }
+
+    const firstName = name ? name.split(' ')[0] : 'there';
 
     const BREVO_API_KEY = process.env.BREVO_API_KEY;
     const BREVO_LIST_ID = parseInt(process.env.BREVO_LIST_ID || '2');
@@ -17,7 +19,6 @@ export async function POST(req: Request) {
     }
 
     // 1. Add/Update contact in Brevo
-    // Documentation: https://developers.brevo.com/reference/createcontact
     try {
       await fetch('https://api.brevo.com/v3/contacts', {
         method: 'POST',
@@ -28,17 +29,21 @@ export async function POST(req: Request) {
         },
         body: JSON.stringify({
           email: email,
+          attributes: {
+            FIRSTNAME: firstName,
+            FULLNAME: name || '',
+          },
           listIds: [BREVO_LIST_ID],
-          updateEnabled: true, // Updates the contact if it already exists
+          updateEnabled: true,
         }),
       });
     } catch (contactError) {
-      // We log but don't block the email if contact creation fails
       console.error('Failed to save contact to Brevo:', contactError);
     }
 
     // 2. Brevo API call to send transactional email
-    // Documentation: https://developers.brevo.com/reference/sendtransacemail
+    const blueprintUrl = "https://docs.google.com/spreadsheets/d/1Plhu1OIv0rRy4Jjw8zFQZ1IBgtaRVjsw/edit?usp=sharing&ouid=102034258856644575129&rtpof=true&sd=true";
+    
     const response = await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
       headers: {
@@ -48,42 +53,38 @@ export async function POST(req: Request) {
       },
       body: JSON.stringify({
         sender: {
-          name: 'Shadow Studio',
+          name: 'Nizami // Shadow Studio',
           email: 'nizami.shadowstudio@gmail.com',
         },
         to: [
           {
             email: email,
+            name: name || '',
           },
         ],
-        subject: 'Your ROI Audit Guide - Shadow Studio',
+        subject: `Why 2M feels like a ceiling... (Audit Attached)`,
         htmlContent: `
           <html>
-            <head></head>
-            <body style="font-family: sans-serif; line-height: 1.6; color: #333;">
-              <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-                <h1 style="color: #f4703a;">Your ROI Audit Guide is here!</h1>
-                <p>Hello,</p>
-                <p>Thank you for requesting our ROI Audit Guide. This framework is designed to help you identify bottlenecks in your ad spend, ACOS, and creative output.</p>
-                <p style="margin: 30px 0;">
-                  <a href="https://docs.google.com/spreadsheets/d/1Plhu1OIv0rRy4Jjw8zFQZ1IBgtaRVjsw/edit?usp=sharing&ouid=102034258856644575129&rtpof=true&sd=true" 
-                     style="background-color: #f4703a; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;">
-                    Access ROI Audit Spreadsheet & Guide
-                  </a>
-                </p>
-                <p>If you have any questions or want us to walk you through it, feel free to book a call with us.</p>
-                <p style="margin: 20px 0;">
-                  <a href="https://form.jotform.com/260972545860061" 
-                     style="display: inline-block; border: 1px solid #f4703a; color: #f4703a; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
-                    Book Your Strategy Call
-                  </a>
-                </p>
-                <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
-                <p style="font-size: 12px; color: #888;">
-                  Best regards,<br>
-                  <strong>The Shadow Studio Team</strong>
-                </p>
-              </div>
+            <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #1a1a1a; max-width: 600px; margin: 0 auto; padding: 20px;">
+              <p>Hey ${firstName},</p>
+              
+              <p>Most eCommerce brands get stuck at 2M monthly because the systems that got them there aren't the same ones that will get them to 7M.</p>
+              
+              <p>Your audit guide is ready: <a href="${blueprintUrl}" style="color: #f4703a; font-weight: bold; text-decoration: underline;">Open the Blueprint →</a></p>
+              
+              <p>We don't look at "vanity metrics." This framework is designed to find the <strong>Bottleneck</strong>.</p>
+              
+              <p>Is it your creative fatigue? Your offer resonance? Or is your demand engine simply not "Unified"?</p>
+              
+              <p>Spend 90 minutes with this. It’s better to find the math error now than to try and scale a broken engine.</p>
+              
+              <p>Talk soon,<br>
+              <strong>Nizami</strong><br>
+              Shadow Studio</p>
+              
+              <p style="margin-top: 30px; font-size: 13px; color: #666; border-top: 1px solid #eee; padding-top: 15px;">
+                <em>p.s. If you want to skip the "do-it-yourself" part and just see the roadmap for 7M+, reply "SYSTEM" and we can chat about your specific setup.</em>
+              </p>
             </body>
           </html>
         `,

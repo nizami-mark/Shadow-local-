@@ -83,7 +83,6 @@ export async function POST(req: Request) {
               Shadow Studio</p>
               
               <p style="margin-top: 30px; font-size: 13px; color: #666; border-top: 1px solid #eee; padding-top: 15px;">
-                <img src="https://drive.google.com/uc?id=1V5uJ2GvVmJtuUMy9EKsfMpo1sUK2s5jY" alt="Nizami" style="width: 50px; height: 50px; border-radius: 25px; margin-bottom: 10px; display: block; object-fit: cover;" />
                 <em>p.s. If you want to skip the "do-it-yourself" part and just see the roadmap for 7M+, reply "SYSTEM" and we can chat about your specific setup.</em>
               </p>
             </body>

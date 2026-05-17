@@ -886,7 +886,7 @@ const LeadMagnet = ( ) => {
                       {status === 'success' ? (
                         <div className="relative w-full h-full">
                           <Image 
-                            src="/nizami-dp.png" 
+                            src="https://drive.google.com/uc?id=1V5uJ2GvVmJtuUMy9EKsfMpo1sUK2s5jY" 
                             alt="Nizami Shadow Studio" 
                             fill 
                             className="object-cover scale-110"
@@ -1107,7 +1107,7 @@ const Footer = () => {
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full overflow-hidden border border-white/10 ring-2 ring-brand-accent/10 shadow-lg">
               <Image 
-                src="/nizami-dp.png" 
+                src="https://drive.google.com/uc?id=1V5uJ2GvVmJtuUMy9EKsfMpo1sUK2s5jY" 
                 alt="Nizami" 
                 width={48} 
                 height={48} 

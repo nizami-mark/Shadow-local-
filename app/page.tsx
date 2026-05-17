@@ -886,7 +886,7 @@ const LeadMagnet = ( ) => {
                       {status === 'success' ? (
                         <div className="relative w-full h-full">
                           <Image 
-                            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&h=200&auto=format&fit=crop" 
+                            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200&h=200&auto=format&fit=crop" 
                             alt="Nizami Shadow Studio" 
                             fill 
                             className="object-cover"
@@ -897,7 +897,7 @@ const LeadMagnet = ( ) => {
                         <Mail className="w-8 h-8" />
                       )}
                     </div>
-                    <h3 className="text-xl font-bold text-white">
+                    <h3 className="text-xl font-bold text-white mt-4">
                       {status === 'success' ? "Audit Sent!" : "Send to my inbox"}
                     </h3>
                     <p className="text-text-primary/40 text-sm">
@@ -1104,7 +1104,17 @@ const Footer = () => {
     <footer className="py-12 border-t border-white/5">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:row justify-between items-center gap-8">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full overflow-hidden border border-white/10 ring-2 ring-brand-accent/20">
+              <Image 
+                src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=100&h=100&auto=format&fit=crop" 
+                alt="Nizami" 
+                width={48} 
+                height={48} 
+                className="object-cover"
+                referrerPolicy="no-referrer"
+              />
+            </div>
             <div 
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
               className="relative w-40 h-10 cursor-pointer"

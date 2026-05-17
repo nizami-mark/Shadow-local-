@@ -882,15 +882,25 @@ const LeadMagnet = ( ) => {
                 <div className="absolute -inset-1 bg-gradient-to-r from-brand-accent/20 to-orange-500/20 blur-xl rounded-3xl opacity-50" />
                 <div className="relative bg-bg-primary/80 border border-white/10 p-8 rounded-3xl shadow-2xl">
                   <div className="text-center mb-8">
-                    <div className="w-16 h-16 bg-brand-accent/10 rounded-2xl flex items-center justify-center text-brand-accent mx-auto mb-4 overflow-hidden relative">
+                    <div className="w-16 h-16 bg-brand-accent/10 rounded-2xl flex items-center justify-center text-brand-accent mx-auto mb-4 overflow-hidden border border-white/5 relative">
                       {status === 'success' ? (
-                        <Image 
-                          src="/nizami-dp.png" 
-                          alt="Nizami Shadow Studio" 
-                          fill 
-                          className="object-cover"
-                          referrerPolicy="no-referrer"
-                        />
+                        <div className="relative w-full h-full">
+                          <Image 
+                            src="/nizami-dp.png" 
+                            alt="Nizami Shadow Studio" 
+                            fill 
+                            className="object-cover"
+                            referrerPolicy="no-referrer"
+                            onError={(e) => {
+                              // Fallback to initials if image fails
+                              const target = e.target as HTMLImageElement;
+                              target.style.display = 'none';
+                            }}
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center bg-brand-accent text-black font-bold text-xl">
+                            N
+                          </div>
+                        </div>
                       ) : (
                         <Mail className="w-8 h-8" />
                       )}

@@ -882,14 +882,14 @@ const LeadMagnet = ( ) => {
                 <div className="absolute -inset-1 bg-gradient-to-r from-brand-accent/20 to-orange-500/20 blur-xl rounded-3xl opacity-50" />
                 <div className="relative bg-bg-primary/80 border border-white/10 p-8 rounded-3xl shadow-2xl">
                   <div className="text-center mb-8">
-                    <div className="w-16 h-16 bg-brand-accent/10 rounded-full flex items-center justify-center text-brand-accent mx-auto mb-4 overflow-hidden border-2 border-brand-accent/20 relative">
+                    <div className="w-16 h-16 bg-brand-accent/10 rounded-full flex items-center justify-center text-brand-accent mx-auto mb-4 overflow-hidden border-2 border-brand-accent/20 relative shadow-[0_0_20px_rgba(244,112,58,0.2)]">
                       {status === 'success' ? (
                         <div className="relative w-full h-full">
                           <Image 
-                            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200&h=200&auto=format&fit=crop" 
+                            src="/nizami-dp.png" 
                             alt="Nizami Shadow Studio" 
                             fill 
-                            className="object-cover"
+                            className="object-cover scale-110"
                             referrerPolicy="no-referrer"
                           />
                         </div>
@@ -1101,17 +1101,17 @@ const CalendlyEmbed = () => {
 
 const Footer = () => {
   return (
-    <footer className="py-12 border-t border-white/5">
+    <footer className="py-12 border-t border-white/5 bg-bg-primary">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:row justify-between items-center gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full overflow-hidden border border-white/10 ring-2 ring-brand-accent/20">
+            <div className="w-12 h-12 rounded-full overflow-hidden border border-white/10 ring-2 ring-brand-accent/10 shadow-lg">
               <Image 
-                src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=100&h=100&auto=format&fit=crop" 
+                src="/nizami-dp.png" 
                 alt="Nizami" 
                 width={48} 
                 height={48} 
-                className="object-cover"
+                className="object-cover scale-110"
                 referrerPolicy="no-referrer"
               />
             </div>

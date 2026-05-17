@@ -83,7 +83,7 @@ export async function POST(req: Request) {
               Shadow Studio</p>
               
               <p style="margin-top: 30px; font-size: 13px; color: #666; border-top: 1px solid #eee; padding-top: 15px;">
-                <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=100&h=100&auto=format&fit=crop" alt="Nizami" style="width: 50px; height: 50px; border-radius: 25px; margin-bottom: 10px; display: block;" />
+                <img src="https://ais-pre-7y6zva7of2jca57cuutgav-311807151341.asia-east1.run.app/nizami-dp.png" alt="Nizami" style="width: 50px; height: 50px; border-radius: 25px; margin-bottom: 10px; display: block; object-fit: cover;" />
                 <em>p.s. If you want to skip the "do-it-yourself" part and just see the roadmap for 7M+, reply "SYSTEM" and we can chat about your specific setup.</em>
               </p>
             </body>

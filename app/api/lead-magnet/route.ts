@@ -62,7 +62,7 @@ export async function POST(req: Request) {
             name: name || '',
           },
         ],
-        subject: `Why 2M feels like a ceiling... (Audit Attached)`,
+        subject: `your audit is in here, ${firstName}`,
         htmlContent: `
           <html>
             <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #1a1a1a; max-width: 600px; margin: 0 auto; padding: 20px;">

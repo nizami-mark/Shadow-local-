@@ -882,11 +882,25 @@ const LeadMagnet = ( ) => {
                 <div className="absolute -inset-1 bg-gradient-to-r from-brand-accent/20 to-orange-500/20 blur-xl rounded-3xl opacity-50" />
                 <div className="relative bg-bg-primary/80 border border-white/10 p-8 rounded-3xl shadow-2xl">
                   <div className="text-center mb-8">
-                    <div className="w-16 h-16 bg-brand-accent/10 rounded-2xl flex items-center justify-center text-brand-accent mx-auto mb-4">
-                      <Mail className="w-8 h-8" />
+                    <div className="w-16 h-16 bg-brand-accent/10 rounded-2xl flex items-center justify-center text-brand-accent mx-auto mb-4 overflow-hidden relative">
+                      {status === 'success' ? (
+                        <Image 
+                          src="/nizami-dp.png" 
+                          alt="Nizami Shadow Studio" 
+                          fill 
+                          className="object-cover"
+                          referrerPolicy="no-referrer"
+                        />
+                      ) : (
+                        <Mail className="w-8 h-8" />
+                      )}
                     </div>
-                    <h3 className="text-xl font-bold text-white">Send to my inbox</h3>
-                    <p className="text-text-primary/40 text-sm">Enter your email to receive the guide instantly.</p>
+                    <h3 className="text-xl font-bold text-white">
+                      {status === 'success' ? "Check your inbox!" : "Send to my inbox"}
+                    </h3>
+                    <p className="text-text-primary/40 text-sm">
+                      {status === 'success' ? "I've just sent the blueprint to your email." : "Enter your email to receive the guide instantly."}
+                    </p>
                   </div>
 
                   <form onSubmit={handleSubmit} className="space-y-4">
@@ -905,7 +919,7 @@ const LeadMagnet = ( ) => {
                     <div className="relative">
                       <input
                         type="email"
-                        placeholder="founder@brand.com"
+                        placeholder="write your email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required

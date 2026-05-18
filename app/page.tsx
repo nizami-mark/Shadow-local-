@@ -1104,17 +1104,7 @@ const Footer = () => {
     <footer className="py-12 border-t border-white/5 bg-bg-primary">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full overflow-hidden border border-white/10 ring-2 ring-brand-accent/10 shadow-lg">
-              <Image 
-                src="https://drive.google.com/uc?id=1V5uJ2GvVmJtuUMy9EKsfMpo1sUK2s5jY" 
-                alt="Nizami" 
-                width={48} 
-                height={48} 
-                className="object-cover scale-110"
-                referrerPolicy="no-referrer"
-              />
-            </div>
+          <div className="flex items-center gap-2">
             <div 
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
               className="relative w-40 h-10 cursor-pointer"

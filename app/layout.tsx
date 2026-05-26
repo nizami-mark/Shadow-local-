@@ -88,19 +88,24 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: 'https://lh3.googleusercontent.com/d/11PftqrVrqzER602AoZWUbAu12fzD95mc',
-        type: 'image/png',
+        url: '/favicon.ico',
+        sizes: 'any',
       },
       {
-        url: 'https://lh3.googleusercontent.com/d/11PftqrVrqzER602AoZWUbAu12fzD95mc',
-        sizes: '32x32',
+        url: '/icon.png',
         type: 'image/png',
+        sizes: '48x48',
+      },
+      {
+        url: '/icon.png',
+        type: 'image/png',
+        sizes: '192x192',
       },
     ],
-    shortcut: 'https://lh3.googleusercontent.com/d/11PftqrVrqzER602AoZWUbAu12fzD95mc',
+    shortcut: '/favicon.ico',
     apple: [
       {
-        url: 'https://lh3.googleusercontent.com/d/11PftqrVrqzER602AoZWUbAu12fzD95mc',
+        url: '/icon.png',
         sizes: '180x180',
         type: 'image/png',
       },

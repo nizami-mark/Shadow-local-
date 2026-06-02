@@ -1146,10 +1146,258 @@ const Footer = () => {
   );
 };
 
+// --- Qualification Gate Component ---
+
+const QualificationGate = ({ onQualified }: { onQualified: () => void }) => {
+  const [step, setStep] = useState<'question' | 'playbook' | 'verifying' | 'success'>('question');
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const handleYes = () => {
+    setStep('verifying');
+    setTimeout(() => {
+      onQualified();
+    }, 1500);
+  };
+
+  const handleNo = () => {
+    setStep('playbook');
+  };
+
+  const handlePlaybookSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setLoading(true);
+    setErrorMsg('');
+
+    try {
+      const response = await fetch('/api/lead-magnet', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, name }),
+      });
+
+      if (response.ok) {
+        setStep('success');
+      } else {
+        const data = await response.json();
+        setErrorMsg(data.error || 'Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      setErrorMsg('Failed to connect to the server.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-[100] bg-bg-primary overflow-y-auto flex items-center justify-center p-4 md:p-6 select-none">
+      {/* Glow background */}
+      <div className="absolute inset-x-0 top-0 h-[50vh] bg-gradient-to-b from-brand-accent/10 to-transparent blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg aspect-square bg-brand-accent/5 blur-[160px] rounded-full pointer-events-none" />
+
+      <div className="relative w-full max-w-xl my-auto py-12">
+        {/* Brand Header */}
+        <div className="relative w-44 md:w-52 h-12 mx-auto mb-10 md:mb-12">
+          <Image 
+            src="https://drive.google.com/uc?export=download&id=1p78NgIMJDO-CY1s-ZWb-OyvdKcxdSHxM" 
+            alt="Shadow Studio Logo" 
+            fill 
+            className="object-contain"
+            referrerPolicy="no-referrer"
+          />
+        </div>
+
+        {/* Content Container */}
+        <div className="glass-panel border-white/10 rounded-3xl p-6 md:p-10 shadow-3xl relative overflow-hidden">
+          {step === 'question' && (
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center"
+            >
+              <span className="inline-block text-[10px] md:text-xs font-mono font-bold tracking-[0.25em] text-brand-accent uppercase mb-4">
+                AUTHENTICATION PORTAL
+              </span>
+              <h2 className="text-xl md:text-3xl font-bold font-display text-white mb-8 tracking-tight px-2 leading-tight">
+                Are you an Ecommerce founder doing 2M+ sales already?
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                {/* YES Option */}
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleYes}
+                  className="glass-panel border-brand-accent/20 hover:border-brand-accent hover:shadow-[0_0_20px_rgba(244,112,58,0.15)] rounded-2xl p-6 cursor-pointer text-left transition-all duration-300 group relative overflow-hidden"
+                >
+                  <div className="absolute top-0 right-0 w-16 h-16 bg-brand-accent/5 rounded-bl-full pointer-events-none transition-all group-hover:bg-brand-accent/10" />
+                  <div className="w-8 h-8 rounded-full bg-brand-accent/10 flex items-center justify-center text-brand-accent mb-4 group-hover:bg-brand-accent group-hover:text-white transition-colors">
+                    <CheckCircle2 className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-bold text-white text-base md:text-lg mb-2">
+                    Yes, we do 2M+
+                  </h3>
+                  <p className="text-xs text-text-primary/50 leading-relaxed group-hover:text-text-primary/70 transition-colors">
+                    Access the complete multi-channel 7M+ scale blueprints, case studies, and book premium strategy audits.
+                  </p>
+                </motion.button>
+
+                {/* NO Option */}
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleNo}
+                  className="glass-panel border-white/5 hover:border-white/20 hover:shadow-xl rounded-2xl p-6 cursor-pointer text-left transition-all duration-300 group"
+                >
+                  <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/40 mb-4 group-hover:bg-white/10 group-hover:text-white transition-colors">
+                    <XCircle className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-bold text-white text-base md:text-lg mb-2">
+                    No, we are below 2M
+                  </h3>
+                  <p className="text-xs text-text-primary/50 leading-relaxed group-hover:text-text-primary/70 transition-colors">
+                    Get an instant copy of our private scale playbook containing our systems to hit your first 2M+ monthly.
+                  </p>
+                </motion.button>
+              </div>
+            </motion.div>
+          )}
+
+          {step === 'playbook' && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-center"
+            >
+              <span className="inline-block text-[10px] md:text-xs font-mono font-bold tracking-[0.25em] text-brand-accent uppercase mb-4">
+                FOUNDER STATS RESTRICTED
+              </span>
+              <h2 className="text-xl md:text-2xl font-bold font-display text-white mb-3 tracking-tight">
+                Unlock The $2M Scale Playbook
+              </h2>
+              <p className="text-xs md:text-sm text-text-primary/60 mb-6 max-w-md mx-auto leading-relaxed">
+                Our main frameworks are custom-assembled for large scales. However, we packed our complete early-stage growth blueprints into a free Starter Playbook. Enter your work email below to receive it.
+              </p>
+
+              <form onSubmit={handlePlaybookSubmit} className="space-y-4 max-w-sm mx-auto text-left">
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    disabled={loading}
+                    className="w-full bg-bg-secondary/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-text-primary/20 focus:outline-none focus:border-brand-accent/50 transition-colors disabled:opacity-50"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="email"
+                    placeholder="Your Work Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    disabled={loading}
+                    className="w-full bg-bg-secondary/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-text-primary/20 focus:outline-none focus:border-brand-accent/50 transition-colors disabled:opacity-50"
+                  />
+                </div>
+
+                {errorMsg && (
+                  <p className="text-red-500 text-xs text-center">{errorMsg}</p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full bg-brand-accent text-white hover:opacity-90 transition-all font-bold text-sm h-12 rounded-xl flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 neon-glow"
+                >
+                  {loading ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    <>
+                      Get Playbook & Proceed
+                      <Send className="w-4 h-4" />
+                    </>
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setStep('question')}
+                  className="w-full text-center text-xs text-text-primary/40 hover:text-white transition-colors py-2 block"
+                >
+                  ← Go back to qualification question
+                </button>
+              </form>
+            </motion.div>
+          )}
+
+          {step === 'verifying' && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-8"
+            >
+              <Loader2 className="w-12 h-12 animate-spin text-brand-accent mx-auto mb-6" />
+              <h3 className="text-xl font-bold text-white mb-2 font-display">
+                Verifying Scale Credentials
+              </h3>
+              <p className="text-xs text-text-primary/40 tracking-widest font-mono">
+                INITIALIZING 7M+ scaling systems...
+              </p>
+            </motion.div>
+          )}
+
+          {step === 'success' && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-center py-4"
+            >
+              <div className="w-16 h-16 bg-green-500/10 border border-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <CheckCircle2 className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2 font-display">
+                Playbook Sent Successfully!
+              </h3>
+              <p className="text-sm text-text-primary/60 mb-6 max-w-xs mx-auto leading-relaxed">
+                Check your inbox (and spam folders) for the $2M scaling framework. You can now browse the full website!
+              </p>
+              <button
+                onClick={onQualified}
+                className="w-full max-w-[240px] bg-white text-bg-primary hover:bg-neutral-200 transition-all font-bold text-sm h-12 rounded-xl mx-auto flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+              >
+                Proceed to Website
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </motion.div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // --- Main Page ---
 
 export default function FunnelPage() {
+  const [gatedStatus, setGatedStatus] = useState<'loading' | 'pending' | 'qualified'>('loading');
   const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const checkQualification = () => {
+      const saved = localStorage.getItem('shadow_studio_qualification');
+      setGatedStatus(saved === 'qualified' ? 'qualified' : 'pending');
+    };
+    Promise.resolve().then(checkQualification);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -1169,6 +1417,26 @@ export default function FunnelPage() {
     { name: 'How We Do It', id: 'process', icon: Layers },
     { name: 'FAQ', id: 'faq', icon: Calendar },
   ];
+
+  if (gatedStatus === 'loading') {
+    return (
+      <div className="fixed inset-0 bg-bg-primary z-[100] flex flex-col items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-brand-accent mb-4" />
+        <p className="text-zinc-500 font-mono text-xs uppercase tracking-widest">LOADING EXPERIENCE...</p>
+      </div>
+    );
+  }
+
+  if (gatedStatus === 'pending') {
+    return (
+      <QualificationGate 
+        onQualified={() => {
+          localStorage.setItem('shadow_studio_qualification', 'qualified');
+          setGatedStatus('qualified');
+        }} 
+      />
+    );
+  }
 
   return (
     <main className="relative pb-20 md:pb-0">

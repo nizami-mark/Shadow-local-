@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Background Plate (Squircle with 128px radius) -->
+  <rect width="512" height="512" rx="128" fill="#1a1a1a" />
+  
+  <!-- Outer Orange branding pill -->
+  <rect x="76" y="166" width="360" height="180" rx="90" fill="#f4703a" />
+  
+  <!-- Inner dark contrasting capsule -->
+  <rect x="126" y="206" width="260" height="100" rx="50" fill="#1a1a1a" />
+  
+  <!-- Bold modern typographic studio branding -->
+  <text x="256" y="259" 
+        font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" 
+        font-weight="900" 
+        font-size="42px" 
+        fill="#ffffff" 
+        text-anchor="middle" 
+        dominant-baseline="central" 
+        letter-spacing="0.12em"
+        style="text-transform: uppercase;">STUDIO</text>
+</svg>

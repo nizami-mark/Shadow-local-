@@ -88,24 +88,32 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/favicon.ico?v=2',
+        url: '/icon.svg?v=3',
+        type: 'image/svg+xml',
+      },
+      {
+        url: '/favicon.ico?v=3',
         sizes: 'any',
       },
       {
-        url: '/icon.png?v=2',
+        url: '/icon.png?v=3',
         type: 'image/png',
         sizes: '48x48',
       },
       {
-        url: '/icon.png?v=2',
+        url: '/icon.png?v=3',
         type: 'image/png',
         sizes: '192x192',
       },
     ],
-    shortcut: '/favicon.ico?v=2',
+    shortcut: '/icon.svg?v=3',
     apple: [
       {
-        url: '/icon.png?v=2',
+        url: '/icon.svg?v=3',
+        type: 'image/svg+xml',
+      },
+      {
+        url: '/icon.png?v=3',
         sizes: '180x180',
         type: 'image/png',
       },
@@ -121,11 +129,11 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${unbounded.variable} ${playfair.variable} dark`}>
       <head>
-        <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
-        <link rel="icon" href="/icon.png?v=2" type="image/png" sizes="32x32" />
-        <link rel="icon" href="/icon.png?v=2" type="image/png" sizes="192x192" />
-        <link rel="shortcut icon" href="/favicon.ico?v=2" />
-        <link rel="apple-touch-icon" href="/icon.png?v=2" sizes="180x180" />
+        <link rel="icon" href="/icon.svg?v=3" type="image/svg+xml" />
+        <link rel="icon" href="/icon.png?v=3" type="image/png" sizes="32x32" />
+        <link rel="icon" href="/icon.png?v=3" type="image/png" sizes="192x192" />
+        <link rel="shortcut icon" href="/icon.svg?v=3" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/icon.svg?v=3" type="image/svg+xml" />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-F4NJFR6YY5"
           strategy="afterInteractive"

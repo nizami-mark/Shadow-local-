@@ -5,7 +5,7 @@ import * as path from 'path';
 
 // Download Google Drive icon to public directory synchronously if missing
 try {
-  const ICON_ID = '1V5uJ2GvVmJtuUMy9EKsfMpo1sUK2s5jY';
+  const ICON_ID = '11PftqrVrqzER602AoZWUbAu12fzD95mc';
   const url = `https://lh3.googleusercontent.com/d/${ICON_ID}`;
   const publicDir = path.join(process.cwd(), 'public');
 

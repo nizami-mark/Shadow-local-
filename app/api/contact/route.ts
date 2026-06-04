@@ -5,11 +5,11 @@ import * as path from 'path';
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, company, aov, adSpend, message } = await req.json();
+    const { name, email, company, phone, aov, adSpend, message } = await req.json();
 
-    if (!name || !email || !company) {
+    if (!name || !email || !company || !phone) {
       return NextResponse.json(
-        { error: 'Name, email, and brand/website name are required fields.' },
+        { error: 'Name, email, brand/website name, and phone number are required fields.' },
         { status: 400 }
       );
     }
@@ -20,6 +20,7 @@ export async function POST(req: NextRequest) {
       name,
       email,
       company,
+      phone,
       aov: aov || 'N/A',
       adSpend: adSpend || 'N/A',
       message: message || 'N/A',
@@ -66,7 +67,7 @@ export async function POST(req: NextRequest) {
       console.warn('[Contact API] SMTP credentials not set. Simulated delivery. To trigger real-time Gmail alerts, configure SMTP_USER and SMTP_PASS variables.');
       return NextResponse.json({
         success: true,
-        message: 'Your application has been received successfully! Our growth team will audit your brand and coordinate a strategy calendar review shortly.',
+        message: 'You are all done, our strategist will get back to you in a short while.',
         simulated: true,
         data: submission
       });
@@ -109,6 +110,10 @@ export async function POST(req: NextRequest) {
             <td style="padding: 12px; border-bottom: 1px solid #222; font-size: 15px;">${company}</td>
           </tr>
           <tr>
+            <td style="padding: 12px; font-weight: bold; border-bottom: 1px solid #222; color: #f4703a; font-size: 14px;">Phone/WhatsApp:</td>
+            <td style="padding: 12px; border-bottom: 1px solid #222; font-size: 15px;">${phone}</td>
+          </tr>
+          <tr>
             <td style="padding: 12px; font-weight: bold; border-bottom: 1px solid #222; color: #f4703a; font-size: 14px;">Average Order Value (AOV):</td>
             <td style="padding: 12px; border-bottom: 1px solid #222; font-size: 15px; color: #ffffff;">${aov}</td>
           </tr>
@@ -135,12 +140,12 @@ export async function POST(req: NextRequest) {
       replyTo: email,
       subject: `🔥 New Brand Inquiry: ${company} (${name})`,
       html: emailHtml,
-      text: `Brand Inquiry Details:\n\nName: ${name}\nEmail: ${email}\nCompany: ${company}\nAOV: ${aov}\nMonthly Ad Spend: ${adSpend}\nMessage: ${message}`
+      text: `Brand Inquiry Details:\n\nName: ${name}\nEmail: ${email}\nCompany: ${company}\nPhone: ${phone}\nAOV: ${aov}\nMonthly Ad Spend: ${adSpend}\nMessage: ${message}`
     });
 
     return NextResponse.json({
       success: true,
-      message: 'Your strategy call request has been successfully transmitted directly to nizami.shadowstudio@gmail.com!',
+      message: 'You are all done, our strategist will get back to you in a short while.',
       simulated: false
     });
   } catch (error: any) {

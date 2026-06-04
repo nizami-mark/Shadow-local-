@@ -24,7 +24,12 @@ import {
   Send,
   Loader2,
   Instagram,
-  Linkedin
+  Linkedin,
+  User,
+  Globe,
+  Phone,
+  DollarSign,
+  MessageSquare
 } from 'lucide-react';
 
 // --- Components ---
@@ -1058,6 +1063,7 @@ const BuiltInContactForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [company, setCompany] = useState('');
+  const [phone, setPhone] = useState('');
   const [aov, setAov] = useState('');
   const [adSpend, setAdSpend] = useState('');
   const [message, setMessage] = useState('');
@@ -1066,9 +1072,9 @@ const BuiltInContactForm = () => {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !email.trim() || !company.trim() || !aov.trim() || !adSpend.trim()) {
+    if (!name.trim() || !email.trim() || !company.trim() || !phone.trim() || !aov.trim() || !adSpend.trim()) {
       setStatus('error');
-      setFeedbackMessage('Please enter your Name, Best Email, Brand/Website Name, Average Order Value (AOV), and Monthly Ad spend.');
+      setFeedbackMessage('Please enter your Name, Best Email, Brand/Website Name, Phone Number, Average Order Value (AOV), and Monthly Ad Spend.');
       return;
     }
 
@@ -1085,6 +1091,7 @@ const BuiltInContactForm = () => {
           name,
           email,
           company,
+          phone,
           aov,
           adSpend,
           message: message || 'N/A',
@@ -1124,28 +1131,19 @@ const BuiltInContactForm = () => {
       <div className="absolute bottom-1/4 right-1/10 w-96 h-96 rounded-full bg-orange-500/5 blur-3xl pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-[10px] md:text-xs font-bold uppercase tracking-widest mb-6"
-          >
-            <Send className="w-3 h-3" />
-            Direct Application
-          </motion.div>
+        <div className="max-w-4xl mx-auto text-center">
           <SectionHeading 
-            title="Book Your Strategy Call"
-            subtitle="Fill out the qualification form below. Nizam and our growth team will audit your brand and coordinate a strategy calendar review."
+            badge="direct inquiry"
+            title="Just submit the form, rest we'll handle"
           />
         </div>
 
         <div className="max-w-3xl mx-auto">
           <div className="relative">
-            {/* Ambient Backlight */}
-            <div className="absolute -inset-1.5 bg-gradient-to-r from-brand-accent/30 to-orange-500/20 blur-2xl rounded-3xl opacity-40 transition-all" />
+            {/* Ambient Backlight - Highly Vibrant & Pulsing Glow */}
+            <div className="absolute -inset-1.5 bg-gradient-to-r from-brand-accent/50 via-orange-500/30 to-brand-accent/45 blur-2xl rounded-3xl opacity-50 animate-pulse duration-3000 pointer-events-none" />
             
-            <div className="relative bg-[#0d0d0d]/90 border border-white/10 p-8 md:p-12 rounded-3xl shadow-2xl overflow-hidden">
+            <div className="relative bg-[#080808]/95 border border-white/10 p-8 md:p-12 rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden backdrop-blur-md">
               
               {status === 'success' ? (
                 <motion.div 
@@ -1153,8 +1151,8 @@ const BuiltInContactForm = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   className="text-center py-12 md:py-16 space-y-6"
                 >
-                  <div className="w-20 h-20 bg-brand-accent/10 rounded-full flex items-center justify-center text-brand-accent mx-auto border-2 border-brand-accent/30 shadow-[0_0_30px_rgba(244,112,58,0.3)]">
-                    <CheckCircle2 className="w-10 h-10 animate-bounce" />
+                  <div className="w-20 h-20 bg-brand-accent/10 rounded-full flex items-center justify-center text-brand-accent mx-auto border-2 border-brand-accent/30 shadow-[0_0_30px_rgba(244,112,58,0.3)] animate-pulse">
+                    <CheckCircle2 className="w-10 h-10" />
                   </div>
                   
                   <div className="space-y-3">
@@ -1170,13 +1168,14 @@ const BuiltInContactForm = () => {
                         setName('');
                         setEmail('');
                         setCompany('');
+                        setPhone('');
                         setAov('');
                         setAdSpend('');
                         setMessage('');
                         setStatus('idle');
                         setFeedbackMessage('');
                       }}
-                      className="px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition-all cursor-pointer"
+                      className="px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition-all cursor-pointer shadow-md hover:shadow-lg"
                     >
                       Submit Another Inquiry
                     </button>
@@ -1187,90 +1186,158 @@ const BuiltInContactForm = () => {
                   
                   {/* Two-Column Inputs (Name, Email) */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-xs uppercase tracking-widest font-bold text-white/50">Your Full Name <span className="text-brand-accent">*</span></label>
-                      <input
-                        type="text"
-                        placeholder="e.g. Nizam Khan"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                        disabled={status === 'loading'}
-                        className="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-text-primary/25 focus:outline-none focus:border-brand-accent/50 transition-colors disabled:opacity-50 text-sm"
-                      />
+                    <div className="space-y-2 group">
+                      <label className="text-xs uppercase tracking-widest font-bold text-white/50 group-focus-within:text-brand-accent transition-colors duration-300 flex items-center gap-1.5 matches-focus">
+                        <span>Your Full Name</span>
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
+                      </label>
+                      <div className="relative">
+                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-brand-accent transition-colors duration-300">
+                          <User className="w-5 h-5" />
+                        </div>
+                        <input
+                          type="text"
+                          placeholder="e.g. Nizam Khan"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          required
+                          disabled={status === 'loading'}
+                          className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl pl-12 pr-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
+                        />
+                      </div>
                     </div>
                     
-                    <div className="space-y-2">
-                      <label className="text-xs uppercase tracking-widest font-bold text-white/50">Your Best Email <span className="text-brand-accent">*</span></label>
-                      <input
-                        type="email"
-                        placeholder="e.g. nizam@brand.com"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        disabled={status === 'loading'}
-                        className="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-text-primary/25 focus:outline-none focus:border-brand-accent/50 transition-colors disabled:opacity-50 text-sm"
-                      />
+                    <div className="space-y-2 group">
+                      <label className="text-xs uppercase tracking-widest font-bold text-white/50 group-focus-within:text-brand-accent transition-colors duration-300 flex items-center gap-1.5">
+                        <span>Your Best Email</span>
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
+                      </label>
+                      <div className="relative">
+                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-brand-accent transition-colors duration-300">
+                          <Mail className="w-5 h-5" />
+                        </div>
+                        <input
+                          type="email"
+                          placeholder="e.g. nizam@brand.com"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          required
+                          disabled={status === 'loading'}
+                          className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl pl-12 pr-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
+                        />
+                      </div>
                     </div>
                   </div>
 
-                  {/* Company/Brand Info */}
-                  <div className="space-y-2">
-                    <label className="text-xs uppercase tracking-widest font-bold text-white/50">Brand / Website Name <span className="text-brand-accent">*</span></label>
-                    <input
-                      type="text"
-                      placeholder="e.g. Luxury Apparels (or apparel.pk)"
-                      value={company}
-                      onChange={(e) => setCompany(e.target.value)}
-                      required
-                      disabled={status === 'loading'}
-                      className="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-text-primary/25 focus:outline-none focus:border-brand-accent/50 transition-colors disabled:opacity-50 text-sm"
-                    />
+                  {/* Two-Column Inputs (Company & Phone) */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2 group">
+                      <label className="text-xs uppercase tracking-widest font-bold text-white/50 group-focus-within:text-brand-accent transition-colors duration-300 flex items-center gap-1.5">
+                        <span>Brand / Website Name</span>
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
+                      </label>
+                      <div className="relative">
+                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-brand-accent transition-colors duration-300">
+                          <Globe className="w-5 h-5" />
+                        </div>
+                        <input
+                          type="text"
+                          placeholder="e.g. Luxury Apparels (or apparel.pk)"
+                          value={company}
+                          onChange={(e) => setCompany(e.target.value)}
+                          required
+                          disabled={status === 'loading'}
+                          className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl pl-12 pr-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-2 group">
+                      <label className="text-xs uppercase tracking-widest font-bold text-white/50 group-focus-within:text-brand-accent transition-colors duration-300 flex items-center gap-1.5">
+                        <span>Your Phone / WhatsApp</span>
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
+                      </label>
+                      <div className="relative">
+                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-brand-accent transition-colors duration-300">
+                          <Phone className="w-5 h-5" />
+                        </div>
+                        <input
+                          type="tel"
+                          placeholder="e.g. +92 300 1234567"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          required
+                          disabled={status === 'loading'}
+                          className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl pl-12 pr-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
+                        />
+                      </div>
+                    </div>
                   </div>
 
                   {/* Two-Column Inputs (AOV & Ad Spend) */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-xs uppercase tracking-widest font-bold text-white/50">Your Average Order Value (AOV) <span className="text-brand-accent">*</span></label>
-                      <input
-                        type="text"
-                        placeholder="e.g. PKR 3,500"
-                        value={aov}
-                        onChange={(e) => setAov(e.target.value)}
-                        required
-                        disabled={status === 'loading'}
-                        className="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-text-primary/25 focus:outline-none focus:border-brand-accent/50 transition-colors disabled:opacity-50 text-sm"
-                      />
+                    <div className="space-y-2 group">
+                      <label className="text-xs uppercase tracking-widest font-bold text-white/50 group-focus-within:text-brand-accent transition-colors duration-300 flex items-center gap-1.5">
+                        <span>Your Average Order Value (AOV)</span>
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
+                      </label>
+                      <div className="relative">
+                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-brand-accent transition-colors duration-300">
+                          <DollarSign className="w-5 h-5" />
+                        </div>
+                        <input
+                          type="text"
+                          placeholder="e.g. PKR 3,500"
+                          value={aov}
+                          onChange={(e) => setAov(e.target.value)}
+                          required
+                          disabled={status === 'loading'}
+                          className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl pl-12 pr-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
+                        />
+                      </div>
                     </div>
                     
-                    <div className="space-y-2">
-                      <label className="text-xs uppercase tracking-widest font-bold text-white/50">Your Monthly Ad Spend <span className="text-brand-accent">*</span></label>
-                      <input
-                        type="text"
-                        placeholder="e.g. PKR 150,000"
-                        value={adSpend}
-                        onChange={(e) => setAdSpend(e.target.value)}
-                        required
-                        disabled={status === 'loading'}
-                        className="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-text-primary/25 focus:outline-none focus:border-brand-accent/50 transition-colors disabled:opacity-50 text-sm"
-                      />
+                    <div className="space-y-2 group">
+                      <label className="text-xs uppercase tracking-widest font-bold text-white/50 group-focus-within:text-brand-accent transition-colors duration-300 flex items-center gap-1.5">
+                        <span>Your Monthly Ad Spend</span>
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
+                      </label>
+                      <div className="relative">
+                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-brand-accent transition-colors duration-300">
+                          <TrendingUp className="w-5 h-5" />
+                        </div>
+                        <input
+                          type="text"
+                          placeholder="e.g. PKR 150,000"
+                          value={adSpend}
+                          onChange={(e) => setAdSpend(e.target.value)}
+                          required
+                          disabled={status === 'loading'}
+                          className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl pl-12 pr-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
+                        />
+                      </div>
                     </div>
                   </div>
 
                   {/* Message / Goals (Optional) */}
-                  <div className="space-y-2">
-                    <label className="text-xs uppercase tracking-widest font-bold text-white/50 flex justify-between">
+                  <div className="space-y-2 group">
+                    <label className="text-xs uppercase tracking-widest font-bold text-white/50 group-focus-within:text-brand-accent transition-colors duration-300 flex justify-between">
                       <span>Core Scaling Bottleneck & Growth Goals</span>
                       <span className="text-white/30 text-[10px]">Optional</span>
                     </label>
-                    <textarea
-                      rows={4}
-                      placeholder="What are your core bottlenecks? Describe your margin setup, budget capabilities, and what you need to achieve..."
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                      disabled={status === 'loading'}
-                      className="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-text-primary/25 focus:outline-none focus:border-brand-accent/50 transition-colors disabled:opacity-50 text-sm resize-none"
-                    />
+                    <div className="relative">
+                      <div className="absolute left-4 top-4 text-white/30 group-focus-within:text-brand-accent transition-colors duration-300">
+                        <MessageSquare className="w-5 h-5" />
+                      </div>
+                      <textarea
+                        rows={4}
+                        placeholder="What are your core bottlenecks? Describe your margin setup, budget capabilities, and what you need to achieve..."
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        disabled={status === 'loading'}
+                        className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl pl-12 pr-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm resize-none focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
+                      />
+                    </div>
                   </div>
 
                   {/* Status Notices */}
@@ -1291,7 +1358,7 @@ const BuiltInContactForm = () => {
                   <div className="pt-2 flex flex-col items-center">
                     <Button 
                       type="submit" 
-                      className="w-full md:w-auto md:min-w-[280px] py-4"
+                      className="w-full md:w-auto md:min-w-[280px] py-4 shadow-lg hover:shadow-[0_0_30px_rgba(244,112,58,0.4)] transition-all duration-300"
                       variant="primary"
                     >
                       {status === 'loading' ? (
@@ -1301,7 +1368,7 @@ const BuiltInContactForm = () => {
                         </>
                       ) : (
                         <>
-                          Submit Strategy Briefing
+                          Submit
                           <Send className="w-4 h-4 ml-1" />
                         </>
                       )}

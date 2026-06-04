@@ -33,12 +33,14 @@ const Button = ({
   children, 
   className = "", 
   variant = "primary", 
-  onClick 
+  onClick,
+  type = "button"
 }: { 
   children: React.ReactNode; 
   className?: string; 
   variant?: "primary" | "secondary" | "outline" | "ghost";
   onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
+  type?: "button" | "submit" | "reset";
 }) => {
   const variants = {
     primary: "bg-brand-accent text-white hover:opacity-90 neon-glow",
@@ -49,6 +51,7 @@ const Button = ({
 
   return (
     <motion.button
+      type={type}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
@@ -1051,48 +1054,265 @@ const FAQ = () => {
 };
 
 
-const CalendlyEmbed = () => {
+const BuiltInContactForm = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [company, setCompany] = useState('');
+  const [aov, setAov] = useState('');
+  const [adSpend, setAdSpend] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [feedbackMessage, setFeedbackMessage] = useState('');
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !email.trim() || !company.trim() || !aov.trim() || !adSpend.trim()) {
+      setStatus('error');
+      setFeedbackMessage('Please enter your Name, Best Email, Brand/Website Name, Average Order Value (AOV), and Monthly Ad spend.');
+      return;
+    }
+
+    setStatus('loading');
+    setFeedbackMessage('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          company,
+          aov,
+          adSpend,
+          message: message || 'N/A',
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok && data.success) {
+        setStatus('success');
+        setFeedbackMessage(data.message);
+        
+        // Direct Facebook Pixel call if loaded
+        if (typeof (window as any).fbq === 'function') {
+          (window as any).fbq('track', 'Lead');
+        }
+        
+        // Google Tag Manager Data Layer push
+        const dataLayer = (window as any).dataLayer || [];
+        dataLayer.push({
+          'event': 'form_submission_completed',
+          'conversion_type': 'lead'
+        });
+      } else {
+        setStatus('error');
+        setFeedbackMessage(data.error || 'Something went wrong. Please check details and try again.');
+      }
+    } catch (err: any) {
+      setStatus('error');
+      setFeedbackMessage(err?.message || 'A transmission failure occurred. Try again.');
+    }
+  };
+
   return (
-    <section className="py-16 md:py-24 bg-bg-secondary relative overflow-hidden" id="booking">
+    <section className="py-20 md:py-28 bg-bg-secondary relative overflow-hidden" id="booking">
+      {/* Background Orbs */}
+      <div className="absolute top-1/4 left-1/10 w-96 h-96 rounded-full bg-brand-accent/5 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/10 w-96 h-96 rounded-full bg-orange-500/5 blur-3xl pointer-events-none" />
+
       <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-5xl mx-auto text-center mb-12">
+        <div className="max-w-4xl mx-auto text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-[10px] md:text-xs font-bold uppercase tracking-widest mb-6"
+          >
+            <Send className="w-3 h-3" />
+            Direct Application
+          </motion.div>
           <SectionHeading 
             title="Book Your Strategy Call"
-            subtitle="Select a time that works for you and let's discuss how we can scale your brand."
+            subtitle="Fill out the qualification form below. Nizam and our growth team will audit your brand and coordinate a strategy calendar review."
           />
         </div>
-        <div className="max-w-5xl mx-auto glass-panel rounded-3xl overflow-hidden border-brand-accent/20">
-          <div 
-            className="calendly-inline-widget" 
-            data-url="https://calendly.com/nizami-shadowstudio/30min?hide_event_type_details=1&hide_gdpr_banner=1" 
-            style={{ minWidth: '320px', height: '700px' }} 
-          />
-          <Script 
-            type="text/javascript" 
-            src="https://assets.calendly.com/assets/external/widget.js" 
-            strategy="lazyOnload"
-          />
-          <Script id="calendly-event-tracking" strategy="lazyOnload">
-            {`
-              window.addEventListener('message', function(e) {
-                if (e.data.event && e.data.event === 'calendly.event_scheduled') {
-                  // Direct Facebook Pixel call
-                  if (typeof fbq === 'function') {
-                    fbq('track', 'Lead');
-                  }
-                  
-                  // Google Tag Manager Data Layer push
-                  window.dataLayer = window.dataLayer || [];
-                  window.dataLayer.push({
-                    'event': 'calendly_booking_completed',
-                    'conversion_type': 'lead'
-                  });
 
-                  console.log('Calendly Event Tracked (Meta + GTM)');
-                }
-              });
-            `}
-          </Script>
+        <div className="max-w-3xl mx-auto">
+          <div className="relative">
+            {/* Ambient Backlight */}
+            <div className="absolute -inset-1.5 bg-gradient-to-r from-brand-accent/30 to-orange-500/20 blur-2xl rounded-3xl opacity-40 transition-all" />
+            
+            <div className="relative bg-[#0d0d0d]/90 border border-white/10 p-8 md:p-12 rounded-3xl shadow-2xl overflow-hidden">
+              
+              {status === 'success' ? (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-12 md:py-16 space-y-6"
+                >
+                  <div className="w-20 h-20 bg-brand-accent/10 rounded-full flex items-center justify-center text-brand-accent mx-auto border-2 border-brand-accent/30 shadow-[0_0_30px_rgba(244,112,58,0.3)]">
+                    <CheckCircle2 className="w-10 h-10 animate-bounce" />
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <h3 className="text-2xl md:text-3xl font-extrabold text-white">Application Received!</h3>
+                    <p className="text-text-primary/75 text-sm md:text-base max-w-lg mx-auto">
+                      {feedbackMessage}
+                    </p>
+                  </div>
+
+                  <div className="pt-6">
+                    <button 
+                      onClick={() => {
+                        setName('');
+                        setEmail('');
+                        setCompany('');
+                        setAov('');
+                        setAdSpend('');
+                        setMessage('');
+                        setStatus('idle');
+                        setFeedbackMessage('');
+                      }}
+                      className="px-6 py-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-sm transition-all cursor-pointer"
+                    >
+                      Submit Another Inquiry
+                    </button>
+                  </div>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleFormSubmit} className="space-y-8">
+                  
+                  {/* Two-Column Inputs (Name, Email) */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-xs uppercase tracking-widest font-bold text-white/50">Your Full Name <span className="text-brand-accent">*</span></label>
+                      <input
+                        type="text"
+                        placeholder="e.g. Nizam Khan"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                        disabled={status === 'loading'}
+                        className="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-text-primary/25 focus:outline-none focus:border-brand-accent/50 transition-colors disabled:opacity-50 text-sm"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label className="text-xs uppercase tracking-widest font-bold text-white/50">Your Best Email <span className="text-brand-accent">*</span></label>
+                      <input
+                        type="email"
+                        placeholder="e.g. nizam@brand.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        disabled={status === 'loading'}
+                        className="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-text-primary/25 focus:outline-none focus:border-brand-accent/50 transition-colors disabled:opacity-50 text-sm"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Company/Brand Info */}
+                  <div className="space-y-2">
+                    <label className="text-xs uppercase tracking-widest font-bold text-white/50">Brand / Website Name <span className="text-brand-accent">*</span></label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Luxury Apparels (or apparel.pk)"
+                      value={company}
+                      onChange={(e) => setCompany(e.target.value)}
+                      required
+                      disabled={status === 'loading'}
+                      className="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-text-primary/25 focus:outline-none focus:border-brand-accent/50 transition-colors disabled:opacity-50 text-sm"
+                    />
+                  </div>
+
+                  {/* Two-Column Inputs (AOV & Ad Spend) */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-xs uppercase tracking-widest font-bold text-white/50">Your Average Order Value (AOV) <span className="text-brand-accent">*</span></label>
+                      <input
+                        type="text"
+                        placeholder="e.g. PKR 3,500"
+                        value={aov}
+                        onChange={(e) => setAov(e.target.value)}
+                        required
+                        disabled={status === 'loading'}
+                        className="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-text-primary/25 focus:outline-none focus:border-brand-accent/50 transition-colors disabled:opacity-50 text-sm"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label className="text-xs uppercase tracking-widest font-bold text-white/50">Your Monthly Ad Spend <span className="text-brand-accent">*</span></label>
+                      <input
+                        type="text"
+                        placeholder="e.g. PKR 150,000"
+                        value={adSpend}
+                        onChange={(e) => setAdSpend(e.target.value)}
+                        required
+                        disabled={status === 'loading'}
+                        className="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-text-primary/25 focus:outline-none focus:border-brand-accent/50 transition-colors disabled:opacity-50 text-sm"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Message / Goals (Optional) */}
+                  <div className="space-y-2">
+                    <label className="text-xs uppercase tracking-widest font-bold text-white/50 flex justify-between">
+                      <span>Core Scaling Bottleneck & Growth Goals</span>
+                      <span className="text-white/30 text-[10px]">Optional</span>
+                    </label>
+                    <textarea
+                      rows={4}
+                      placeholder="What are your core bottlenecks? Describe your margin setup, budget capabilities, and what you need to achieve..."
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      disabled={status === 'loading'}
+                      className="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-text-primary/25 focus:outline-none focus:border-brand-accent/50 transition-colors disabled:opacity-50 text-sm resize-none"
+                    />
+                  </div>
+
+                  {/* Status Notices */}
+                  {status === 'error' && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: -5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-4 rounded-xl bg-red-500/10 border border-red-500/25 text-red-500 text-sm flex items-start gap-3"
+                    >
+                      <XCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <span className="font-bold">Transmission Error:</span> {feedbackMessage}
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* Submit Button */}
+                  <div className="pt-2 flex flex-col items-center">
+                    <Button 
+                      type="submit" 
+                      className="w-full md:w-auto md:min-w-[280px] py-4"
+                      variant="primary"
+                    >
+                      {status === 'loading' ? (
+                        <>
+                          <Loader2 className="w-5 h-5 animate-spin" />
+                          Processing Application...
+                        </>
+                      ) : (
+                        <>
+                          Submit Strategy Briefing
+                          <Send className="w-4 h-4 ml-1" />
+                        </>
+                      )}
+                    </Button>
+                  </div>
+
+                </form>
+              )}
+
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1544,7 +1764,7 @@ export default function FunnelPage() {
       <HowItWorks />
       <LeadMagnet />
       <Qualification />
-      <CalendlyEmbed />
+      <BuiltInContactForm />
       <FAQ />
       <Footer />
     </main>

@@ -1134,7 +1134,7 @@ const BuiltInContactForm = () => {
         <div className="max-w-4xl mx-auto text-center">
           <SectionHeading 
             badge="direct inquiry"
-            title="Just submit the form, rest we'll handle"
+            title="Just submit the form, we'll handle the rest"
           />
         </div>
 
@@ -1163,157 +1163,48 @@ const BuiltInContactForm = () => {
               
               {status === 'success' ? (
                 <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="relative text-center py-12 md:py-16 space-y-8 overflow-hidden"
                 >
-                  {/* Floating Background Confetti */}
-                  <div className="absolute inset-0 pointer-events-none">
-                    {[...Array(24)].map((_, i) => {
-                      const colors = ["#f4703a", "#fb923c", "#f97316", "#ffedd5", "#ffffff"];
-                      const size = (i % 5) + 6;
-                      const startX = (i * 27) % 100; // %
-                      const driftX = startX + ((i % 3 === 0) ? 12 : (i % 3 === 1) ? -12 : 6);
-                      const duration = ((i % 4) * 0.5) + 2.0;
-                      const delay = (i % 6) * 0.3;
-                      const rotate = (i * 45) % 360;
-                      const scale = 0.5 + 0.1 * (i % 6);
-                      
-                      return (
-                        <motion.div
-                          key={i}
-                          initial={{ 
-                            opacity: 0, 
-                            y: -20, 
-                            x: `${startX}%`, 
-                            rotate: 0,
-                            scale: scale
-                          }}
-                          animate={{ 
-                            opacity: [0, 1, 1, 0], 
-                            y: ['0%', '120%'], 
-                            x: [`${startX}%`, `${driftX}%`],
-                            rotate: [0, rotate * 2]
-                          }}
-                          transition={{ 
-                            duration: duration,
-                            repeat: Infinity,
-                            delay: delay,
-                            ease: "linear"
-                          }}
-                          style={{
-                            backgroundColor: colors[i % colors.length],
-                            width: size,
-                            height: size,
-                            borderRadius: i % 3 === 0 ? '50%' : i % 3 === 1 ? '0%' : '2px 8px'
-                          }}
-                          className="absolute top-0"
-                        />
-                      );
-                    })}
-                  </div>
-
                   <div className="relative w-32 h-32 mx-auto flex items-center justify-center">
-                    {/* Concentric Pulsing Halo Rings */}
+                    {/* Single Subtle Breathing Outer Halo Ring */}
                     <motion.div 
-                      initial={{ scale: 0.6, opacity: 0 }}
                       animate={{ 
-                        scale: [1, 2, 2.4], 
-                        opacity: [0.6, 0.2, 0] 
+                        scale: [1, 1.15, 1],
+                        opacity: [0.3, 0.6, 0.3] 
                       }}
                       transition={{ 
                         repeat: Infinity, 
                         duration: 3, 
-                        ease: "easeOut" 
+                        ease: "easeInOut" 
                       }}
-                      className="absolute inset-0 rounded-full bg-brand-accent/25 border border-brand-accent/30"
+                      className="absolute inset-0 rounded-full bg-brand-accent/5 border border-brand-accent/15 filter blur-[1px]"
                     />
-                    <motion.div 
-                      initial={{ scale: 0.6, opacity: 0 }}
-                      animate={{ 
-                        scale: [1, 1.6, 2], 
-                        opacity: [0.8, 0.3, 0] 
-                      }}
-                      transition={{ 
-                        repeat: Infinity, 
-                        duration: 3, 
-                        delay: 1,
-                        ease: "easeOut" 
-                      }}
-                      className="absolute inset-0 rounded-full bg-orange-500/15 border border-orange-500/20"
-                    />
-                    <motion.div 
-                      initial={{ scale: 0.6, opacity: 0 }}
-                      animate={{ 
-                        scale: [1, 1.25, 1.5], 
-                        opacity: [0.9, 0.4, 0] 
-                      }}
-                      transition={{ 
-                        repeat: Infinity, 
-                        duration: 3, 
-                        delay: 2,
-                        ease: "easeOut" 
-                      }}
-                      className="absolute inset-0 rounded-full bg-brand-accent/10 border border-brand-accent/15"
-                    />
-
-                    {/* Concentric Sparkle Radial Particles */}
-                    {[...Array(12)].map((_, i) => {
-                      const angle = (i * 360) / 12;
-                      const distance = 90;
-                      const radian = (angle * Math.PI) / 180;
-                      const x = Math.cos(radian) * distance;
-                      const y = Math.sin(radian) * distance;
-                      const colors = ["#f4703a", "#ffedd5", "#f97316", "#fb923c", "#fca5a5"];
-                      const color = colors[i % colors.length];
-                      
-                      return (
-                        <motion.div
-                          key={i}
-                          initial={{ scale: 0, x: 0, y: 0, opacity: 1 }}
-                          animate={{ 
-                            scale: [0, 1.4, 1, 0],
-                            x: [0, x],
-                            y: [0, y],
-                            opacity: [1, 1, 0]
-                          }}
-                          transition={{ 
-                            duration: 2.2, 
-                            repeat: Infinity,
-                            repeatDelay: 0.5,
-                            delay: (i % 4) * 0.15,
-                            ease: "easeOut"
-                          }}
-                          style={{ backgroundColor: color }}
-                          className="absolute w-2 h-2 rounded-full shadow-[0_0_10px_rgba(244,112,58,0.5)]"
-                        />
-                      );
-                    })}
 
                     {/* Central Success Container */}
                     <motion.div 
-                      initial={{ scale: 0, rotate: -30 }}
-                      animate={{ scale: 1, rotate: 0 }}
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
                       transition={{ 
                         type: "spring", 
-                        stiffness: 200, 
+                        stiffness: 180, 
                         damping: 15,
                         delay: 0.1
                       }}
-                      className="relative z-10 w-24 h-24 bg-gradient-to-br from-brand-accent to-orange-600 rounded-full flex items-center justify-center text-white border border-white/20 shadow-[0_0_40px_rgba(244,112,58,0.6)]"
+                      className="relative z-10 w-24 h-24 bg-gradient-to-br from-brand-accent to-orange-600 rounded-full flex items-center justify-center text-white border border-white/20 shadow-[0_0_30px_rgba(244,112,58,0.4)]"
                     >
                       <motion.div
                         animate={{ 
-                          scale: [1, 1.15, 1],
-                          rotate: [0, 5, -5, 0]
+                          scale: [1, 1.06, 1],
                         }}
                         transition={{
                           repeat: Infinity,
-                          duration: 4,
+                          duration: 3,
                           ease: "easeInOut"
                         }}
                       >
-                        <CheckCircle2 className="w-12 h-12 text-white drop-shadow-[0_2px_5px_rgba(0,0,0,0.3)]" strokeWidth={2.5} />
+                        <CheckCircle2 className="w-12 h-12 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]" strokeWidth={2.5} />
                       </motion.div>
                     </motion.div>
                   </div>

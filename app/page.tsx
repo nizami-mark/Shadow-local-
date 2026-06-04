@@ -1145,24 +1145,204 @@ const BuiltInContactForm = () => {
             
             <div className="relative bg-[#080808]/95 border border-white/10 p-8 md:p-12 rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden backdrop-blur-md">
               
+              {/* Subtle Animated Progress / Loading Bar */}
+              {status === 'loading' && (
+                <div className="absolute top-0 left-0 right-0 h-1 bg-white/5 overflow-hidden z-50">
+                  <motion.div 
+                    initial={{ x: "-100%" }}
+                    animate={{ x: "100%" }}
+                    transition={{ 
+                      repeat: Infinity, 
+                      duration: 1.5, 
+                      ease: "easeInOut" 
+                    }}
+                    className="h-full w-1/3 bg-gradient-to-r from-transparent via-brand-accent to-transparent"
+                  />
+                </div>
+              )}
+              
               {status === 'success' ? (
                 <motion.div 
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="text-center py-12 md:py-16 space-y-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="relative text-center py-12 md:py-16 space-y-8 overflow-hidden"
                 >
-                  <div className="w-20 h-20 bg-brand-accent/10 rounded-full flex items-center justify-center text-brand-accent mx-auto border-2 border-brand-accent/30 shadow-[0_0_30px_rgba(244,112,58,0.3)] animate-pulse">
-                    <CheckCircle2 className="w-10 h-10" />
-                  </div>
-                  
-                  <div className="space-y-3">
-                    <h3 className="text-2xl md:text-3xl font-extrabold text-white">Application Received!</h3>
-                    <p className="text-text-primary/75 text-sm md:text-base max-w-lg mx-auto">
-                      {feedbackMessage}
-                    </p>
+                  {/* Floating Background Confetti */}
+                  <div className="absolute inset-0 pointer-events-none">
+                    {[...Array(24)].map((_, i) => {
+                      const colors = ["#f4703a", "#fb923c", "#f97316", "#ffedd5", "#ffffff"];
+                      const size = (i % 5) + 6;
+                      const startX = (i * 27) % 100; // %
+                      const driftX = startX + ((i % 3 === 0) ? 12 : (i % 3 === 1) ? -12 : 6);
+                      const duration = ((i % 4) * 0.5) + 2.0;
+                      const delay = (i % 6) * 0.3;
+                      const rotate = (i * 45) % 360;
+                      const scale = 0.5 + 0.1 * (i % 6);
+                      
+                      return (
+                        <motion.div
+                          key={i}
+                          initial={{ 
+                            opacity: 0, 
+                            y: -20, 
+                            x: `${startX}%`, 
+                            rotate: 0,
+                            scale: scale
+                          }}
+                          animate={{ 
+                            opacity: [0, 1, 1, 0], 
+                            y: ['0%', '120%'], 
+                            x: [`${startX}%`, `${driftX}%`],
+                            rotate: [0, rotate * 2]
+                          }}
+                          transition={{ 
+                            duration: duration,
+                            repeat: Infinity,
+                            delay: delay,
+                            ease: "linear"
+                          }}
+                          style={{
+                            backgroundColor: colors[i % colors.length],
+                            width: size,
+                            height: size,
+                            borderRadius: i % 3 === 0 ? '50%' : i % 3 === 1 ? '0%' : '2px 8px'
+                          }}
+                          className="absolute top-0"
+                        />
+                      );
+                    })}
                   </div>
 
-                  <div className="pt-6">
+                  <div className="relative w-32 h-32 mx-auto flex items-center justify-center">
+                    {/* Concentric Pulsing Halo Rings */}
+                    <motion.div 
+                      initial={{ scale: 0.6, opacity: 0 }}
+                      animate={{ 
+                        scale: [1, 2, 2.4], 
+                        opacity: [0.6, 0.2, 0] 
+                      }}
+                      transition={{ 
+                        repeat: Infinity, 
+                        duration: 3, 
+                        ease: "easeOut" 
+                      }}
+                      className="absolute inset-0 rounded-full bg-brand-accent/25 border border-brand-accent/30"
+                    />
+                    <motion.div 
+                      initial={{ scale: 0.6, opacity: 0 }}
+                      animate={{ 
+                        scale: [1, 1.6, 2], 
+                        opacity: [0.8, 0.3, 0] 
+                      }}
+                      transition={{ 
+                        repeat: Infinity, 
+                        duration: 3, 
+                        delay: 1,
+                        ease: "easeOut" 
+                      }}
+                      className="absolute inset-0 rounded-full bg-orange-500/15 border border-orange-500/20"
+                    />
+                    <motion.div 
+                      initial={{ scale: 0.6, opacity: 0 }}
+                      animate={{ 
+                        scale: [1, 1.25, 1.5], 
+                        opacity: [0.9, 0.4, 0] 
+                      }}
+                      transition={{ 
+                        repeat: Infinity, 
+                        duration: 3, 
+                        delay: 2,
+                        ease: "easeOut" 
+                      }}
+                      className="absolute inset-0 rounded-full bg-brand-accent/10 border border-brand-accent/15"
+                    />
+
+                    {/* Concentric Sparkle Radial Particles */}
+                    {[...Array(12)].map((_, i) => {
+                      const angle = (i * 360) / 12;
+                      const distance = 90;
+                      const radian = (angle * Math.PI) / 180;
+                      const x = Math.cos(radian) * distance;
+                      const y = Math.sin(radian) * distance;
+                      const colors = ["#f4703a", "#ffedd5", "#f97316", "#fb923c", "#fca5a5"];
+                      const color = colors[i % colors.length];
+                      
+                      return (
+                        <motion.div
+                          key={i}
+                          initial={{ scale: 0, x: 0, y: 0, opacity: 1 }}
+                          animate={{ 
+                            scale: [0, 1.4, 1, 0],
+                            x: [0, x],
+                            y: [0, y],
+                            opacity: [1, 1, 0]
+                          }}
+                          transition={{ 
+                            duration: 2.2, 
+                            repeat: Infinity,
+                            repeatDelay: 0.5,
+                            delay: (i % 4) * 0.15,
+                            ease: "easeOut"
+                          }}
+                          style={{ backgroundColor: color }}
+                          className="absolute w-2 h-2 rounded-full shadow-[0_0_10px_rgba(244,112,58,0.5)]"
+                        />
+                      );
+                    })}
+
+                    {/* Central Success Container */}
+                    <motion.div 
+                      initial={{ scale: 0, rotate: -30 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ 
+                        type: "spring", 
+                        stiffness: 200, 
+                        damping: 15,
+                        delay: 0.1
+                      }}
+                      className="relative z-10 w-24 h-24 bg-gradient-to-br from-brand-accent to-orange-600 rounded-full flex items-center justify-center text-white border border-white/20 shadow-[0_0_40px_rgba(244,112,58,0.6)]"
+                    >
+                      <motion.div
+                        animate={{ 
+                          scale: [1, 1.15, 1],
+                          rotate: [0, 5, -5, 0]
+                        }}
+                        transition={{
+                          repeat: Infinity,
+                          duration: 4,
+                          ease: "easeInOut"
+                        }}
+                      >
+                        <CheckCircle2 className="w-12 h-12 text-white drop-shadow-[0_2px_5px_rgba(0,0,0,0.3)]" strokeWidth={2.5} />
+                      </motion.div>
+                    </motion.div>
+                  </div>
+                  
+                  <div className="space-y-3 relative z-10">
+                    <motion.h3 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                      className="text-3xl md:text-4.5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-orange-200 to-brand-accent tracking-tight"
+                    >
+                      Gotcha!
+                    </motion.h3>
+                    <motion.p 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="text-text-primary/75 text-sm md:text-base max-w-lg mx-auto"
+                    >
+                      {feedbackMessage}
+                    </motion.p>
+                  </div>
+
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="pt-6 relative z-10"
+                  >
                     <button 
                       onClick={() => {
                         setName('');
@@ -1179,7 +1359,7 @@ const BuiltInContactForm = () => {
                     >
                       Submit Another Inquiry
                     </button>
-                  </div>
+                  </motion.div>
                 </motion.div>
               ) : (
                 <form onSubmit={handleFormSubmit} className="space-y-8">
@@ -1191,20 +1371,15 @@ const BuiltInContactForm = () => {
                         <span>Your Full Name</span>
                         <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
                       </label>
-                      <div className="relative">
-                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-brand-accent transition-colors duration-300">
-                          <User className="w-5 h-5" />
-                        </div>
-                        <input
-                          type="text"
-                          placeholder="e.g. Nizam Khan"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          required
-                          disabled={status === 'loading'}
-                          className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl pl-12 pr-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
-                        />
-                      </div>
+                      <input
+                        type="text"
+                        placeholder="e.g. Nizam Khan"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                        disabled={status === 'loading'}
+                        className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
+                      />
                     </div>
                     
                     <div className="space-y-2 group">
@@ -1212,20 +1387,15 @@ const BuiltInContactForm = () => {
                         <span>Your Best Email</span>
                         <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
                       </label>
-                      <div className="relative">
-                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-brand-accent transition-colors duration-300">
-                          <Mail className="w-5 h-5" />
-                        </div>
-                        <input
-                          type="email"
-                          placeholder="e.g. nizam@brand.com"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          required
-                          disabled={status === 'loading'}
-                          className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl pl-12 pr-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
-                        />
-                      </div>
+                      <input
+                        type="email"
+                        placeholder="e.g. nizam@brand.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        disabled={status === 'loading'}
+                        className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
+                      />
                     </div>
                   </div>
 
@@ -1236,20 +1406,15 @@ const BuiltInContactForm = () => {
                         <span>Brand / Website Name</span>
                         <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
                       </label>
-                      <div className="relative">
-                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-brand-accent transition-colors duration-300">
-                          <Globe className="w-5 h-5" />
-                        </div>
-                        <input
-                          type="text"
-                          placeholder="e.g. Luxury Apparels (or apparel.pk)"
-                          value={company}
-                          onChange={(e) => setCompany(e.target.value)}
-                          required
-                          disabled={status === 'loading'}
-                          className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl pl-12 pr-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
-                        />
-                      </div>
+                      <input
+                        type="text"
+                        placeholder="e.g. Luxury Apparels (or apparel.pk)"
+                        value={company}
+                        onChange={(e) => setCompany(e.target.value)}
+                        required
+                        disabled={status === 'loading'}
+                        className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
+                      />
                     </div>
                     
                     <div className="space-y-2 group">
@@ -1257,20 +1422,15 @@ const BuiltInContactForm = () => {
                         <span>Your Phone / WhatsApp</span>
                         <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
                       </label>
-                      <div className="relative">
-                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-brand-accent transition-colors duration-300">
-                          <Phone className="w-5 h-5" />
-                        </div>
-                        <input
-                          type="tel"
-                          placeholder="e.g. +92 300 1234567"
-                          value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
-                          required
-                          disabled={status === 'loading'}
-                          className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl pl-12 pr-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
-                        />
-                      </div>
+                      <input
+                        type="tel"
+                        placeholder="e.g. +92 300 1234567"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        required
+                        disabled={status === 'loading'}
+                        className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
+                      />
                     </div>
                   </div>
 
@@ -1281,20 +1441,15 @@ const BuiltInContactForm = () => {
                         <span>Your Average Order Value (AOV)</span>
                         <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
                       </label>
-                      <div className="relative">
-                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-brand-accent transition-colors duration-300">
-                          <DollarSign className="w-5 h-5" />
-                        </div>
-                        <input
-                          type="text"
-                          placeholder="e.g. PKR 3,500"
-                          value={aov}
-                          onChange={(e) => setAov(e.target.value)}
-                          required
-                          disabled={status === 'loading'}
-                          className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl pl-12 pr-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
-                        />
-                      </div>
+                      <input
+                        type="text"
+                        placeholder="e.g. PKR 3,500"
+                        value={aov}
+                        onChange={(e) => setAov(e.target.value)}
+                        required
+                        disabled={status === 'loading'}
+                        className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
+                      />
                     </div>
                     
                     <div className="space-y-2 group">
@@ -1302,20 +1457,19 @@ const BuiltInContactForm = () => {
                         <span>Your Monthly Ad Spend</span>
                         <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
                       </label>
-                      <div className="relative">
-                        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 group-focus-within:text-brand-accent transition-colors duration-300">
-                          <TrendingUp className="w-5 h-5" />
-                        </div>
-                        <input
-                          type="text"
-                          placeholder="e.g. PKR 150,000"
-                          value={adSpend}
-                          onChange={(e) => setAdSpend(e.target.value)}
-                          required
-                          disabled={status === 'loading'}
-                          className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl pl-12 pr-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
-                        />
-                      </div>
+                      <select
+                        value={adSpend}
+                        onChange={(e) => setAdSpend(e.target.value)}
+                        required
+                        disabled={status === 'loading'}
+                        className="w-full bg-white/[0.01] hover:bg-[#0d0d0d] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl px-5 py-[15px] text-white focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)] cursor-pointer"
+                      >
+                        <option value="" disabled className="bg-[#0c0c0c] text-white/40">Select Monthly Ad Spend</option>
+                        <option value="0-500k" className="bg-[#0c0c0c] text-white">0-500k</option>
+                        <option value="1M-2M" className="bg-[#0c0c0c] text-white">1M-2M</option>
+                        <option value="2M-5M" className="bg-[#0c0c0c] text-white">2M-5M</option>
+                        <option value="5M+" className="bg-[#0c0c0c] text-white">5M+</option>
+                      </select>
                     </div>
                   </div>
 
@@ -1325,19 +1479,14 @@ const BuiltInContactForm = () => {
                       <span>Core Scaling Bottleneck & Growth Goals</span>
                       <span className="text-white/30 text-[10px]">Optional</span>
                     </label>
-                    <div className="relative">
-                      <div className="absolute left-4 top-4 text-white/30 group-focus-within:text-brand-accent transition-colors duration-300">
-                        <MessageSquare className="w-5 h-5" />
-                      </div>
-                      <textarea
-                        rows={4}
-                        placeholder="What are your core bottlenecks? Describe your margin setup, budget capabilities, and what you need to achieve..."
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        disabled={status === 'loading'}
-                        className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl pl-12 pr-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm resize-none focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
-                      />
-                    </div>
+                    <textarea
+                      rows={4}
+                      placeholder="What are your core bottlenecks? Describe your margin setup, budget capabilities, and what you need to achieve..."
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      disabled={status === 'loading'}
+                      className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm resize-none focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
+                    />
                   </div>
 
                   {/* Status Notices */}

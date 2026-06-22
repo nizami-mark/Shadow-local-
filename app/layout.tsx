@@ -19,7 +19,7 @@ const playfair = Playfair_Display({
 });
 
 const siteConfig = {
-  name: 'Shadow Studio',
+  name: 'Shadow Studio | Ecommerce Marketing Agency',
   description: 'Shadow Studio is an advertising agency specializing in branding, content, performance marketing, outdoor advertising (OOH), and digital growth.',
   url: 'https://shadowstudio.co', // Updated URL
   ogImage: 'https://drive.google.com/uc?export=download&id=1p78NgIMJDO-CY1s-ZWb-OyvdKcxdSHxM',

@@ -138,6 +138,20 @@ const UnifiedHero = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-6xl mx-auto flex flex-col items-center">
+          {/* Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs md:text-sm font-semibold mb-6 tracking-wide shadow-[0_2px_10px_rgba(16,185,129,0.05)]"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span>Best Ecommerce Agency in Pakistan</span>
+          </motion.div>
+
           {/* Headline */}
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
@@ -488,7 +502,7 @@ const HowItWorks = () => {
             transition={{ delay: 0.1 }}
             className="text-white/40 text-sm md:text-lg max-w-2xl mx-auto"
           >
-            Built for eCommerce founders ready to move volume and dominate their category.
+            Our custom campaigns as the leading Ecommerce Marketing Agency in Pakistan are built for eCommerce founders ready to move volume and dominate their category.
           </motion.p>
         </div>
         
@@ -866,7 +880,7 @@ const LeadMagnet = ( ) => {
                   A Complete Ecommerce <span className="text-brand-accent">ROI Audit Framework</span>, worth $399 for free
                 </h2>
                 <p className="text-text-primary/60 text-sm md:text-lg mb-8 leading-relaxed">
-                  This is our secret sauce for auditing a brand&apos;s last 90 days of ROI—so you can make clear, data-backed decisions on what to scale next.
+                  As the premier Ecommerce Marketing Agency in Pakistan, we use this exact framework to audit a brand&apos;s last 90 days of ROI, helping founders make clear, data-backed decisions on what to scale next.
                 </p>
                 
                 <ul className="space-y-4 mb-8">
@@ -922,7 +936,7 @@ const LeadMagnet = ( ) => {
                         onChange={(e) => setName(e.target.value)}
                         required
                         disabled={status === 'loading' || status === 'success'}
-                        className="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-text-primary/20 focus:outline-none focus:border-brand-accent/50 transition-colors disabled:opacity-50"
+                        className="w-full bg-[#141416]/95 hover:bg-[#1a1a1d] focus:bg-[#0c0c0d] border border-white/20 hover:border-white/30 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/40 focus:outline-none focus:ring-4 focus:ring-brand-accent/10 transition-all duration-300 disabled:opacity-50 text-base font-medium shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.03),0_4px_12px_rgba(0,0,0,0.6)] focus:shadow-[0_0_30px_rgba(244,112,58,0.15)]"
                       />
                     </div>
 
@@ -934,13 +948,13 @@ const LeadMagnet = ( ) => {
                         onChange={(e) => setEmail(e.target.value)}
                         required
                         disabled={status === 'loading' || status === 'success'}
-                        className="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-4 text-white placeholder:text-text-primary/20 focus:outline-none focus:border-brand-accent/50 transition-colors disabled:opacity-50"
+                        className="w-full bg-[#141416]/95 hover:bg-[#1a1a1d] focus:bg-[#0c0c0d] border border-white/20 hover:border-white/30 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/40 focus:outline-none focus:ring-4 focus:ring-brand-accent/10 transition-all duration-300 disabled:opacity-50 text-base font-medium shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.03),0_4px_12px_rgba(0,0,0,0.6)] focus:shadow-[0_0_30px_rgba(244,112,58,0.15)]"
                       />
                     </div>
                     
                     <Button 
+                      type="submit"
                       className="w-full max-w-[280px] mx-auto py-2.5 md:py-4 text-xs md:text-base" 
-                      onClick={() => {}} // Form handles submission
                       variant={status === 'success' ? 'secondary' : 'primary'}
                     >
                       {status === 'loading' ? (
@@ -993,7 +1007,11 @@ const FAQ = () => {
     },
     {
       question: "Do you work with new eCommerce stores?",
-      answer: "No. We specifically partner with established brands already doing PKR 2M+ monthly. Our systems are designed for high-performance scaling. We don't 'test' if your product works; we fuel products that are already selling but have stalled in growth."
+      answer: "No. We specifically partner with established brands already doing PKR 2M+ monthly. As a leading Ecommerce Marketing Agency in Pakistan, our systems are designed for high-performance scaling. We don't 'test' if your product works; we fuel products that are already selling but have stalled in growth."
+    },
+    {
+      question: "Why choose Shadow Studio as your Ecommerce Marketing Agency in Pakistan?",
+      answer: "We are deep in the trenches of Pakistan's eCommerce landscape. We design campaigns to solve local challenges like cash-on-delivery (COD) logistics, high return rates, and complex seasonal dynamics. We don't just report vanity ad metrics; we scale your actual net margins."
     },
     {
       question: "Which advertising channels do you specialize in?",
@@ -1017,7 +1035,7 @@ const FAQ = () => {
         <div className="max-w-3xl mx-auto">
           <SectionHeading 
             title="Frequently Asked Questions"
-            subtitle="Everything you need to know about scaling with Shadow Studio."
+            subtitle="Everything you need to know about scaling with the leading Ecommerce Marketing Agency in Pakistan."
           />
           
           <div className="space-y-4">
@@ -1258,9 +1276,9 @@ const BuiltInContactForm = () => {
                   {/* Two-Column Inputs (Name, Email) */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2 group">
-                      <label className="text-xs uppercase tracking-widest font-bold text-white/50 group-focus-within:text-brand-accent transition-colors duration-300 flex items-center gap-1.5 matches-focus">
+                      <label className="text-sm md:text-base font-semibold text-white/95 group-focus-within:text-brand-accent transition-colors duration-300 flex items-center gap-2">
                         <span>Your Full Name</span>
-                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
+                        <span className="inline-flex items-center text-brand-accent text-[10px] md:text-xs font-bold bg-brand-accent/15 px-2 py-0.5 rounded-full border border-brand-accent/30 animate-pulse">Required</span>
                       </label>
                       <input
                         type="text"
@@ -1269,14 +1287,14 @@ const BuiltInContactForm = () => {
                         onChange={(e) => setName(e.target.value)}
                         required
                         disabled={status === 'loading'}
-                        className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
+                        className="w-full bg-[#141416]/95 hover:bg-[#1a1a1d] focus:bg-[#0c0c0d] border border-white/20 hover:border-white/30 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/40 focus:outline-none focus:ring-4 focus:ring-brand-accent/10 transition-all duration-300 disabled:opacity-50 text-base font-medium focus:shadow-[0_0_30px_rgba(244,112,58,0.15)] shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.03),0_4px_12px_rgba(0,0,0,0.6)]"
                       />
                     </div>
                     
                     <div className="space-y-2 group">
-                      <label className="text-xs uppercase tracking-widest font-bold text-white/50 group-focus-within:text-brand-accent transition-colors duration-300 flex items-center gap-1.5">
+                      <label className="text-sm md:text-base font-semibold text-white/95 group-focus-within:text-brand-accent transition-colors duration-300 flex items-center gap-2">
                         <span>Your Best Email</span>
-                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
+                        <span className="inline-flex items-center text-brand-accent text-[10px] md:text-xs font-bold bg-brand-accent/15 px-2 py-0.5 rounded-full border border-brand-accent/30 animate-pulse">Required</span>
                       </label>
                       <input
                         type="email"
@@ -1285,7 +1303,7 @@ const BuiltInContactForm = () => {
                         onChange={(e) => setEmail(e.target.value)}
                         required
                         disabled={status === 'loading'}
-                        className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
+                        className="w-full bg-[#141416]/95 hover:bg-[#1a1a1d] focus:bg-[#0c0c0d] border border-white/20 hover:border-white/30 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/40 focus:outline-none focus:ring-4 focus:ring-brand-accent/10 transition-all duration-300 disabled:opacity-50 text-base font-medium focus:shadow-[0_0_30px_rgba(244,112,58,0.15)] shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.03),0_4px_12px_rgba(0,0,0,0.6)]"
                       />
                     </div>
                   </div>
@@ -1293,9 +1311,9 @@ const BuiltInContactForm = () => {
                   {/* Two-Column Inputs (Company & Phone) */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2 group">
-                      <label className="text-xs uppercase tracking-widest font-bold text-white/50 group-focus-within:text-brand-accent transition-colors duration-300 flex items-center gap-1.5">
+                      <label className="text-sm md:text-base font-semibold text-white/95 group-focus-within:text-brand-accent transition-colors duration-300 flex items-center gap-2">
                         <span>Brand / Website Name</span>
-                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
+                        <span className="inline-flex items-center text-brand-accent text-[10px] md:text-xs font-bold bg-brand-accent/15 px-2 py-0.5 rounded-full border border-brand-accent/30 animate-pulse">Required</span>
                       </label>
                       <input
                         type="text"
@@ -1304,14 +1322,14 @@ const BuiltInContactForm = () => {
                         onChange={(e) => setCompany(e.target.value)}
                         required
                         disabled={status === 'loading'}
-                        className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
+                        className="w-full bg-[#141416]/95 hover:bg-[#1a1a1d] focus:bg-[#0c0c0d] border border-white/20 hover:border-white/30 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/40 focus:outline-none focus:ring-4 focus:ring-brand-accent/10 transition-all duration-300 disabled:opacity-50 text-base font-medium focus:shadow-[0_0_30px_rgba(244,112,58,0.15)] shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.03),0_4px_12px_rgba(0,0,0,0.6)]"
                       />
                     </div>
                     
                     <div className="space-y-2 group">
-                      <label className="text-xs uppercase tracking-widest font-bold text-white/50 group-focus-within:text-brand-accent transition-colors duration-300 flex items-center gap-1.5">
+                      <label className="text-sm md:text-base font-semibold text-white/95 group-focus-within:text-brand-accent transition-colors duration-300 flex items-center gap-2">
                         <span>Your Phone / WhatsApp</span>
-                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
+                        <span className="inline-flex items-center text-brand-accent text-[10px] md:text-xs font-bold bg-brand-accent/15 px-2 py-0.5 rounded-full border border-brand-accent/30 animate-pulse">Required</span>
                       </label>
                       <input
                         type="tel"
@@ -1320,7 +1338,7 @@ const BuiltInContactForm = () => {
                         onChange={(e) => setPhone(e.target.value)}
                         required
                         disabled={status === 'loading'}
-                        className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
+                        className="w-full bg-[#141416]/95 hover:bg-[#1a1a1d] focus:bg-[#0c0c0d] border border-white/20 hover:border-white/30 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/40 focus:outline-none focus:ring-4 focus:ring-brand-accent/10 transition-all duration-300 disabled:opacity-50 text-base font-medium focus:shadow-[0_0_30px_rgba(244,112,58,0.15)] shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.03),0_4px_12px_rgba(0,0,0,0.6)]"
                       />
                     </div>
                   </div>
@@ -1328,9 +1346,9 @@ const BuiltInContactForm = () => {
                   {/* Two-Column Inputs (AOV & Ad Spend) */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2 group">
-                      <label className="text-xs uppercase tracking-widest font-bold text-white/50 group-focus-within:text-brand-accent transition-colors duration-300 flex items-center gap-1.5">
+                      <label className="text-sm md:text-base font-semibold text-white/95 group-focus-within:text-brand-accent transition-colors duration-300 flex items-center gap-2">
                         <span>Your Average Order Value (AOV)</span>
-                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
+                        <span className="inline-flex items-center text-brand-accent text-[10px] md:text-xs font-bold bg-brand-accent/15 px-2 py-0.5 rounded-full border border-brand-accent/30 animate-pulse">Required</span>
                       </label>
                       <input
                         type="text"
@@ -1339,21 +1357,21 @@ const BuiltInContactForm = () => {
                         onChange={(e) => setAov(e.target.value)}
                         required
                         disabled={status === 'loading'}
-                        className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
+                        className="w-full bg-[#141416]/95 hover:bg-[#1a1a1d] focus:bg-[#0c0c0d] border border-white/20 hover:border-white/30 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/40 focus:outline-none focus:ring-4 focus:ring-brand-accent/10 transition-all duration-300 disabled:opacity-50 text-base font-medium focus:shadow-[0_0_30px_rgba(244,112,58,0.15)] shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.03),0_4px_12px_rgba(0,0,0,0.6)]"
                       />
                     </div>
                     
                     <div className="space-y-2 group">
-                      <label className="text-xs uppercase tracking-widest font-bold text-white/50 group-focus-within:text-brand-accent transition-colors duration-300 flex items-center gap-1.5">
+                      <label className="text-sm md:text-base font-semibold text-white/95 group-focus-within:text-brand-accent transition-colors duration-300 flex items-center gap-2">
                         <span>Your Monthly Ad Spend</span>
-                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
+                        <span className="inline-flex items-center text-brand-accent text-[10px] md:text-xs font-bold bg-brand-accent/15 px-2 py-0.5 rounded-full border border-brand-accent/30 animate-pulse">Required</span>
                       </label>
                       <select
                         value={adSpend}
                         onChange={(e) => setAdSpend(e.target.value)}
                         required
                         disabled={status === 'loading'}
-                        className="w-full bg-white/[0.01] hover:bg-[#0d0d0d] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl px-5 py-[15px] text-white focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm focus:shadow-[0_0_30px_rgba(244,112,58,0.12)] cursor-pointer"
+                        className="w-full bg-[#141416]/95 hover:bg-[#1a1a1d] focus:bg-[#0c0c0d] border border-white/20 hover:border-white/30 focus:border-brand-accent rounded-xl px-5 py-[15px] text-white focus:outline-none focus:ring-4 focus:ring-brand-accent/10 transition-all duration-300 disabled:opacity-50 text-base font-medium cursor-pointer focus:shadow-[0_0_30px_rgba(244,112,58,0.15)] shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.03),0_4px_12px_rgba(0,0,0,0.6)]"
                       >
                         <option value="" disabled className="bg-[#0c0c0c] text-white/40">Select Monthly Ad Spend</option>
                         <option value="0-500k" className="bg-[#0c0c0c] text-white">0-500k</option>
@@ -1366,9 +1384,9 @@ const BuiltInContactForm = () => {
 
                   {/* Message / Goals (Optional) */}
                   <div className="space-y-2 group">
-                    <label className="text-xs uppercase tracking-widest font-bold text-white/50 group-focus-within:text-brand-accent transition-colors duration-300 flex justify-between">
+                    <label className="text-sm md:text-base font-semibold text-white/90 group-focus-within:text-brand-accent transition-colors duration-300 flex justify-between">
                       <span>Core Scaling Bottleneck & Growth Goals</span>
-                      <span className="text-white/30 text-[10px]">Optional</span>
+                      <span className="text-white/40 text-[10px] md:text-xs font-medium bg-white/5 px-2 py-0.5 rounded border border-white/10">Optional</span>
                     </label>
                     <textarea
                       rows={4}
@@ -1376,7 +1394,7 @@ const BuiltInContactForm = () => {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       disabled={status === 'loading'}
-                      className="w-full bg-white/[0.01] hover:bg-white/[0.02] focus:bg-[#0c0c0c] border border-white/10 hover:border-white/20 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-brand-accent/5 transition-all duration-300 disabled:opacity-50 text-sm resize-none focus:shadow-[0_0_30px_rgba(244,112,58,0.12)]"
+                      className="w-full bg-[#141416]/95 hover:bg-[#1a1a1d] focus:bg-[#0c0c0d] border border-white/20 hover:border-white/30 focus:border-brand-accent rounded-xl px-5 py-4 text-white placeholder:text-white/40 focus:outline-none focus:ring-4 focus:ring-brand-accent/10 transition-all duration-300 disabled:opacity-50 text-base font-medium resize-none focus:shadow-[0_0_30px_rgba(244,112,58,0.15)] shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.03),0_4px_12px_rgba(0,0,0,0.6)]"
                     />
                   </div>
 
@@ -1621,7 +1639,7 @@ const QualificationGate = ({ onQualified }: { onQualified: () => void }) => {
                     onChange={(e) => setName(e.target.value)}
                     required
                     disabled={loading}
-                    className="w-full bg-bg-secondary/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-text-primary/20 focus:outline-none focus:border-brand-accent/50 transition-colors disabled:opacity-50"
+                    className="w-full bg-[#141416]/95 hover:bg-[#1a1a1d] focus:bg-[#0c0c0d] border border-white/20 hover:border-white/30 focus:border-brand-accent rounded-xl px-5 py-4 text-base font-medium text-white placeholder:text-white/40 focus:outline-none focus:ring-4 focus:ring-brand-accent/10 transition-all duration-300 disabled:opacity-50 shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.03),0_4px_12px_rgba(0,0,0,0.6)] focus:shadow-[0_0_30px_rgba(244,112,58,0.15)]"
                   />
                 </div>
                 <div>
@@ -1632,7 +1650,7 @@ const QualificationGate = ({ onQualified }: { onQualified: () => void }) => {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     disabled={loading}
-                    className="w-full bg-bg-secondary/40 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-text-primary/20 focus:outline-none focus:border-brand-accent/50 transition-colors disabled:opacity-50"
+                    className="w-full bg-[#141416]/95 hover:bg-[#1a1a1d] focus:bg-[#0c0c0d] border border-white/20 hover:border-white/30 focus:border-brand-accent rounded-xl px-5 py-4 text-base font-medium text-white placeholder:text-white/40 focus:outline-none focus:ring-4 focus:ring-brand-accent/10 transition-all duration-300 disabled:opacity-50 shadow-[inset_0_1.5px_3px_rgba(255,255,255,0.03),0_4px_12px_rgba(0,0,0,0.6)] focus:shadow-[0_0_30px_rgba(244,112,58,0.15)]"
                   />
                 </div>
 
